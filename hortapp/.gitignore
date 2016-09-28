@@ -1,1 +1,2 @@
-hooks/
+hooks/*
+!hooks/platforms.json
