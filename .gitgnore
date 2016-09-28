@@ -1,0 +1,10 @@
+hortapp/platforms/*
+!hortapp/platforms/platforms.json
+
+hortapp/www/bower_components/*
+
+hortapp/plugins/*
+!hortapp/plugins/android.json
+!hortapp/plugins/browser.json
+!hortapp/plugins/fetch.json
+
