@@ -1,10 +1,12 @@
 hortapp/platforms/*
-!hortapp/platforms/platforms.json
+hortapp/hooks/*
+hortapp/plugins/*
 
+!hortapp/www/*
 hortapp/www/bower_components/*
 
-hortapp/plugins/*
+!hortapp/platforms/platforms.json
 !hortapp/plugins/android.json
 !hortapp/plugins/browser.json
 !hortapp/plugins/fetch.json
-
+!hortapp/hooks/README.md

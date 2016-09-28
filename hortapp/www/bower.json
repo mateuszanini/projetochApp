@@ -1,0 +1,21 @@
+{
+  "name": "HortApp",
+  "homepage": "https://mateuszanini.github.io/",
+  "description": "Aplicativo HortApp",
+  "main": "",
+  "authors": [
+    "Mateus Zanini",
+    "Tiago Possato"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Framework7": "framework7#^1.4.2"
+  }
+}
