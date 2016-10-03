@@ -3,8 +3,9 @@ var myApp = new Framework7({
   pushState: true,
   sortable: false,
   modalTitle: "hortapp",
-  scrollTopOnNavbarClick: true
-  //swipePanel: 'left',
+  scrollTopOnNavbarClick: true,
+  animateNavBackIcon: true,
+  swipePanel: 'left',
 });
 
 // We need to use custom DOM library, let's save it to $$ variable:
@@ -21,8 +22,8 @@ var mainView = myApp.addView('.view-main', {
 // Option 1. Using page callback for page (for "about" page in this case) (recommended way):
 myApp.onPageInit('about', function (page) {
   // Do something here for "about" page
-  myApp.alert('è nois');
-})
+  //myApp.alert('è nois');
+});
  /*
 // Option 2. Using one 'pageInit' event handler for all pages:
 $$(document).on('pageInit', function (e) {

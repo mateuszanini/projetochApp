@@ -19,65 +19,187 @@
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
 </head>
 
-<body>
+<body class="theme-blue">
     <!-- Status bar overlay for full screen mode (PhoneGap) -->
     <div class="statusbar-overlay"></div>
     <!-- Panels overlay-->
     <div class="panel-overlay"></div>
     <!-- Left panel with reveal effect-->
-    <div class="panel panel-left panel-reveal">
-        <div class="content-block">
-            <p>Left panel content goes here</p>
+
+    <div class="panel panel-left panel-reveal bg-white">
+        <div class="row bg-lightblue">
+            <div class="round">
+                <div style="background-image: url('img/avatar/avatar.jpg');"></div>
+            </div>
+        </div>
+        <div class="row bg-lightblue">
+            <div class="col-100 text-center color-white">
+                <p>
+                    <h2>Kevin Minion</h2></p>
+            </div>
+        </div>
+        <div class="list-block">
+            <ul>
+                <li>
+                    <a href="#" class="item-link item-content">
+                        <div class="item-media"><i class="fa fa-user" aria-hidden="true"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title">Minha conta</div>
+                            <div class="item-after"></div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item-link item-content">
+                        <div class="item-media"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title">Reservas</div>
+                            <div class="item-after"><span class="badge color-green">5</span></div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item-link item-content">
+                        <div class="item-media"><i class="fa fa-cog" aria-hidden="true"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title">Configurações</div>
+                            <div class="item-after"></div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item-link item-content close-panel open-login-screen">
+                        <div class="item-media"><i class="fa fa-power-off" aria-hidden="true"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title">Sair</div>
+                            <div class="item-after"></div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
+
     <!-- Views -->
     <div class="views">
-        <!-- Your main view, should have "view-main" class -->
         <div class="view view-main">
+
             <!-- Top Navbar-->
             <div class="navbar">
                 <div class="navbar-inner">
-                    <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-                    <div class="center sliding">Awesome App</div>
-                    <div class="right">
-                        <!--
-            Right link contains only icon - additional "icon-only" class
-            Additional "open-panel" class tells app to open panel when we click on this link
-          -->
-                        <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
+                    <div class="left">
+                        <a href="#" class="link icon-only">
+                            <i class="icon icon-back"></i>
+                            <span>Voltar</span>
+                        </a>
+                    </div>
+                    <div class="center sliding">HortApp</div>
+                    <div class="right sliding">
+                        <a href="#" data-panel="left" class="link icon-only open-panel">
+                            <i class="icon icon-bars"></i>
+                            <span>Menu</span>
+                        </a>
                     </div>
                 </div>
             </div>
-            <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
+            <!-- /End of Top Navbar-->
+
+            <!-- Now we need additional "navbar-through" and "toolbar-through" classes on Pages -->
             <div class="pages navbar-through toolbar-through">
-                <!-- Page, "data-page" contains page name -->
                 <div data-page="index" class="page">
-                    <!-- Scrollable page content -->
-                    <div class="page-content">
+                    <div class="page-content hide-tabbar-on-scroll">
                         <p>Page content goes here</p>
                         <!-- Link to another page -->
-                        <a href="about.html">About app</a>
-
                         <div class="content-block">
+                            <p><a href="about.html">About app</a></p>
                             <p><a href="#" class="open-login-screen">Open Login Screen</a></p>
                         </div>
-
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
+                        <p>Page content goes here</p>
                     </div>
                 </div>
             </div>
+
             <!-- Bottom Toolbar-->
-            <div class="toolbar">
+            <div class="toolbar tabbar">
                 <div class="toolbar-inner">
-                    <!-- Toolbar links -->
-                    <a href="#" class="link">Link 1</a>
-                    <a href="#" class="link">Link 2</a>
+                    <a href="#tab1" class="tab-link active">
+                        <i class="fa fa-comments" aria-hidden="true"></i>
+                        <span class="tabbar-label">Chat</span>
+                    </a>
+                    <a href="#tab2" class="tab-link">
+                        <i class="fa fa-cloud" aria-hidden="true"></i>
+                    </a>
+                    <a href="#tab3" class="tab-link">
+                        <i class="fa fa-camera" aria-hidden="true"></i>
+                    </a>
                 </div>
             </div>
+            <!-- /End of Bottom Toolbar-->
+
         </div>
     </div>
 
 
-    <!-- Tela de Login -->
+    <!-- Tela de Login add modal-in-->
     <div class="login-screen modal-in">
         <!-- Default view-page layout -->
         <div class="view">
