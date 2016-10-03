@@ -1,5 +1,5 @@
 {
-  "name": "HortApp",
+  "name": "hortapp",
   "homepage": "https://mateuszanini.github.io/",
   "description": "Aplicativo HortApp",
   "main": "",
@@ -16,6 +16,8 @@
     "tests"
   ],
   "dependencies": {
-    "Framework7": "framework7#^1.4.2"
+    "Framework7": "framework7#^1.4.2",
+    "font-awesome": "fontawesome#^4.6.3",
+    "jquery": "^3.1.1"
   }
 }
