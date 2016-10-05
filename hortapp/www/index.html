@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <!-- Your app title -->
-    <title>My App</title>
+    <title>HortApp</title>
     <!-- Path to Framework7 iOS CSS theme styles-->
     <link rel="stylesheet" href="bower_components/Framework7/dist/css/framework7.ios.min.css">
     <!-- Path to Framework7 iOS related color styles -->
@@ -20,12 +20,9 @@
 </head>
 
 <body class="theme-blue">
-    <!-- Status bar overlay for full screen mode (PhoneGap) -->
-    <div class="statusbar-overlay"></div>
     <!-- Panels overlay-->
     <div class="panel-overlay"></div>
     <!-- Left panel with reveal effect-->
-
     <div class="panel panel-left panel-reveal bg-white">
         <div class="row bg-lightblue color-white">
             <div class="round">
@@ -41,7 +38,7 @@
         <div class="list-block">
             <ul>
                 <li>
-                    <a href="views/usuario/perfil.html" class="item-link item-content">
+                    <a href="views/usuario/meuPerfil.html" class="item-link item-content close-panel">
                         <div class="item-media"><i class="fa fa-user" aria-hidden="true"></i></div>
                         <div class="item-inner">
                             <div class="item-title">Meu perfil</div>
@@ -135,8 +132,7 @@
                 </div>
             </div>
 
-
-            <!--Bottom Toolbar
+            <!--Bottom tabbar
             <div class="toolbar tabbar">
                 <div class="toolbar-inner">
                     <a href="#tab1" class="tab-link">
@@ -150,11 +146,9 @@
                         <i class="fa fa-camera" aria-hidden="true"></i>
                     </a>
                 </div>
-                /End of Bottom Toolbar-->
-
+                /End of Bottom tabbar-->
         </div>
     </div>
-
 
     <!-- Tela de Login add modal-in-->
     <div class="login-screen modal-in">
