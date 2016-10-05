@@ -19,14 +19,31 @@ var mainView = myApp.addView('.view-main', {
     dynamicNavbar: true
 });
 
-// var salvarPerfil = myApp.addView('.salvar-perfil', {
-//     dynamicNavbar: true
-// });
+/*var toolbarDefault = '<a href="views/chat/chat.html">' +
+    '<i class="fa fa-comments" aria-hidden="true"></i>' +
+    '<span>Chat</span>' +
+    '</a>' +
+    '<a href="views/usuario/perfil.html" class="link">' +
+    '<i class="fa fa-apple" aria-hidden="true"></i>' +
+    '<span>Apple</span>' +
+    '</a>' +
+    '<a href="#" class="link">' +
+    '<i class="fa fa-clock-o" aria-hidden="true"></i>' +
+    '<span>Lembrete</span>' +
+    '</a>';
 
-// Now we need to run the code that will be executed only for About page.
-
-// Option 1. Using page callback for page (for "about" page in this case) (recommended way):
-myApp.onPageInit('chat', function(page) {
+myApp.onPageBeforeInit('perfil', function(page) {
     // Do something here for "about" page
     //myApp.alert('è nois');
+    $$('.toolbar-inner').html(
+        '<a href="#" class="link">' +
+        '<i class="fa fa-check" aria-hidden="true"></i>' +
+        '<span>Salvar</span>' +
+        '</a>');
 });
+
+myApp.onPageBack('perfil', function(page) {
+    // Do something here for "about" page
+    //myApp.alert('è nois');
+    $$('.toolbar-inner').html(toolbar);
+});*/
