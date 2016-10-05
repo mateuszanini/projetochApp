@@ -41,10 +41,10 @@
         <div class="list-block">
             <ul>
                 <li>
-                    <a href="#" class="item-link item-content">
+                    <a href="views/usuario/perfil.html" class="item-link item-content" data-view=".salvar-perfil">
                         <div class="item-media"><i class="fa fa-user" aria-hidden="true"></i></div>
                         <div class="item-inner">
-                            <div class="item-title">Minha conta</div>
+                            <div class="item-title">Meu perfil</div>
                             <div class="item-after"></div>
                         </div>
                     </a>
@@ -86,15 +86,15 @@
             <!-- Top Navbar-->
             <div class="navbar">
                 <div class="navbar-inner">
-                    <div class="left">
-                        <!--<a href="#" class="link icon-only">
+                    <div class="left sliding">
+                        <a href="#" class="link">
                             <i class="icon icon-back"></i>
                             <span>Voltar</span>
-                        </a>-->
+                        </a>
                     </div>
                     <div class="center sliding">HortApp</div>
                     <div class="right sliding">
-                        <a href="#" data-panel="left" class="link icon-only open-panel">
+                        <a href="#" data-panel="left" class="link open-panel">
                             <i class="icon icon-bars"></i>
                             <span>Menu</span>
                         </a>
@@ -106,12 +106,12 @@
             <!-- Now we need additional "navbar-through" and "toolbar-through" classes on Pages -->
             <div class="pages navbar-through toolbar-through">
                 <div data-page="index" class="page">
-                    <div class="page-content hide-toolbar-on-scroll">
+                    <div class="page-content">
                         <p>Page content goes here</p>
                         <!-- Link to another page -->
                         <div class="content-block">
+                            <p>Page content goes here</p>
                             <p><a href="views/about/about.html">About app</a></p>
-                            <p><a href="#" class="open-login-screen">Open Login Screen</a></p>
                         </div>
 
                     </div>
@@ -124,29 +124,68 @@
                         <i class="fa fa-comments" aria-hidden="true"></i>
                         <span>Chat</span>
                     </a>
-                    <a href="#" class="link"><i class="fa fa-apple" aria-hidden="true"></i></a>
-                    <a href="#" class="link"><i class="fa fa-clock-o" aria-hidden="true"></i></a>
+                    <a href="views/usuario/perfil.html" class="link" data-view=".salvar-perfil">
+                        <i class="fa fa-apple" aria-hidden="true"></i>
+                        <span>Apple</span>
+                    </a>
+                    <a href="#" class="link">
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        <span>Lembrete</span>
+                    </a>
                 </div>
             </div>
 
 
-            <!-- Bottom Toolbar
-                <div class="toolbar tabbar">
-                    <div class="toolbar-inner">
-                        <a href="#tab1" class="tab-link">
-                            <i class="fa fa-comments" aria-hidden="true"></i>
-                            <span class="tabbar-label">Chat</span>
-                        </a>
-                        <a href="#tab2" class="tab-link">
-                            <i class="fa fa-cloud" aria-hidden="true"></i>
-                        </a>
-                        <a href="#tab3" class="tab-link">
-                            <i class="fa fa-camera" aria-hidden="true"></i>
-                        </a>
-                    </div>
-            /End of Bottom Toolbar-->
+            <!--Bottom Toolbar
+            <div class="toolbar tabbar">
+                <div class="toolbar-inner">
+                    <a href="#tab1" class="tab-link">
+                        <i class="fa fa-comments" aria-hidden="true"></i>
+                        <span class="tabbar-label">Chat</span>
+                    </a>
+                    <a href="#tab2" class="tab-link">
+                        <i class="fa fa-cloud" aria-hidden="true"></i>
+                    </a>
+                    <a href="#tab3" class="tab-link">
+                        <i class="fa fa-camera" aria-hidden="true"></i>
+                    </a>
+                </div>
+                /End of Bottom Toolbar-->
 
         </div>
+
+        <div class="view salvar-perfil">
+            <!-- Navbar-->
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="left">Left</div>
+                    <div class="center">Center</div>
+                    <div class="right">Right</div>
+                </div>
+            </div>
+            <!-- Pages -->
+            <div class="pages">
+                <div class="page" data-page="view-perfil">
+                    <div class="page-content">
+                        <h3>View perfil</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- Toolbar-->
+            <div class="toolbar">
+                <div class="toolbar-inner">
+                    <a href="#" class="link">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                        <span>Cancelar</span>
+                    </a>
+                    <a href="#" class="link">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                        <span>Salvar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 
