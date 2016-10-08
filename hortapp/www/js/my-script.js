@@ -16,3 +16,13 @@ redimensionaLogoLogin();
 window.addEventListener('resize', function(){
 	redimensionaLogoLogin();
 });
+
+
+function mostraMapa(){
+  $('.btnLocalizacaoAtual').toggleClass('button-fill');
+  $('.divisor').toggleClass('animated zoomOut');
+  $('.divisor').toggleClass('animated zoomIn');
+
+  $('.mapa').toggleClass('hide');
+  $('.mapa').toggleClass('animated zoomIn');
+}

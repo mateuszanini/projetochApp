@@ -65,18 +65,40 @@
                             </ul>
                         </div>
                     </li>
+
                     <li class="accordion-item">
                         <a href="#" class="item-content item-link">
                             <div class="item-inner">
-                                <div class="item-title"><i class="fa fa-map-marker" aria-hidden="true"></i> Endereço</div>
+                                <div class="item-title"><i class="fa fa-map-signs" aria-hidden="true"></i> Endereço</div>
                             </div>
                         </a>
                         <div class="accordion-item-content">
                             <div class="content-block">
-                                <p>Item 2 content. Lorem ipsum dolor sit amet...</p>
+                                <p class="buttons-row">
+                                    <a href="#" class="button btnLocalizacaoAtual" onclick="mostraMapa()"><i class="fa fa-map-marker" aria-hidden="true"></i> Utilizar localização atual</a>
+                                </p>
+                                <div class="row divisor animated zoomIn">
+                                    <div class="col-45">
+                                        <hr>
+                                    </div>
+                                    <div class="col-10 text-center divisor">OU</div>
+                                    <div class="col-45">
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row hide mapa">
+                                    <img src="http://cdn.newsapi.com.au/image/v1/0a0ceda4bda18e664ffac1a8fa86a7d1" alt="Google Maps" />
+                                    <!--<iframe
+  width="600"
+  height="450"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0P239oFuH1QHiBM91-nmQo435XFcDKfs&q=Space+Needle,Seattle+WA" allowfullscreen>
+</iframe>-->
+                                </div>
                             </div>
                         </div>
                     </li>
+
                     <li class="accordion-item">
                         <a href="#" class="item-content item-link">
                             <div class="item-inner">
