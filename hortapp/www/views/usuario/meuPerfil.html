@@ -21,6 +21,7 @@
         <form id="formPerfil" class="list-block store-data">
             <div class="list-block accordion-list">
                 <ul>
+
                     <li class="accordion-item">
                         <a href="#" class="item-content item-link">
                             <div class="item-inner color-blue">
@@ -35,7 +36,7 @@
                                         <div class="item-inner">
                                             <div class="item-title label">Nome</div>
                                             <div class="item-input">
-                                                <input type="text" name="nome" placeholder="Nome" value="Kevin Minion" disabled>
+                                                <input type="text" name="usuNome" id="usuNome" placeholder="Nome" value="Kevin Minion" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -46,7 +47,7 @@
                                         <div class="item-inner">
                                             <div class="item-title label">E-mail</div>
                                             <div class="item-input">
-                                                <input type="email" name="email" placeholder="E-mail" value="kevin.minion@gmail.com" disabled>
+                                                <input type="email" name="usuEmail" id="usuEmail" placeholder="E-mail" value="kevin.minion@gmail.com" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -57,7 +58,7 @@
                                         <div class="item-inner">
                                             <div class="item-title label">Telefone</div>
                                             <div class="item-input">
-                                                <input type="tel" name="telefone" placeholder="Telefone">
+                                                <input type="tel" name="usuTelefone" id="usuTelefone" placeholder="Telefone">
                                             </div>
                                         </div>
                                     </div>
@@ -80,7 +81,7 @@
                                             <div class="item-title label">Localização atual</div>
                                             <div class="item-input">
                                                 <label class="label-switch">
-                                                  <input type="checkbox" onchange="mostraMapa()">
+                                                  <input type="checkbox" nome="usuLocalizacaoAtual" id="usuLocalizacaoAtual">
                                                   <div class="checkbox"></div>
                                                 </label>
                                             </div>
@@ -89,11 +90,7 @@
                                 </li>
                             </ul>
                             <div class="content-block">
-                                <!--<p class="buttons-row">
-                                        <a href="#" class="button btnLocalizacaoAtual" onclick="mostraMapa()"><i class="fa fa-map-marker" aria-hidden="true"></i> Utilizar localização atual</a>
-                                    </p>-->
                                 <div class="row hide mapa">
-                                    <!--<img src="http://cdn.newsapi.com.au/image/v1/0a0ceda4bda18e664ffac1a8fa86a7d1" alt="Google Maps" />-->
                                     <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0P239oFuH1QHiBM91-nmQo435XFcDKfs&q=Space+Needle,Seattle+WA" allowfullscreen></iframe>
                                 </div>
                                 <div class="row divisor animated zoomIn">
@@ -112,14 +109,14 @@
                                         <div class="item-inner">
                                             <div class="item-title label">CEP</div>
                                             <div class="item-input">
-                                                <input type="number" name="cep" placeholder="00000-000">
+                                                <input type="number" name="usuCep" id="usuCep" placeholder="00000-000">
                                             </div>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
                                     <a href="#" class="item-link smart-select" data-open-in="popup" data-popup-close-text="Voltar" data-back-on-select="true" data-searchbar="true" data-searchbar-placeholder="Pesquisar Estados" data-searchbar-cancel="Cancelar">
-                                        <select name="uf" id="uf" onchange="listaCidades()">
+                                        <select name="ufCodigo" id="ufCodigo">
 
                                         </select>
                                         <div class="item-content">
@@ -132,7 +129,7 @@
                                 </li>
                                 <li>
                                     <a href="#" class="item-link smart-select" data-open-in="popup" data-popup-close-text="Voltar" data-back-on-select="true" data-searchbar="true" data-searchbar-placeholder="Pesquisar Cidades" data-searchbar-cancel="Cancelar">
-                                        <select name="cidade" id="cidade" class="text-capitalize">
+                                        <select name="cidCodigo" id="cidCodigo" class="text-capitalize">
 
                                         </select>
                                         <div class="item-content">
@@ -144,10 +141,6 @@
                                     </a>
                                 </li>
                             </ul>
-
-
-
-
                         </div>
                     </li>
 
@@ -165,7 +158,7 @@
                             <ul>
                                 <li>
                                     <label class="label-checkbox item-content">
-                                      <input type="checkbox" name="privacidade" value="telefonePublico" checked="checked">
+                                      <input type="checkbox" name="usuTelefoneVisivel" value="usuTelefoneVisivel" checked="checked">
                                       <div class="item-media">
                                           <i class="icon icon-form-checkbox"></i>
                                       </div>
@@ -182,12 +175,12 @@
                             <ul>
                                 <li>
                                     <label class="label-checkbox item-content">
-                                    <input type="checkbox" name="privacidade" value="enderecoPublico" checked="checked">
+                                    <input type="checkbox" name="usuEndVisivel" value="usuEndVisivel" checked="checked">
                                     <div class="item-media">
                                         <i class="icon icon-form-checkbox"></i>
                                     </div>
                                     <div class="item-inner">
-                                        <div class="item-title">Localização público</div>
+                                        <div class="item-title">Localização pública</div>
                                     </div>
                                   </label>
                                 </li>
@@ -195,9 +188,7 @@
                         </div>
                     </li>
                 </ul>
-
             </div>
-
         </form>
     </div>
 </div>
