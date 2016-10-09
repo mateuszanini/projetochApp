@@ -3,14 +3,18 @@ img {
     height: auto;
 }
 
-#logoLogin img {
+.semBorda:after{
+  height: 0 !important;
+}
+
+/*#logoLogin img {
     max-width: 100%;
     height: auto;
     transition: 0.5s;
-    /*-webkit-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
     -ms-transform: scale(1.2);
-    transform: scale(1.2);*/
-}
+    transform: scale(1.2);
+}*/
 
 
 /*

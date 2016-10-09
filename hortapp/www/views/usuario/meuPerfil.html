@@ -19,15 +19,15 @@
 <div class="page" data-page="meuPerfil">
     <div class="page-content">
         <form id="formPerfil" class="list-block store-data">
-            <div class="list-block accordion-list color-blue">
+            <div class="list-block accordion-list">
                 <ul>
                     <li class="accordion-item">
                         <a href="#" class="item-content item-link">
-                            <div class="item-inner">
+                            <div class="item-inner color-blue">
                                 <div class="item-title"><i class="fa fa-user" aria-hidden="true"></i> Contato</div>
                             </div>
                         </a>
-                        <div class="accordion-item-content">
+                        <div class="accordion-item-content color-lightblue">
                             <ul>
                                 <li>
                                     <div class="item-content">
@@ -68,15 +68,34 @@
 
                     <li class="accordion-item">
                         <a href="#" class="item-content item-link">
-                            <div class="item-inner">
-                                <div class="item-title"><i class="fa fa-map-signs" aria-hidden="true"></i> Endereço</div>
+                            <div class="item-inner color-blue">
+                                <div class="item-title"><i class="fa fa-map-marker" aria-hidden="true"></i> Endereço</div>
                             </div>
                         </a>
                         <div class="accordion-item-content">
+                            <ul>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner semBorda">
+                                            <div class="item-title label">Localização atual</div>
+                                            <div class="item-input">
+                                                <label class="label-switch">
+                                                  <input type="checkbox" onchange="mostraMapa()">
+                                                  <div class="checkbox"></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
                             <div class="content-block">
-                                <p class="buttons-row">
-                                    <a href="#" class="button btnLocalizacaoAtual" onclick="mostraMapa()"><i class="fa fa-map-marker" aria-hidden="true"></i> Utilizar localização atual</a>
-                                </p>
+                                <!--<p class="buttons-row">
+                                        <a href="#" class="button btnLocalizacaoAtual" onclick="mostraMapa()"><i class="fa fa-map-marker" aria-hidden="true"></i> Utilizar localização atual</a>
+                                    </p>-->
+                                <div class="row hide mapa">
+                                    <!--<img src="http://cdn.newsapi.com.au/image/v1/0a0ceda4bda18e664ffac1a8fa86a7d1" alt="Google Maps" />-->
+                                    <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0P239oFuH1QHiBM91-nmQo435XFcDKfs&q=Space+Needle,Seattle+WA" allowfullscreen></iframe>
+                                </div>
                                 <div class="row divisor animated zoomIn">
                                     <div class="col-45">
                                         <hr>
@@ -86,23 +105,55 @@
                                         <hr>
                                     </div>
                                 </div>
-                                <div class="row hide mapa">
-                                    <!--<img src="http://cdn.newsapi.com.au/image/v1/0a0ceda4bda18e664ffac1a8fa86a7d1" alt="Google Maps" />-->
-                                    <iframe
-  width="600"
-  height="450"
-  frameborder="0" style="border:0"
-  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0P239oFuH1QHiBM91-nmQo435XFcDKfs&q=Space+Needle,Seattle+WA" allowfullscreen>
-</iframe>
-                                </div>
                             </div>
+                            <ul>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title label">CEP</div>
+                                            <div class="item-input">
+                                                <input type="number" name="cep" placeholder="00000-000">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="#" class="item-link smart-select" data-open-in="popup" data-popup-close-text="Voltar" data-back-on-select="true" data-searchbar="true" data-searchbar-placeholder="Pesquisar Estados" data-searchbar-cancel="Cancelar">
+                                        <select name="uf" id="uf" onchange="listaCidades()">
+
+                                        </select>
+                                        <div class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title">Estado</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="item-link smart-select" data-open-in="popup" data-popup-close-text="Voltar" data-back-on-select="true" data-searchbar="true" data-searchbar-placeholder="Pesquisar Cidades" data-searchbar-cancel="Cancelar">
+                                        <select name="cidade" id="cidade" class="text-capitalize">
+
+                                        </select>
+                                        <div class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title">Cidade</div>
+                                                <div class="item-after" id="cidadeSelecionada"></div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+
+
+
+
                         </div>
                     </li>
 
                     <li class="accordion-item">
                         <a href="#" class="item-content item-link">
                             <div class="item-inner">
-                                <div class="item-title"><i class="fa fa-lock" aria-hidden="true"></i> Privacidade</div>
+                                <div class="item-title color-blue"><i class="fa fa-lock" aria-hidden="true"></i> Privacidade</div>
                             </div>
                         </a>
                         <div class="accordion-item-content">
@@ -113,15 +164,6 @@
                     </li>
                 </ul>
             </div>
-
-
-
-
-
-
-
-
-
 
         </form>
     </div>

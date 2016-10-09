@@ -19,6 +19,11 @@ var mainView = myApp.addView('.view-main', {
     dynamicNavbar: true
 });
 
+myApp.onPageBeforeInit('meuPerfil', function(page){
+  listaEstados();
+  listaCidades();
+});
+
 /*var toolbarDefault = '<a href="views/chat/chat.html">' +
     '<i class="fa fa-comments" aria-hidden="true"></i>' +
     '<span>Chat</span>' +
