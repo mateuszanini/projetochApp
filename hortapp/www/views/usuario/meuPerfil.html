@@ -27,7 +27,7 @@
                                 <div class="item-title"><i class="fa fa-user" aria-hidden="true"></i> Contato</div>
                             </div>
                         </a>
-                        <div class="accordion-item-content color-lightblue">
+                        <div class="accordion-item-content">
                             <ul>
                                 <li>
                                     <div class="item-content">
@@ -125,6 +125,7 @@
                                         <div class="item-content">
                                             <div class="item-inner">
                                                 <div class="item-title">Estado</div>
+                                                <div class="item-after" id="estadoSelecionado"></div>
                                             </div>
                                         </div>
                                     </a>
@@ -158,11 +159,43 @@
                         </a>
                         <div class="accordion-item-content">
                             <div class="content-block">
-                                <p>Item 2 content. Lorem ipsum dolor sit amet...</p>
+                                <hr>
                             </div>
+                            <p class="content-block text-muted text-uppercase">Telefone</p>
+                            <ul>
+                                <li>
+                                    <label class="label-checkbox item-content">
+                                      <input type="checkbox" name="privacidade" value="telefonePublico" checked="checked">
+                                      <div class="item-media">
+                                          <i class="icon icon-form-checkbox"></i>
+                                      </div>
+                                      <div class="item-inner">
+                                          <div class="item-title">Número de telefone público</div>
+                                      </div>
+                                    </label>
+                                </li>
+                            </ul>
+                            <div class="content-block">
+                                <hr>
+                            </div>
+                            <p class="content-block text-muted text-uppercase">Endereço</p>
+                            <ul>
+                                <li>
+                                    <label class="label-checkbox item-content">
+                                    <input type="checkbox" name="privacidade" value="enderecoPublico" checked="checked">
+                                    <div class="item-media">
+                                        <i class="icon icon-form-checkbox"></i>
+                                    </div>
+                                    <div class="item-inner">
+                                        <div class="item-title">Localização público</div>
+                                    </div>
+                                  </label>
+                                </li>
+                            </ul>
                         </div>
                     </li>
                 </ul>
+
             </div>
 
         </form>
