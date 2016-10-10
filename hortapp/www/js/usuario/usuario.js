@@ -9,22 +9,40 @@ var usuario = {
         $("#usuCep").keyup(function() {
             var cep = $(this).val().replace(/\D/g, '');
             if (cep.length == 8) {
-                myApp.showIndicator();
                 var validacep = /^[0-9]{8}$/;
                 if (validacep.test(cep)) {
-                    $.getJSON("//viacep.com.br/ws/" + cep + "/json/?callback=?", function(dados) {
-                        if (!("erro" in dados)) {
-                            console.log(dados);
-                        } else {
+                    $.ajax({
+                        url: "https://viacep.com.br/ws/" + cep + "/json",
+                        method: "GET",
+                        beforeSend: function(xhr) {
+                            myApp.showIndicator();
+                        },
+                        success: function(data) {
+                            if (!("erro" in data)) {
+                                myApp.addNotification({
+                                    subtitle: 'Cidade encontrada',
+                                    message: 'Você está em ' + data.localidade,
+                                    media: '<img width="44" height="44" style="border-radius:100%" src="img/icons/error.png">'
+                                });
+                            } else {
+                                myApp.addNotification({
+                                    subtitle: 'CEP não encontrado',
+                                    message: 'Por favor, digite um CEP existente.',
+                                    media: '<img width="44" height="44" style="border-radius:100%" src="img/icons/error.png">'
+                                });
+                            }
+                        },
+                        error: function(data, status, xhr) {
                             myApp.addNotification({
-                                title: 'CEP não encontrado',
-                                message: 'Por favor, digite um CEP existente.'
+                                subtitle: 'Erro na requisição Ajax',
+                                message: 'Tente novamente mais tarde.',
+                                media: '<img width="44" height="44" style="border-radius:100%" src="img/icons/error.png">'
                             });
+                        },
+                        complete: function(xhr, status) {
+                            myApp.hideIndicator();
                         }
-                        myApp.hideIndicator();
                     });
-                } else {
-                    alert("CEP Inválido");
                 }
             }
         });
