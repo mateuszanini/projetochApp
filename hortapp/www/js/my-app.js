@@ -1,4 +1,3 @@
-// Initialize app and store it to myApp variable for futher access to its methods
 var myApp = new Framework7({
     pushState: true,
     sortable: false,
@@ -21,6 +20,6 @@ var mainView = myApp.addView('.view-main', {
 
 myApp.onPageInit('meuPerfil', function(page){
   usuario.initialize();
-  usuario.listaEstados();
-  usuario.listaCidades();
+  usuario.listaEstados("SC");
+  usuario.listaCidades(0);
 });

@@ -4,7 +4,7 @@ var usuario = {
             usuario.mostraMapa();
         });
         $("#ufCodigo").change(function() {
-            usuario.listaCidades();
+            usuario.listaCidades(0);
         });
         $("#usuCep").keyup(function() {
             var cep = $(this).val().replace(/\D/g, '');
@@ -21,9 +21,13 @@ var usuario = {
                             if (!("erro" in data)) {
                                 myApp.addNotification({
                                     subtitle: 'Cidade encontrada',
-                                    message: 'Você está em ' + data.localidade,
-                                    media: '<img width="44" height="44" style="border-radius:100%" src="img/icons/error.png">'
+                                    message: 'Você está em ' + data.localidade + ' - ' + data.uf + '',
+                                    media: '<img width="44" height="44" style="border-radius:100%" src="img/icons/success.png">'
                                 });
+                                $("#endBairro").val(data.bairro);
+                                $("#endLogradouro").val(data.logradouro);
+                                usuario.listaEstados(data.uf);
+                                usuario.listaCidades(data.ibge);
                             } else {
                                 myApp.addNotification({
                                     subtitle: 'CEP não encontrado',
@@ -58,10 +62,10 @@ var usuario = {
         }*/
     },
 
-    listaEstados: function() {
+    listaEstados: function(ufSigla) {
         var strUf = '';
         for (var i = 0; i < uf.length; i++) {
-            if (uf[i].ufSigla == "SC") {
+            if (uf[i].ufSigla == ufSigla) {
                 strUf += '<option value="' + uf[i].ufCodigo + '" selected>' + uf[i].ufNome + '</option>';
                 $("#estadoSelecionado").html(uf[i].ufNome);
             } else {
@@ -69,21 +73,24 @@ var usuario = {
             }
         }
         $("#ufCodigo").html(strUf);
-
     },
 
-    listaCidades: function() {
+    listaCidades: function(cidCodigo) {
         var ufSelecionado = parseInt($("#ufCodigo").val());
         var strCidade = '';
         for (var i = 0; i < uf.length; i++) {
             if (uf[i].ufCodigo == ufSelecionado) {
                 for (var j = 0; j < uf[i].cidades.length; j++) {
-                    if (j === 0) {
+                    if (cidCodigo === 0 && j === 0) {
+                        strCidade += '<option value="' + uf[i].cidades[j].cidCodigo + '" selected>' + uf[i].cidades[j].cidNome + '</option>';
+                        $("#cidadeSelecionada").html(uf[i].cidades[j].cidNome);
+                    } else if (uf[i].cidades[j].cidCodigo == cidCodigo) {
                         strCidade += '<option value="' + uf[i].cidades[j].cidCodigo + '" selected>' + uf[i].cidades[j].cidNome + '</option>';
                         $("#cidadeSelecionada").html(uf[i].cidades[j].cidNome);
                     } else {
                         strCidade += '<option value="' + uf[i].cidades[j].cidCodigo + '">' + uf[i].cidades[j].cidNome + '</option>';
                     }
+
                 }
             }
         }

@@ -3,9 +3,10 @@ img {
     height: auto;
 }
 
-.semBorda:after{
-  height: 0 !important;
+.semBorda:after {
+    height: 0 !important;
 }
+
 
 /*#logoLogin img {
     max-width: 100%;
