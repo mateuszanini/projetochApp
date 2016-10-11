@@ -67,7 +67,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="item-link item-content close-panel open-login-screen">
+                    <a href="#" id="btnSair" class="item-link item-content">
                         <div class="item-media"><i class="fa fa-power-off" aria-hidden="true"></i></div>
                         <div class="item-inner">
                             <div class="item-title">Sair</div>
@@ -153,7 +153,7 @@
     </div>
 
     <!-- Tela de Login add modal-in-->
-    <div class="login-screen modal-in">
+    <div class="login-screen" id="loginScreen">
         <!-- Default view-page layout -->
         <div class="view">
             <div class="page">
@@ -173,8 +173,7 @@
                     </div>
                     <div class="row content-block">
                         <div class="col-100">
-                            <a href="#" class="button button-big button-fill close-login-screen color-red animated fadeInUpBig"><i class="fa fa-google" aria-hidden="true"></i>&nbspSign in with Google</a>
-                        </div>
+                            <a href="#" id="btnLogin" class="button button-big button-fill color-red animated fadeInUpBig"><i class="fa fa-google" aria-hidden="true"></i>&nbspLogin com Google</a> </div>
                     </div>
                 </div>
             </div>
@@ -182,18 +181,24 @@
     </div>
 
 
+    <script type="text/javascript" src="cordova.js"></script>
     <!-- Path to Framework7 Library JS-->
     <script type="text/javascript" src="bower_components/Framework7/dist/js/framework7.min.js"></script>
-    <!-- Path to your app js-->
-    <script type="text/javascript" src="js/my-app.js"></script>
     <!-- JQuery-->
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+    <!-- Configurações do F7 -->
+    <script type="text/javascript" src="js/my-app.js"></script>
     <!-- JS personalizado-->
-    <script type="text/javascript" src="js/my-script.js"></script>
+    <script type="text/javascript" src="js/configuracoes.js"></script>
+    <script type="text/javascript" src="js/usuario/usuarioController.js"></script>
+    <script type="text/javascript" src="js/usuario/autenticacao.js"></script>
+    <script type="text/javascript" src="js/localizacao.js"></script>
+    <script type="text/javascript" src="js/notificacoes.js"></script>
     <!-- JSON Estados e Cidades-->
     <script type="text/javascript" src="js/usuario/uf.js"></script>
-
     <script type="text/javascript" src="js/usuario/usuario.js"></script>
+
+    <script type="text/javascript" src="js/cordovaInit.js"></script>
 </body>
 
 </html>
