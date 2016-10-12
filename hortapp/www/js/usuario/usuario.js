@@ -3,11 +3,6 @@ var usuario = {
         $("#usuLocalizacaoAtual").change(function() {
             usuario.mostraMapa();
         });
-
-        $("#btnBuscar").click(function() {
-            localizacao.geocodeAddress($('#endereco').val());
-        });
-
         $("#ufCodigo").change(function() {
             usuario.listaCidades(0);
         });
@@ -16,43 +11,7 @@ var usuario = {
             if (cep.length == 8) {
                 var validacep = /^[0-9]{8}$/;
                 if (validacep.test(cep)) {
-                    $.ajax({
-                        url: "https://viacep.com.br/ws/" + cep + "/json",
-                        method: "GET",
-                        beforeSend: function(xhr) {
-                            myApp.showIndicator();
-                        },
-                        success: function(data) {
-                            if (!("erro" in data)) {
-                                myApp.addNotification({
-                                    subtitle: 'Cidade encontrada',
-                                    message: 'Você está em ' + data.localidade +
-                                        ' - ' + data.uf + '',
-                                    media: '<img width="44" height="44" style="border-radius:100%" src="img/icons/success.png">'
-                                });
-                                $("#endBairro").val(data.bairro);
-                                $("#endLogradouro").val(data.logradouro);
-                                usuario.listaEstados(data.uf);
-                                usuario.listaCidades(data.ibge);
-                            } else {
-                                myApp.addNotification({
-                                    subtitle: 'CEP não encontrado',
-                                    message: 'Por favor, digite um CEP existente.',
-                                    media: '<img width="44" height="44" style="border-radius:100%" src="img/icons/error.png">'
-                                });
-                            }
-                        },
-                        error: function(data, status, xhr) {
-                            myApp.addNotification({
-                                subtitle: 'Erro na requisição Ajax',
-                                message: 'Tente novamente mais tarde.',
-                                media: '<img width="44" height="44" style="border-radius:100%" src="img/icons/error.png">'
-                            });
-                        },
-                        complete: function(xhr, status) {
-                            myApp.hideIndicator();
-                        }
-                    });
+                    usuario.pesquisaCep(cep, "manual");
                 }
             }
         });
@@ -64,6 +23,35 @@ var usuario = {
         $("#usuSalvar").click(function() {
             var formData = myApp.formToJSON('#usuFormulario');
             alert(JSON.stringify(formData));
+        });
+    },
+
+    pesquisaCep: function(cep, tipo) {
+        $.ajax({
+            url: "https://viacep.com.br/ws/" + cep + "/json",
+            method: "GET",
+            beforeSend: function(xhr) {
+                myApp.showIndicator();
+            },
+            success: function(data) {
+                if (!("erro" in data)) {
+                    if (tipo == "manual") {
+                        myScript.notificacao("Cidade encontrada", "Você está em " + data.localidade + " - " + data.uf, true);
+                        $("#endBairro").val(data.bairro);
+                        $("#endLogradouro").val(data.logradouro);
+                    }
+                    usuario.listaEstados(data.uf);
+                    usuario.listaCidades(data.ibge);
+                } else {
+                    myScript.notificacao("CEP não encontrado", "Por favor, digite um CEP existente.", false);
+                }
+            },
+            error: function(data, status, xhr) {
+                myScript.notificacao("Erro desconhecido", "Tente novamente mais tarde", false);
+            },
+            complete: function(xhr, status) {
+                myApp.hideIndicator();
+            }
         });
     },
 

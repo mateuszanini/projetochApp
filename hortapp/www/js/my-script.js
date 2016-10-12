@@ -1,22 +1,15 @@
-/*function redimensionaLogoLogin(){
-  var windowWidth = window.innerWidth;
-  var windowHeight = window.innerHeight;
-
-  $("#logoLogin").css("width", (windowWidth/2));
-
-  var tamanhoImagem = $("#imagem").width();
-  tamanhoImagem = (windowWidth - tamanhoImagem) / 2;
-
-  $("#logoLogin").css("margin-left", tamanhoImagem);
-
-}
-
-redimensionaLogoLogin();
-
-window.addEventListener('resize', function(){
-	redimensionaLogoLogin();
-});*/
-
-
-
-/* MÁSCARAS DE INPUTS */
+var myScript = {
+  notificacao: function(subtitle, message, status) {
+    var img = "";
+    if(status){
+      img = "img/icons/success.png";
+    }else{
+      img = "img/icons/error.png";
+    }
+    myApp.addNotification({
+        subtitle: subtitle,
+        message: message,
+        media: '<img width="44" height="44" style="border-radius:100%" src="' + img +'">'
+    });
+  }
+};
