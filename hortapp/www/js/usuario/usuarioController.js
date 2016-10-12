@@ -1,30 +1,41 @@
 var usuarioController = {
-  // var usuEmail = null;
-  // var usuNome = null;
-  // var usuIdGoogle = null;
-  // var usuImagem = null;
-  // var usuTokenFcm = null;
-  // var idToken = null;
-  // var serverAuthCode = null;
-  // var familyName = null;
-  // var givemName = null;
-
   initialize: function(perfil) {
-    this.usuEmail = perfil['email'];
-    this.usuNome = perfil['displayName'];
-    this.usuImagem = perfil['imageUrl'];
-    this.usuIdGoogle = perfil['userId'];
+    //define os objetos
+    this.endereco = {
+      endLogradouro: null,
+      endBairro: null,
+      endNumero: null,
+      cidCodigo: null,
+      endLatitude: null,
+      endLongitude: null,
+    };
 
+    this.usuario = {
+      usuEmail: null,
+      usuNome: null,
+      usuImagem: null,
+      usuIdGoogle: null,
+      usuTokenFcm: null,
+      usuEndVisivel: null,
+      usuTelefone: null,
+      usuTelefoneVisivel: null,
+    };
+
+    //inicializa os objetos com os dados vindos da Google
     this.idToken = perfil['idToken'];
-    this.serverAuthCode = perfil['serverAuthCode'];
-    this.familyName = perfil['familyName'];
-    this.givemName = perfil['givemName'];
-    //alert(JSON.stringify(this));
+    this.usuario.usuEmail = perfil['email'];
+    this.usuario.usuNome = perfil['displayName'];
+    this.usuario.usuImagem = perfil['imageUrl'];
+
+    //this.usuario.serverAuthCode = perfil['serverAuthCode'];
+    // this.usuario.familyName = perfil['familyName'];
+    // this.usuario.givemName = perfil['givemName'];
+    this.usuario.usuIdGoogle = perfil['userId'];
     try {
       $.ajax({
         url: config.getApi() + '/usuario/login',
         headers: {
-          "idtoken": usuarioController.getIdToken()
+          "idtoken": usuarioController.idToken
         },
         method: "GET",
         contentType: "application/json",
@@ -55,23 +66,61 @@ var usuarioController = {
     }
   },
 
-  getIdGoogle: function() {
-    //alert("Solicitando usuIdGoogle: "+ this.usuIdGoogle);
-    return this.usuIdGoogle;
-  },
-  getIdToken: function() {
-    return this.idToken;
-  },
+  //envia alterações para salvar no banco de dados
+  salvar: function() {
+    //cria variaveis para montar o json que sera enviado ao banco.
+    //desta forma somente os campos interessados sao enviados
+    var usuario = {
+      usuTokenFcm: usuarioController.usuario.usuTokenFcm,
+      usuEndVisivel: usuarioController.usuario.usuEndVisivel,
+      usuTelefone: usuarioController.usuario.usuTelefone,
+      usuTelefoneVisivel: usuarioController.usuario.usuTelefoneVisivel,
+    };
+    var endereco = {
+      endLogradouro: usuarioController.endereco.endLogradouro,
+      endBairro: usuarioController.endereco.endBairro,
+      endNumero: usuarioController.endereco.endNumero,
+      cidCodigo: usuarioController.endereco.cidCodigo,
+      endLatitude: usuarioController.endereco.endLatitude,
+      endLongitude: usuarioController.endereco.endLongitude,
+    };
 
-  setTokenFcm: function(token) {
-    try {
-      this.usuTokenFcm = token;
-    } catch (err) {
-      alert('Erro no setTokenFcm: ' + err);
+    //deleta as propriedades nulas
+    for (var k in usuarioController.endereco) {
+      if (usuarioController.endereco[k] === null) {
+        delete usuarioController.endereco[k];
+      }
     }
-  },
 
-  getTokenFcm: function() {
-    return this.usuTokenFcm;
+    var dados = {
+      usuario, endereco
+    };
+    try {
+      $.ajax({
+        url: config.getApi() + '/usuario/update/me',
+        headers: {
+          "idtoken": usuarioController.idToken
+        },
+        data: dados,
+        method: "GET",
+        contentType: "application/json",
+        beforeSend: function() {
+          myApp.showIndicator();
+        },
+        success: function(data, status, xhr) {
+          //alert('success: \nstatus:' + JSON.stringify(status)+'\ndata:' + JSON.stringify(data));
+        },
+        error: function(data, status, xhr) {
+          alert('error: \nstatus:' + JSON.stringify(status) +
+            '\ndata:' + JSON.stringify(data));
+        },
+        complete: function(xhr, status) {
+          myApp.hideIndicator();
+        }
+      });
+    } catch (err) {
+      alert('Erro usuarioController.salvar: ' + err.message);
+    }
   }
+
 };

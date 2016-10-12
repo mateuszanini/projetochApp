@@ -11,8 +11,9 @@ var notificacoes = {
         this.push.on('registration', function(data) {
           //alert('Registrado: '+data.registrationId);
           try {
-            usuarioController.setTokenFcm(data.registrationId);
-            notificacoes.enviaTokenFcm();
+            usuarioController.usuario.usuTokenFcm = data.registrationId;
+            usuarioController.salvar();
+            //notificacoes.enviaTokenFcm();
           } catch (err) {
             alert('Erro: try registration push: \n' + err);
           }
@@ -24,7 +25,7 @@ var notificacoes = {
             //subtitle: 'New message from John Doe',
             message: data.message,
             media: '<img width="44" height="44" style="border-radius:100%" src=' +
-              usuarioController.usuImagem + '>',
+              usuarioController.usuario.usuImagem + '>',
             onClose: function() {
               //localizacao.mapa.setClickable(true);
             }
@@ -48,51 +49,53 @@ var notificacoes = {
   },
 
   unregister: function() {
-    try {
-      var push = window.plugins.pushNotification;
-      push.unregister(
-        function(e) {
-          console.log('success');
-        },
-        function(e) {
-          console.log('error');
-        });
-    } catch (err) {
-      alert(err);
+      try {
+        var push = window.plugins.pushNotification;
+        push.unregister(
+          function(e) {
+            console.log('success');
+          },
+          function(e) {
+            console.log('error');
+          });
+      } catch (err) {
+        alert(err);
+      }
     }
-  },
-
-  enviaTokenFcm: function() {
-    //alert('enviaTokenFcm: '+usuario.getTokenFcm());
-    try {
-      var url = config.getApi() + '/usuario/update/' + usuarioController.getIdGoogle();
-      //alert('url:'+url);
-      $.ajax({
-        url: url,
-        headers: {
-          "idtoken": usuarioController.getIdToken()
-        },
-        data: {
-          'usuTokenFcm': usuarioController.getTokenFcm()
-        },
-        method: "GET",
-        contentType: "application/json",
-        beforeSend: function() {
-          myApp.showIndicator();
-        },
-        success: function(data, status, xhr) {
-          //alert('success: \nstatus:' + JSON.stringify(status)+'\ndata:' + JSON.stringify(data));
-        },
-        error: function(data, status, xhr) {
-          alert('error: \nstatus:' + JSON.stringify(status) +
-            '\ndata:' + JSON.stringify(data));
-        },
-        complete: function(xhr, status) {
-          myApp.hideIndicator();
-        }
-      });
-    } catch (err) {
-      alert('Erro enviaTokenFcm: ' + err);
-    }
-  }
+    //
+    // ,
+    //
+    // enviaTokenFcm: function() {
+    //   //alert('enviaTokenFcm: '+usuario.getTokenFcm());
+    //   try {
+    //     var url = config.getApi() + '/usuario/update/me';
+    //     //alert('url:'+url);
+    //     $.ajax({
+    //       url: url,
+    //       headers: {
+    //         "idtoken": usuarioController.idToken
+    //       },
+    //       data: {
+    //         'usuTokenFcm': usuarioController.usuario.usuTokenFcm
+    //       },
+    //       method: "GET",
+    //       contentType: "application/json",
+    //       beforeSend: function() {
+    //         myApp.showIndicator();
+    //       },
+    //       success: function(data, status, xhr) {
+    //         //alert('success: \nstatus:' + JSON.stringify(status)+'\ndata:' + JSON.stringify(data));
+    //       },
+    //       error: function(data, status, xhr) {
+    //         alert('error: \nstatus:' + JSON.stringify(status) +
+    //           '\ndata:' + JSON.stringify(data));
+    //       },
+    //       complete: function(xhr, status) {
+    //         myApp.hideIndicator();
+    //       }
+    //     });
+    //   } catch (err) {
+    //     alert('Erro enviaTokenFcm: ' + err);
+    //   }
+    // }
 };
