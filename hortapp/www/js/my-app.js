@@ -1,10 +1,12 @@
 var myApp = new Framework7({
     pushState: true,
     sortable: false,
-    modalTitle: "HortApp",
     scrollTopOnNavbarClick: true,
     animateNavBackIcon: true,
     swipePanel: 'left',
+    /*MODAL*/
+    modalTitle: "HortApp",
+    modalButtonCancel: "Cancelar",
     /*NOTIFICATION*/
     notificationTitle: "HortApp",
     notificationHold: 5000,

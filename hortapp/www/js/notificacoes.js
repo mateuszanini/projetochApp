@@ -63,18 +63,21 @@ var notificacoes = {
   },
 
   enviaTokenFcm: function() {
-    //alert('enviaTokenFcm: '+usuario.getTokenFcm());
+    var dados = {
+      "usuario": {
+        "usuTokenFcm": usuarioController.getTokenFcm()
+      }
+    };
+
     try {
-      var url = config.getApi() + '/usuario/update/' + usuarioController.getIdGoogle();
+      var url = config.getApi() + '/usuario/update/me';
       //alert('url:'+url);
       $.ajax({
         url: url,
         headers: {
           "idtoken": usuarioController.getIdToken()
         },
-        data: {
-          'usuTokenFcm': usuarioController.getTokenFcm()
-        },
+        data: dados,
         method: "GET",
         contentType: "application/json",
         beforeSend: function() {
