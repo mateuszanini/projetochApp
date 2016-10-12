@@ -62,40 +62,4 @@ var notificacoes = {
         alert(err);
       }
     }
-    //
-    // ,
-    //
-    // enviaTokenFcm: function() {
-    //   //alert('enviaTokenFcm: '+usuario.getTokenFcm());
-    //   try {
-    //     var url = config.getApi() + '/usuario/update/me';
-    //     //alert('url:'+url);
-    //     $.ajax({
-    //       url: url,
-    //       headers: {
-    //         "idtoken": usuarioController.idToken
-    //       },
-    //       data: {
-    //         'usuTokenFcm': usuarioController.usuario.usuTokenFcm
-    //       },
-    //       method: "GET",
-    //       contentType: "application/json",
-    //       beforeSend: function() {
-    //         myApp.showIndicator();
-    //       },
-    //       success: function(data, status, xhr) {
-    //         //alert('success: \nstatus:' + JSON.stringify(status)+'\ndata:' + JSON.stringify(data));
-    //       },
-    //       error: function(data, status, xhr) {
-    //         alert('error: \nstatus:' + JSON.stringify(status) +
-    //           '\ndata:' + JSON.stringify(data));
-    //       },
-    //       complete: function(xhr, status) {
-    //         myApp.hideIndicator();
-    //       }
-    //     });
-    //   } catch (err) {
-    //     alert('Erro enviaTokenFcm: ' + err);
-    //   }
-    // }
 };

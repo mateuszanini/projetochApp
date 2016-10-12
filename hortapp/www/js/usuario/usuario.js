@@ -56,6 +56,11 @@ var usuario = {
                 }
             }
         });
+        $("#btnPesquisarLocalizacao").click(function() {
+            myApp.prompt('Digite uma localização para pesquisar', function(value) {
+                localizacao.geocodeAddress(value);
+            });
+        });
         $("#usuSalvar").click(function() {
             var formData = myApp.formToJSON('#usuFormulario');
             alert(JSON.stringify(formData));
@@ -68,10 +73,22 @@ var usuario = {
         $('.mapa').toggleClass('hide');
         $('.mapa').toggleClass('animated zoomIn');
         if ($("#usuLocalizacaoAtual").is(":checked")) {
+            mainView.hideToolbar();
             localizacao.initMap(document.getElementById("mapCanvas"));
         } else {
             localizacao.mapa = null;
+            mainView.showToolbar();
         }
+        /*
+        results[0].formatted_address: "275-291 Bedford Ave, Brooklyn, NY 11211, USA",
+        results[1].formatted_address: "Williamsburg, NY, USA",
+        results[2].formatted_address: "New York 11211, USA",
+        results[3].formatted_address: "Kings, New York, USA",
+        results[4].formatted_address: "Brooklyn, New York, USA",
+        results[5].formatted_address: "New York, New York, USA",
+        results[6].formatted_address: "New York, USA",
+        results[7].formatted_address: "United States"
+        */
     },
 
     listaEstados: function(ufSigla) {
