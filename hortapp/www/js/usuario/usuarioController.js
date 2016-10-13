@@ -17,7 +17,7 @@ var usuarioController = {
       usuIdGoogle: null,
       usuTokenFcm: null,
       usuEndVisivel: null,
-      usuTelefone: null,
+      usuTelefone: "91347498",
       usuTelefoneVisivel: null,
     };
 
@@ -95,15 +95,21 @@ var usuarioController = {
     var dados = {
       usuario, endereco
     };
+
     try {
-      $.ajax({
+      // $$.post(config.getApi() + '/usuario/update/me', dados, function(data) {
+      //   alert('FOI!');
+      // });
+
+      $$.ajax({
         url: config.getApi() + '/usuario/update/me',
         headers: {
           "idtoken": usuarioController.idToken
         },
         data: dados,
-        method: "GET",
-        contentType: "application/json",
+        type: "POST",
+        dataType: undefined,
+        // contentType: "application/json",
         beforeSend: function() {
           myApp.showIndicator();
         },
