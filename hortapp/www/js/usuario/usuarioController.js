@@ -101,13 +101,13 @@ var usuarioController = {
       //   alert('FOI!');
       // });
 
-      $$.ajax({
+      $.ajax({
         url: config.getApi() + '/usuario/update/me',
         headers: {
           "idtoken": usuarioController.idToken
         },
         data: dados,
-        type: "POST",
+        type: "GET",
         dataType: undefined,
         // contentType: "application/json",
         beforeSend: function() {

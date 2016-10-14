@@ -10,7 +10,10 @@ var myApp = new Framework7({
   /*NOTIFICATION*/
   notificationTitle: "HortApp",
   notificationHold: 5000,
-  notificationCloseOnClick: false
+  notificationCloseOnClick: false,
+  onAjaxStart: function() {
+    alert("enviando");
+  }
 });
 
 var $$ = Dom7;
