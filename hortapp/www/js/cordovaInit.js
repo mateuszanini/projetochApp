@@ -79,3 +79,4 @@ var app = {
   }
 };
 app.initialize();
+usuarioController.initialize(null);

@@ -20,9 +20,8 @@ var mainView = myApp.addView('.view-main', {
     dynamicNavbar: true
 });
 
-myApp.onPageInit('meuPerfil', function(page){
-  usuario.initialize();
-  usuario.listaEstados("SC");
-  usuario.listaCidades(0);
-  usuarioController.initialize(null);
+myApp.onPageInit('meuPerfil', function(page) {
+    usuario.initialize();
+    usuario.listaEstados("SC");
+    usuario.listaCidades(0);
 });

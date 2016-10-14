@@ -20,13 +20,20 @@ var usuarioController = {
       usuTelefone: null,
       usuTelefoneVisivel: null,
     };
-    return;
+
     //inicializa os objetos com os dados vindos da Google
-    this.idToken = perfil['idToken'];
+    /*this.idToken = perfil['idToken'];
     this.usuario.usuEmail = perfil['email'];
     this.usuario.usuNome = perfil['displayName'];
-    this.usuario.usuImagem = perfil['imageUrl'];
+    this.usuario.usuImagem = perfil['imageUrl'];*/
+    this.usuario.usuEmail = "mateus.zanini.gl@gmail.com";
+    this.usuario.usuNome = "Mateus Zanini";
+    this.usuario.usuImagem = "http://rubberchickengames.com/wp-content/uploads/2016/05/Rambo-1.png";
 
+    $("#usuNome").html(this.usuario.usuNome);
+    $("#usuImagem").css("background-image", "url('" + this.usuario.usuImagem + "')");
+
+    return;
     //this.usuario.serverAuthCode = perfil['serverAuthCode'];
     // this.usuario.familyName = perfil['familyName'];
     // this.usuario.givemName = perfil['givemName'];
