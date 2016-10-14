@@ -21,7 +21,6 @@
         <form id="usuFormulario" class="list-block">
             <div class="list-block accordion-list">
                 <ul>
-
                     <li class="accordion-item">
                         <a href="#" class="item-content item-link">
                             <div class="item-inner color-blue">
@@ -89,7 +88,7 @@
                                     </div>
                                 </li>
                             </ul>
-                            <div class="content-block ">
+                            <div class="content-block">
                                 <div class="row hide mapa">
                                     <!--<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0P239oFuH1QHiBM91-nmQo435XFcDKfs&q=Space+Needle,Seattle+WA" allowfullscreen></iframe>
                                     <input id="endereco" type="textbox" value="">
@@ -98,6 +97,8 @@
                                         <a href="#" class="button col-100" id="btnPesquisarLocalizacao"><i class="fa fa-search" aria-hidden="true"></i>&nbspPesquisar localização</a>
                                     </div>
                                     <div id="mapCanvas"></div>
+                                    <div class="usuLocalizacao color-blue">
+                                    </div>
                                 </div>
 
                                 <div class="row content-block divisor animated zoomIn">
@@ -110,74 +111,76 @@
                                     </div>
                                 </div>
                             </div>
-                            <ul>
-                                <li>
-                                    <div class="item-content">
-                                        <div class="item-inner">
-                                            <div class="item-title label">CEP</div>
-                                            <div class="item-input">
-                                                <input type="number" name="usuCep" id="usuCep" placeholder="00000-000">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="#" class="item-link smart-select" data-open-in="popup" data-popup-close-text="Voltar" data-back-on-select="true" data-searchbar="true" data-searchbar-placeholder="Pesquisar Estados" data-searchbar-cancel="Cancelar">
-                                        <select name="ufCodigo" id="ufCodigo">
-
-                                        </select>
+                            <div class="usuEndereco animated fadeInRight">
+                                <ul>
+                                    <li>
                                         <div class="item-content">
                                             <div class="item-inner">
-                                                <div class="item-title">Estado</div>
-                                                <div class="item-after" id="estadoSelecionado"></div>
+                                                <div class="item-title label">CEP</div>
+                                                <div class="item-input">
+                                                    <input type="number" name="usuCep" id="usuCep" placeholder="00000-000">
+                                                </div>
                                             </div>
                                         </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="item-link smart-select" data-open-in="popup" data-popup-close-text="Voltar" data-back-on-select="true" data-searchbar="true" data-searchbar-placeholder="Pesquisar Cidades" data-searchbar-cancel="Cancelar">
-                                        <select name="cidCodigo" id="cidCodigo" class="text-capitalize">
+                                    </li>
+                                    <li>
+                                        <a href="#" class="item-link smart-select" data-open-in="popup" data-popup-close-text="Voltar" data-back-on-select="true" data-searchbar="true" data-searchbar-placeholder="Pesquisar Estados" data-searchbar-cancel="Cancelar">
+                                            <select name="ufCodigo" id="ufCodigo">
 
                                         </select>
+                                            <div class="item-content">
+                                                <div class="item-inner">
+                                                    <div class="item-title">Estado</div>
+                                                    <div class="item-after" id="estadoSelecionado"></div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="item-link smart-select" data-open-in="popup" data-popup-close-text="Voltar" data-back-on-select="true" data-searchbar="true" data-searchbar-placeholder="Pesquisar Cidades" data-searchbar-cancel="Cancelar">
+                                            <select name="cidCodigo" id="cidCodigo" class="text-capitalize">
+
+                                        </select>
+                                            <div class="item-content">
+                                                <div class="item-inner">
+                                                    <div class="item-title">Cidade</div>
+                                                    <div class="item-after" id="cidadeSelecionada"></div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <div class="item-content">
                                             <div class="item-inner">
-                                                <div class="item-title">Cidade</div>
-                                                <div class="item-after" id="cidadeSelecionada"></div>
+                                                <div class="item-title label">Bairro</div>
+                                                <div class="item-input">
+                                                    <input type="text" name="endBairro" id="endBairro" placeholder="Bairro">
+                                                </div>
                                             </div>
                                         </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="item-content">
-                                        <div class="item-inner">
-                                            <div class="item-title label">Bairro</div>
-                                            <div class="item-input">
-                                                <input type="text" name="endBairro" id="endBairro" placeholder="Bairro">
+                                    </li>
+                                    <li>
+                                        <div class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title label">Logradouro</div>
+                                                <div class="item-input">
+                                                    <input type="text" name="endLogradouro" id="endLogradouro" placeholder="Logradouro">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item-content">
-                                        <div class="item-inner">
-                                            <div class="item-title label">Logradouro</div>
-                                            <div class="item-input">
-                                                <input type="text" name="endLogradouro" id="endLogradouro" placeholder="Logradouro">
+                                    </li>
+                                    <li>
+                                        <div class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title label">Número</div>
+                                                <div class="item-input">
+                                                    <input type="text" name="endNumero" id="endNumero" placeholder="Numero">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item-content">
-                                        <div class="item-inner">
-                                            <div class="item-title label">Número</div>
-                                            <div class="item-input">
-                                                <input type="text" name="endNumero" id="endNumero" placeholder="Numero">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </li>
 

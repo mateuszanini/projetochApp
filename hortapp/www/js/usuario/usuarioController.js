@@ -9,7 +9,6 @@ var usuarioController = {
       endLatitude: null,
       endLongitude: null,
     };
-
     this.usuario = {
       usuEmail: null,
       usuNome: null,
@@ -17,10 +16,9 @@ var usuarioController = {
       usuIdGoogle: null,
       usuTokenFcm: null,
       usuEndVisivel: null,
-      usuTelefone: "91347498",
+      usuTelefone: null,
       usuTelefoneVisivel: null,
     };
-
     //inicializa os objetos com os dados vindos da Google
     this.idToken = perfil['idToken'];
     this.usuario.usuEmail = perfil['email'];

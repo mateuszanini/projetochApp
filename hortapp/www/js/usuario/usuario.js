@@ -21,9 +21,19 @@ var usuario = {
             });
         });
         $("#usuSalvar").click(function() {
-            var formData = myApp.formToJSON('#usuFormulario');
-            alert(JSON.stringify(formData));
+            usuario.salvar();
         });
+    },
+
+    salvar: function() {
+        if ($("#usuLocalizacaoAtual").is(":checked")) {
+            myScript.notificacao("Dados do formulário", "Latitude: " + usuarioController.endereco.endLatitude
+             + " / Longitude: " + usuarioController.endereco.endLongitude, true);
+        } else {
+            var formData = myApp.formToJSON('#usuFormulario');
+            myScript.notificacao("Dados do formulário", JSON.stringify(formData), true);
+        }
+        //usuarioController.salvar();
     },
 
     pesquisaCep: function(cep, tipo) {
@@ -60,6 +70,8 @@ var usuario = {
         $('.divisor').toggleClass('animated zoomIn');
         $('.mapa').toggleClass('hide');
         $('.mapa').toggleClass('animated zoomIn');
+        $('.usuEndereco').toggleClass('hide');
+
         if ($("#usuLocalizacaoAtual").is(":checked")) {
             mainView.hideToolbar();
             localizacao.initMap(document.getElementById("mapCanvas"));
@@ -67,16 +79,6 @@ var usuario = {
             localizacao.mapa = null;
             mainView.showToolbar();
         }
-        /*
-        results[0].formatted_address: "275-291 Bedford Ave, Brooklyn, NY 11211, USA",
-        results[1].formatted_address: "Williamsburg, NY, USA",
-        results[2].formatted_address: "New York 11211, USA",
-        results[3].formatted_address: "Kings, New York, USA",
-        results[4].formatted_address: "Brooklyn, New York, USA",
-        results[5].formatted_address: "New York, New York, USA",
-        results[6].formatted_address: "New York, USA",
-        results[7].formatted_address: "United States"
-        */
     },
 
     listaEstados: function(ufSigla) {
