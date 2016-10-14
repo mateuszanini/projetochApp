@@ -24,4 +24,5 @@ myApp.onPageInit('meuPerfil', function(page){
   usuario.initialize();
   usuario.listaEstados("SC");
   usuario.listaCidades(0);
+  usuarioController.initialize(null);
 });
