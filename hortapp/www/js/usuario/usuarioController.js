@@ -5,7 +5,9 @@ var usuarioController = {
       endLogradouro: null,
       endBairro: null,
       endNumero: null,
+      endCep: null,
       cidCodigo: null,
+      ufCodigo: null,
       endLatitude: null,
       endLongitude: null,
     };
@@ -43,7 +45,7 @@ var usuarioController = {
           //dispara envento avisando que o login foi concluido
           document.dispatchEvent(app.evtAutenticado);
           try {
-            // alert("Dados recebidos: \n"+JSON.stringify(data.data));
+            // alert("Dados recebidos: \n" + JSON.stringify(data.data));
             if (data.data.usuario) {
               usuarioController.usuario.usuTelefone =
                 data.data.usuario['usuTelefone'];
@@ -64,14 +66,22 @@ var usuarioController = {
               usuarioController.endereco.endNumero =
                 data.data.endereco['endNumero'];
 
+              usuarioController.endereco.endCep =
+                data.data.endereco['endCep'];
+
               usuarioController.endereco.cidCodigo =
                 data.data.endereco['cidCodigo'];
 
+              usuarioController.endereco.ufCodigo =
+                data.data.endereco['ufCodigo'];
+
               usuarioController.endereco.endLatitude =
                 data.data.endereco['endLatitude'];
+              localizacao.latitude = usuarioController.endereco.endLatitude;
 
               usuarioController.endereco.endLongitude =
                 data.data.endereco['endLongitude'];
+              localizacao.longitude = usuarioController.endereco.endLongitude;
             }
             if (data.data.completarCadastro) {
               myScript.notificacao("Dados incompletos",
@@ -89,6 +99,10 @@ var usuarioController = {
         complete: function(xhr, status) {
           myApp.hideIndicator();
           myApp.closeModal(loginScreen);
+          //altera a imagem e o nome no painel lateral
+          $('#painelUsuImagem').css('background-image', 'url(' +
+            usuarioController.usuario.usuImagem + ')');
+          $('#painelUsuNome').html(usuarioController.usuario.usuNome);
         }
       });
     } catch (err) {
@@ -110,12 +124,20 @@ var usuarioController = {
       endLogradouro: usuarioController.endereco.endLogradouro,
       endBairro: usuarioController.endereco.endBairro,
       endNumero: usuarioController.endereco.endNumero,
+      endCep: usuarioController.endereco.endCep,
       cidCodigo: usuarioController.endereco.cidCodigo,
+      ufCodigo: usuarioController.endereco.ufCodigo,
       endLatitude: usuarioController.endereco.endLatitude,
       endLongitude: usuarioController.endereco.endLongitude,
     };
 
     //deleta as propriedades nulas
+    for (var k in usuario) {
+      if (usuario[k] === null) {
+        delete usuario[k];
+      }
+    }
+
     for (var k in endereco) {
       if (endereco[k] === null) {
         delete endereco[k];
