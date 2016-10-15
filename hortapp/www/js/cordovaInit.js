@@ -29,7 +29,6 @@ var app = {
     }
     config.initialize();
     autenticacao.initialize();
-    //app.autenticado();
   },
   autenticado: function() {
     try {
@@ -78,4 +77,3 @@ var app = {
   }
 };
 app.initialize();
-usuarioController.initialize(null);

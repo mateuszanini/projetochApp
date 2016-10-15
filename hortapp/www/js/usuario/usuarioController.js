@@ -41,12 +41,45 @@ var usuarioController = {
         },
         success: function(data) {
           //dispara envento avisando que o login foi concluido
+          document.dispatchEvent(app.evtAutenticado);
           try {
-            document.dispatchEvent(app.evtAutenticado);
+            // alert("Dados recebidos: \n"+JSON.stringify(data.data));
+            if (data.data.usuario) {
+              usuarioController.usuario.usuTelefone =
+                data.data.usuario['usuTelefone'];
+
+              usuarioController.usuario.usuTelefoneVisivel =
+                data.data.usuario['usuTelefoneVisivel'];
+
+              usuarioController.usuario.usuEndVisivel =
+                data.data.usuario['usuEndVisivel'];
+            }
+            if (data.data.endereco) {
+              usuarioController.endereco.endLogradouro =
+                data.data.endereco['endLogradouro'];
+
+              usuarioController.endereco.endBairro =
+                data.data.endereco['endBairro'];
+
+              usuarioController.endereco.endNumero =
+                data.data.endereco['endNumero'];
+
+              usuarioController.endereco.cidCodigo =
+                data.data.endereco['cidCodigo'];
+
+              usuarioController.endereco.endLatitude =
+                data.data.endereco['endLatitude'];
+
+              usuarioController.endereco.endLongitude =
+                data.data.endereco['endLongitude'];
+            }
+            if (data.data.completarCadastro) {
+              myScript.notificacao("Dados incompletos",
+                "Você deve completar seu cadastro");
+            }
           } catch (err) {
-            alert('Erro ao disparar o evento:' + err);
+            alert('Erro no success do /usuario/login :' + err);
           }
-          //alert('success: \nstatus:' + JSON.stringify(status)+'\ndata:' + JSON.stringify(data));
         },
         error: function(data, status, xhr) {
           alert('error: \nstatus:' + JSON.stringify(status) +
@@ -83,16 +116,16 @@ var usuarioController = {
     };
 
     //deleta as propriedades nulas
-    for (var k in usuarioController.endereco) {
-      if (usuarioController.endereco[k] === null) {
-        delete usuarioController.endereco[k];
+    for (var k in endereco) {
+      if (endereco[k] === null) {
+        delete endereco[k];
       }
     }
 
     var dados = {
       usuario, endereco
     };
-
+    // alert("Dados a serem enviados:\n" + JSON.stringify(dados));
     try {
       // $$.post(config.getApi() + '/usuario/update/me', dados, function(data) {
       //   alert('FOI!');
