@@ -45,7 +45,7 @@ var usuarioController = {
           //dispara envento avisando que o login foi concluido
           document.dispatchEvent(app.evtAutenticado);
           try {
-            // alert("Dados recebidos: \n" + JSON.stringify(data.data));
+            // alert("Dados recebidos: \n" + JSON.stringify(data.data.usuario));
             if (data.data.usuario) {
               usuarioController.usuario.usuTelefone =
                 data.data.usuario['usuTelefone'];

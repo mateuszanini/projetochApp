@@ -3,9 +3,11 @@ var usuario = {
     $("#usuLocalizacaoAtual").change(function() {
       usuario.mostraMapa();
     });
+
     $("#ufCodigo").change(function() {
       usuario.listaCidades(0);
     });
+
     $("#endCep").keyup(function() {
       var cep = $(this).val().replace(/\D/g, '');
       if (cep.length == 8) {
@@ -15,6 +17,7 @@ var usuario = {
         }
       }
     });
+
     $("#btnPesquisarLocalizacao").click(function() {
       myApp.prompt('Digite uma localização para pesquisar', function(
         value) {
@@ -34,6 +37,18 @@ var usuario = {
     $("#usuEmail").val(usuarioController.usuario.usuEmail);
     $("#usuTelefone").val(usuarioController.usuario.usuTelefone);
 
+    if (usuarioController.usuario.usuTelefoneVisivel === 1) {
+      $('#usuTelefoneVisivel').prop('checked', true);
+    } else {
+      $('#usuTelefoneVisivel').prop('checked', false);
+    }
+
+    if (usuarioController.usuario.usuEndVisivel === 1) {
+      $('#usuEndVisivel').prop('checked', true);
+    } else {
+      $('#usuEndVisivel').prop('checked', false);
+    }
+
     if (usuarioController.endereco.endLatitude !== null &&
       usuarioController.endereco.endLongitude !== null) {
       $('#usuLocalizacaoAtual').prop('checked', true);
@@ -45,12 +60,42 @@ var usuario = {
       $("#endNumero").val(usuarioController.endereco.endNumero);
     }
 
-    //usuario.listaCidades(usuarioController.endereco.cidCodigo);
     usuario.listaEstados(usuarioController.endereco.ufCodigo);
     usuario.listaCidades(usuarioController.endereco.cidCodigo);
   },
 
   salvar: function() {
+
+    try {
+      var formData = myApp.formToJSON('#usuFormulario');
+      // alert(JSON.stringify(formData));
+
+      usuarioController.usuario.usuTelefone = formData['usuTelefone'];
+
+      if (formData['usuTelefoneVisivel'][0]) {
+        usuarioController.usuario.usuTelefoneVisivel = 1;
+      } else {
+        usuarioController.usuario.usuTelefoneVisivel = 0;
+
+      }
+      if (formData['usuEndVisivel'][0]) {
+        usuarioController.usuario.usuEndVisivel = 1;
+      } else {
+        usuarioController.usuario.usuEndVisivel = 0;
+      }
+
+      // alert(JSON.stringify(usuarioController.usuario ));
+
+      usuarioController.endereco.endLogradouro = formData['endLogradouro'];
+      usuarioController.endereco.endBairro = formData['endBairro'];
+      usuarioController.endereco.endNumero = formData['endNumero'];
+      usuarioController.endereco.endCep = formData['endCep'];
+      usuarioController.endereco.cidCodigo = formData['cidCodigo'];
+      usuarioController.endereco.ufCodigo = formData['ufCodigo'];
+    } catch (err) {
+      alert("Erro ao capturar os dados do formulário: " + err);
+    }
+
     if ($("#usuLocalizacaoAtual").is(":checked")) {
       usuarioController.endereco.endLogradouro = "";
       usuarioController.endereco.endBairro = "";
@@ -62,28 +107,10 @@ var usuario = {
       //   usuarioController.endereco.endLatitude + " / Longitude: " +
       //   usuarioController.endereco.endLongitude, true);
     } else {
-      var formData = myApp.formToJSON('#usuFormulario');
-      try {
-        usuarioController.usuario.usuTelefone = formData['usuTelefone'];
-        usuarioController.usuario.usuTelefoneVisivel =
-          formData['usuTelefoneVisivel'];
-        usuarioController.usuario.usuEndVisivel = formData['usuEndVisivel'];
-        usuarioController.endereco.endLogradouro = formData['endLogradouro'];
-        usuarioController.endereco.endBairro = formData['endBairro'];
-        usuarioController.endereco.endNumero = formData['endNumero'];
-        usuarioController.endereco.endCep = formData['endCep'];
-        usuarioController.endereco.cidCodigo = formData['cidCodigo'];
-        usuarioController.endereco.ufCodigo = formData['ufCodigo'];
-
-        usuarioController.endereco.endLatitude = null;
-        usuarioController.endereco.endLongitude = null;
-
-      } catch (err) {
-        alert("Erro ao capturar os dados do formulário: " + err);
-      }
-      // myScript.notificacao("Dados do formulário", JSON.stringify(formData),
-      //   true);
+      usuarioController.endereco.endLatitude = null;
+      usuarioController.endereco.endLongitude = null;
     }
+
     usuarioController.salvar();
   },
 
