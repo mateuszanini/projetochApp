@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <meta http-equiv="Content-Security-Policy" content="connect-src *;"/>
     <!-- Your app title -->
     <title>HortApp</title>
     <!-- Path to Framework7 iOS CSS theme styles-->
@@ -28,13 +30,13 @@
     <div class="panel panel-left panel-reveal bg-white">
         <div class="row bg-lightblue color-white">
             <div class="round">
-                <div style="background-image: url('img/avatar/avatar.jpg');"></div>
+                <div id="painelUsuImagem" style="background-image: url('img/avatar/avatar.jpg');"></div>
             </div>
         </div>
         <div class="row bg-lightblue color-white">
             <div class="col-100 text-center">
                 <p>
-                    <h2>Kevin Minion</h2></p>
+                    <h2 id="painelUsuNome"></h2></p>
             </div>
         </div>
         <div class="list-block">
@@ -58,7 +60,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="item-link item-content">
+                    <a href="#" class="item-link item-content open-login-screen">
                         <div class="item-media"><i class="fa fa-cog" aria-hidden="true"></i></div>
                         <div class="item-inner">
                             <div class="item-title">Configurações</div>
@@ -194,6 +196,7 @@
     <script type="text/javascript" src="js/usuario/autenticacao.js"></script>
     <script type="text/javascript" src="js/localizacao.js"></script>
     <script type="text/javascript" src="js/notificacoes.js"></script>
+    <script type="text/javascript" src="js/my-script.js"></script>
     <!-- JSON Estados e Cidades-->
     <script type="text/javascript" src="js/usuario/uf.js"></script>
     <script type="text/javascript" src="js/usuario/usuario.js"></script>

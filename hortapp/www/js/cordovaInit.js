@@ -11,7 +11,6 @@ var app = {
   bindEvents: function() {
     document.addEventListener('deviceready', this.onDeviceReady, false);
     document.addEventListener('autenticado', this.autenticado);
-
   },
   // deviceready Event Handler
   //
@@ -30,7 +29,6 @@ var app = {
     }
     config.initialize();
     autenticacao.initialize();
-    //app.autenticado();
   },
   autenticado: function() {
     try {

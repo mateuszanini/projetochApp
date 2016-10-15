@@ -1,30 +1,40 @@
 var usuarioController = {
-  // var usuEmail = null;
-  // var usuNome = null;
-  // var usuIdGoogle = null;
-  // var usuImagem = null;
-  // var usuTokenFcm = null;
-  // var idToken = null;
-  // var serverAuthCode = null;
-  // var familyName = null;
-  // var givemName = null;
-
   initialize: function(perfil) {
-    this.usuEmail = perfil['email'];
-    this.usuNome = perfil['displayName'];
-    this.usuImagem = perfil['imageUrl'];
-    this.usuIdGoogle = perfil['userId'];
-
+    //define os objetos
+    this.endereco = {
+      endLogradouro: null,
+      endBairro: null,
+      endNumero: null,
+      endCep: null,
+      cidCodigo: null,
+      ufCodigo: null,
+      endLatitude: null,
+      endLongitude: null,
+    };
+    this.usuario = {
+      usuEmail: null,
+      usuNome: null,
+      usuImagem: null,
+      usuIdGoogle: null,
+      usuTokenFcm: null,
+      usuEndVisivel: null,
+      usuTelefone: null,
+      usuTelefoneVisivel: null,
+    };
+    //inicializa os objetos com os dados vindos da Google
     this.idToken = perfil['idToken'];
-    this.serverAuthCode = perfil['serverAuthCode'];
-    this.familyName = perfil['familyName'];
-    this.givemName = perfil['givemName'];
-    //alert(JSON.stringify(this));
+    this.usuario.usuEmail = perfil['email'];
+    this.usuario.usuNome = perfil['displayName'];
+    this.usuario.usuImagem = perfil['imageUrl'];
+    //this.usuario.serverAuthCode = perfil['serverAuthCode'];
+    // this.usuario.familyName = perfil['familyName'];
+    // this.usuario.givemName = perfil['givemName'];
+    this.usuario.usuIdGoogle = perfil['userId'];
     try {
       $.ajax({
         url: config.getApi() + '/usuario/login',
         headers: {
-          "idtoken": usuarioController.getIdToken()
+          "idtoken": usuarioController.idToken
         },
         method: "GET",
         contentType: "application/json",
@@ -33,12 +43,53 @@ var usuarioController = {
         },
         success: function(data) {
           //dispara envento avisando que o login foi concluido
+          document.dispatchEvent(app.evtAutenticado);
           try {
-            document.dispatchEvent(app.evtAutenticado);
+            // alert("Dados recebidos: \n" + JSON.stringify(data.data.usuario));
+            if (data.data.usuario) {
+              usuarioController.usuario.usuTelefone =
+                data.data.usuario['usuTelefone'];
+
+              usuarioController.usuario.usuTelefoneVisivel =
+                data.data.usuario['usuTelefoneVisivel'];
+
+              usuarioController.usuario.usuEndVisivel =
+                data.data.usuario['usuEndVisivel'];
+            }
+            if (data.data.endereco) {
+              usuarioController.endereco.endLogradouro =
+                data.data.endereco['endLogradouro'];
+
+              usuarioController.endereco.endBairro =
+                data.data.endereco['endBairro'];
+
+              usuarioController.endereco.endNumero =
+                data.data.endereco['endNumero'];
+
+              usuarioController.endereco.endCep =
+                data.data.endereco['endCep'];
+
+              usuarioController.endereco.cidCodigo =
+                data.data.endereco['cidCodigo'];
+
+              usuarioController.endereco.ufCodigo =
+                data.data.endereco['ufCodigo'];
+
+              usuarioController.endereco.endLatitude =
+                data.data.endereco['endLatitude'];
+              localizacao.latitude = usuarioController.endereco.endLatitude;
+
+              usuarioController.endereco.endLongitude =
+                data.data.endereco['endLongitude'];
+              localizacao.longitude = usuarioController.endereco.endLongitude;
+            }
+            if (data.data.completarCadastro) {
+              myScript.notificacao("Dados incompletos",
+                "Você deve completar seu cadastro");
+            }
           } catch (err) {
-            alert('Erro ao disparar o evento:' + err);
+            alert('Erro no success do /usuario/login :' + err);
           }
-          //alert('success: \nstatus:' + JSON.stringify(status)+'\ndata:' + JSON.stringify(data));
         },
         error: function(data, status, xhr) {
           alert('error: \nstatus:' + JSON.stringify(status) +
@@ -48,6 +99,10 @@ var usuarioController = {
         complete: function(xhr, status) {
           myApp.hideIndicator();
           myApp.closeModal(loginScreen);
+          //altera a imagem e o nome no painel lateral
+          $('#painelUsuImagem').css('background-image', 'url(' +
+            usuarioController.usuario.usuImagem + ')');
+          $('#painelUsuNome').html(usuarioController.usuario.usuNome);
         }
       });
     } catch (err) {
@@ -55,23 +110,75 @@ var usuarioController = {
     }
   },
 
-  getIdGoogle: function() {
-    //alert("Solicitando usuIdGoogle: "+ this.usuIdGoogle);
-    return this.usuIdGoogle;
-  },
-  getIdToken: function() {
-    return this.idToken;
-  },
+  //envia alterações para salvar no banco de dados
+  salvar: function() {
+    //cria variaveis para montar o json que sera enviado ao banco.
+    //desta forma somente os campos interessados sao enviados
+    var usuario = {
+      usuTokenFcm: usuarioController.usuario.usuTokenFcm,
+      usuEndVisivel: usuarioController.usuario.usuEndVisivel,
+      usuTelefone: usuarioController.usuario.usuTelefone,
+      usuTelefoneVisivel: usuarioController.usuario.usuTelefoneVisivel,
+    };
+    var endereco = {
+      endLogradouro: usuarioController.endereco.endLogradouro,
+      endBairro: usuarioController.endereco.endBairro,
+      endNumero: usuarioController.endereco.endNumero,
+      endCep: usuarioController.endereco.endCep,
+      cidCodigo: usuarioController.endereco.cidCodigo,
+      ufCodigo: usuarioController.endereco.ufCodigo,
+      endLatitude: usuarioController.endereco.endLatitude,
+      endLongitude: usuarioController.endereco.endLongitude,
+    };
 
-  setTokenFcm: function(token) {
-    try {
-      this.usuTokenFcm = token;
-    } catch (err) {
-      alert('Erro no setTokenFcm: ' + err);
+    //deleta as propriedades nulas
+    for (var k in usuario) {
+      if (usuario[k] === null) {
+        delete usuario[k];
+      }
     }
-  },
 
-  getTokenFcm: function() {
-    return this.usuTokenFcm;
+    for (var k in endereco) {
+      if (endereco[k] === null) {
+        delete endereco[k];
+      }
+    }
+
+    var dados = {
+      usuario, endereco
+    };
+    // alert("Dados a serem enviados:\n" + JSON.stringify(dados));
+    try {
+      // $$.post(config.getApi() + '/usuario/update/me', dados, function(data) {
+      //   alert('FOI!');
+      // });
+
+      $.ajax({
+        url: config.getApi() + '/usuario/update/me',
+        headers: {
+          "idtoken": usuarioController.idToken
+        },
+        data: dados,
+        type: "GET",
+        dataType: undefined,
+        // contentType: "application/json",
+        beforeSend: function() {
+          myApp.showIndicator();
+        },
+        success: function(data, status, xhr) {
+          //alert('success: \nstatus:' + JSON.stringify(status)+'\ndata:' + JSON.stringify(data));
+        },
+        error: function(data, status, xhr) {
+          alert('error: \nstatus:' + JSON.stringify(status) +
+            '\ndata:' + JSON.stringify(data));
+        },
+        complete: function(xhr, status) {
+          myApp.hideIndicator();
+        }
+      });
+    } catch (err) {
+      alert('Erro usuarioController.salvar: ' + err.message);
+    }
   }
+
 };

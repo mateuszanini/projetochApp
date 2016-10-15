@@ -18,10 +18,9 @@
 
 <div class="page" data-page="meuPerfil">
     <div class="page-content">
-        <form id="usuFormulario" class="list-block store-data">
+        <form id="usuFormulario" class="list-block">
             <div class="list-block accordion-list">
                 <ul>
-
                     <li class="accordion-item">
                         <a href="#" class="item-content item-link">
                             <div class="item-inner color-blue">
@@ -36,7 +35,7 @@
                                         <div class="item-inner">
                                             <div class="item-title label">Nome</div>
                                             <div class="item-input">
-                                                <input type="text" name="usuNome" id="usuNome" placeholder="Nome" value="Kevin Minion" disabled>
+                                                <input type="text" name="usuNome" id="usuNome" placeholder="Nome" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -47,7 +46,7 @@
                                         <div class="item-inner">
                                             <div class="item-title label">E-mail</div>
                                             <div class="item-input">
-                                                <input type="email" name="usuEmail" id="usuEmail" placeholder="E-mail" value="kevin.minion@gmail.com" disabled>
+                                                <input type="email" name="usuEmail" id="usuEmail" placeholder="E-mail" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -78,7 +77,7 @@
                                 <li>
                                     <div class="item-content">
                                         <div class="item-inner semBorda">
-                                            <div class="item-title label">Localização atual</div>
+                                            <div class="item-title label">Usar GPS</div>
                                             <div class="item-input">
                                                 <label class="label-switch">
                                                   <input type="checkbox" nome="usuLocalizacaoAtual" id="usuLocalizacaoAtual">
@@ -91,12 +90,19 @@
                             </ul>
                             <div class="content-block">
                                 <div class="row hide mapa">
-                                    <!--<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0P239oFuH1QHiBM91-nmQo435XFcDKfs&q=Space+Needle,Seattle+WA" allowfullscreen></iframe>-->
+                                    <!--<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0P239oFuH1QHiBM91-nmQo435XFcDKfs&q=Space+Needle,Seattle+WA" allowfullscreen></iframe>
                                     <input id="endereco" type="textbox" value="">
-                                    <input id="btnBuscar" type="button" value="Buscar">
-                                    <div style="height: 100%; width:100%;height:400px" id="mapCanvas"></div>
+                                    <input id="btnBuscar" type="button" value="Buscar">-->
+                                    <div class="row col-100 pesquisarLocalizacao">
+                                        <a href="#" class="button col-50" id="btnPesquisarLocalizacao"><i class="fa fa-search" aria-hidden="true"></i>&nbspPesquisar localização</a>
+                                        <a href="#" class="button col-50" id="btnLocalizacaoAtual"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbspLocalização Atual</a>
+                                    </div>
+                                    <div id="mapCanvas"></div>
+                                    <div class="usuLocalizacao color-blue">
+                                    </div>
                                 </div>
-                                <div class="row divisor animated zoomIn">
+
+                                <div class="row content-block divisor animated zoomIn">
                                     <div class="col-45">
                                         <hr>
                                     </div>
@@ -106,74 +112,76 @@
                                     </div>
                                 </div>
                             </div>
-                            <ul>
-                                <li>
-                                    <div class="item-content">
-                                        <div class="item-inner">
-                                            <div class="item-title label">CEP</div>
-                                            <div class="item-input">
-                                                <input type="number" name="usuCep" id="usuCep" placeholder="00000-000">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="#" class="item-link smart-select" data-open-in="popup" data-popup-close-text="Voltar" data-back-on-select="true" data-searchbar="true" data-searchbar-placeholder="Pesquisar Estados" data-searchbar-cancel="Cancelar">
-                                        <select name="ufCodigo" id="ufCodigo">
-
-                                        </select>
+                            <div class="usuEndereco animated fadeInRight">
+                                <ul>
+                                    <li>
                                         <div class="item-content">
                                             <div class="item-inner">
-                                                <div class="item-title">Estado</div>
-                                                <div class="item-after" id="estadoSelecionado"></div>
+                                                <div class="item-title label">CEP</div>
+                                                <div class="item-input">
+                                                    <input type="number" name="endCep" id="endCep" placeholder="00000-000">
+                                                </div>
                                             </div>
                                         </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="item-link smart-select" data-open-in="popup" data-popup-close-text="Voltar" data-back-on-select="true" data-searchbar="true" data-searchbar-placeholder="Pesquisar Cidades" data-searchbar-cancel="Cancelar">
-                                        <select name="cidCodigo" id="cidCodigo" class="text-capitalize">
+                                    </li>
+                                    <li>
+                                        <a href="#" class="item-link smart-select" data-open-in="popup" data-popup-close-text="Voltar" data-back-on-select="true" data-searchbar="true" data-searchbar-placeholder="Pesquisar Estados" data-searchbar-cancel="Cancelar">
+                                            <select name="ufCodigo" id="ufCodigo">
 
                                         </select>
+                                            <div class="item-content">
+                                                <div class="item-inner">
+                                                    <div class="item-title">Estado</div>
+                                                    <div class="item-after" id="estadoSelecionado"></div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="item-link smart-select" data-open-in="popup" data-popup-close-text="Voltar" data-back-on-select="true" data-searchbar="true" data-searchbar-placeholder="Pesquisar Cidades" data-searchbar-cancel="Cancelar">
+                                            <select name="cidCodigo" id="cidCodigo" class="text-capitalize">
+
+                                        </select>
+                                            <div class="item-content">
+                                                <div class="item-inner">
+                                                    <div class="item-title">Cidade</div>
+                                                    <div class="item-after" id="cidadeSelecionada"></div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <div class="item-content">
                                             <div class="item-inner">
-                                                <div class="item-title">Cidade</div>
-                                                <div class="item-after" id="cidadeSelecionada"></div>
+                                                <div class="item-title label">Bairro</div>
+                                                <div class="item-input">
+                                                    <input type="text" name="endBairro" id="endBairro" placeholder="Bairro">
+                                                </div>
                                             </div>
                                         </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="item-content">
-                                        <div class="item-inner">
-                                            <div class="item-title label">Bairro</div>
-                                            <div class="item-input">
-                                                <input type="text" name="endBairro" id="endBairro" placeholder="Bairro">
+                                    </li>
+                                    <li>
+                                        <div class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title label">Logradouro</div>
+                                                <div class="item-input">
+                                                    <input type="text" name="endLogradouro" id="endLogradouro" placeholder="Logradouro">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item-content">
-                                        <div class="item-inner">
-                                            <div class="item-title label">Logradouro</div>
-                                            <div class="item-input">
-                                                <input type="text" name="endLogradouro" id="endLogradouro" placeholder="Logradouro">
+                                    </li>
+                                    <li>
+                                        <div class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title label">Número</div>
+                                                <div class="item-input">
+                                                    <input type="text" name="endNumero" id="endNumero" placeholder="Numero">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item-content">
-                                        <div class="item-inner">
-                                            <div class="item-title label">Número</div>
-                                            <div class="item-input">
-                                                <input type="text" name="endNumero" id="endNumero" placeholder="Numero">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </li>
 
@@ -191,7 +199,7 @@
                             <ul>
                                 <li>
                                     <label class="label-checkbox item-content">
-                                      <input type="checkbox" name="usuTelefoneVisivel" value="true" checked="checked">
+                                      <input type="checkbox" name="usuTelefoneVisivel" id="usuTelefoneVisivel"  value="true">
                                       <div class="item-media">
                                           <i class="icon icon-form-checkbox"></i>
                                       </div>
@@ -208,7 +216,7 @@
                             <ul>
                                 <li>
                                     <label class="label-checkbox item-content">
-                                    <input type="checkbox" name="usuEndVisivel" value="true" checked="checked">
+                                    <input type="checkbox" name="usuEndVisivel" id="usuEndVisivel" value="true">
                                     <div class="item-media">
                                         <i class="icon icon-form-checkbox"></i>
                                     </div>
