@@ -37,13 +37,13 @@ var usuario = {
     $("#usuEmail").val(usuarioController.usuario.usuEmail);
     $("#usuTelefone").val(usuarioController.usuario.usuTelefone);
 
-    if (usuarioController.usuario.usuTelefoneVisivel === 1) {
+    if (usuarioController.usuario.usuTelefoneVisivel == 1) {
       $('#usuTelefoneVisivel').prop('checked', true);
     } else {
       $('#usuTelefoneVisivel').prop('checked', false);
     }
 
-    if (usuarioController.usuario.usuEndVisivel === 1) {
+    if (usuarioController.usuario.usuEndVisivel == 1) {
       $('#usuEndVisivel').prop('checked', true);
     } else {
       $('#usuEndVisivel').prop('checked', false);
@@ -165,7 +165,7 @@ var usuario = {
   listaEstados: function(ufSigla) {
     var strUf = '';
     for (var i = 0; i < uf.length; i++) {
-      if (uf[i].ufSigla === ufSigla || uf[i].ufCodigo === ufSigla) {
+      if (uf[i].ufSigla == ufSigla || uf[i].ufCodigo == ufSigla) {
         strUf += '<option value="' + uf[i].ufCodigo + '" selected>' + uf[i]
           .ufNome +
           '</option>';
@@ -184,7 +184,7 @@ var usuario = {
     for (var i = 0; i < uf.length; i++) {
       if (uf[i].ufCodigo == ufSelecionado) {
         for (var j = 0; j < uf[i].cidades.length; j++) {
-          if (cidCodigo === 0 && j === 0) {
+          if (cidCodigo == 0 && j == 0) {
             strCidade += '<option value="' + uf[i].cidades[j].cidCodigo +
               '" selected>' + uf[i].cidades[j].cidNome + '</option>';
             $("#cidadeSelecionada").html(uf[i].cidades[j].cidNome);

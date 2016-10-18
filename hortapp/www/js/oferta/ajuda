@@ -2,7 +2,7 @@ LER OFERTAS:
 
 	GET:/ofertas
 
-	var preferencias = 
+	var preferencias =
 	{
 		"distancia": "XX",
 		"dataVencimento": "data",
@@ -12,4 +12,14 @@ LER OFERTAS:
 
 
 CRIAR OFERTA:
-	
+
+//cria novo objeto da oferta
+var oferta = new OfertaModel();
+
+//seta os parametros
+oferta.itmCodigo = 7;
+oferta.nanan = xxx;
+
+//salva no banco de dados
+
+oferta.create();

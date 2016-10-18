@@ -1,36 +1,13 @@
-var oferta = function(){
-
-  this.oftCodigo = null;
-  this.usuCodigo = null;
-  this.itmCodigo = null;
-  this.oftQuantidade = null;
-  this.oftValor = null;
-  this.oftDataInicial = null;
-  this.oftDataFinal = null;
-  this.endCodigo = null;
-  this.stsCodigo = null;
-  this.oftObs = null;
-
-  this.endereco = {
-    endLogradouro: null,
-    endBairro: null,
-    endNumero: null,
-    endCep: null,
-    cidCodigo: null,
-    ufCodigo: null,
-    endLatitude: null,
-    endLongitude: null,
-  };
-
-  this.create = function(){
-    ofertaController.create(this);
-  };
-};
-
-
 var ofertaController = {
   initialize: function() {
-    this.ofertas = [];
+    ofertaController.ofertas = [];
+    //adiciona métodos ao modelo de oferta
+    OfertaModel.prototype.create = function(){
+      ofertaController.create(this);
+    };
+    OfertaModel.prototype.update = function(){
+      ofertaController.update(this);
+    };
   },
 
   create: function(oferta) {

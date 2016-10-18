@@ -1,13 +1,9 @@
 var autenticacao = {
 
   initialize: function() {
-    // var signinButton = $$('#btnLogin');
-    // signinButton.addEventListener("click", this.login);
-    // var btnSair = $$('#btnSair');
-    // btnSair.addEventListener("click", this.logout);
-    $('#btnLogin').click(this.login);
-    $('#btnSair').click(this.logout);
-    this.login();
+    $('#btnLogin').click(autenticacao.login);
+    $('#btnSair').click(autenticacao.logout);
+    autenticacao.login();
   },
 
   login: function() {

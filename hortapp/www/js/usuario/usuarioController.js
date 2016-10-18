@@ -1,35 +1,20 @@
+
+
 var usuarioController = {
   initialize: function(perfil) {
     //define os objetos
-    this.endereco = {
-      endLogradouro: null,
-      endBairro: null,
-      endNumero: null,
-      endCep: null,
-      cidCodigo: null,
-      ufCodigo: null,
-      endLatitude: null,
-      endLongitude: null,
-    };
-    this.usuario = {
-      usuEmail: null,
-      usuNome: null,
-      usuImagem: null,
-      usuIdGoogle: null,
-      usuTokenFcm: null,
-      usuEndVisivel: null,
-      usuTelefone: null,
-      usuTelefoneVisivel: null,
-    };
+    usuarioController.endereco = new EnderecoModel();
+    usuarioController.usuario = new UsuarioModel();
+
     //inicializa os objetos com os dados vindos da Google
-    this.idToken = perfil['idToken'];
-    this.usuario.usuEmail = perfil['email'];
-    this.usuario.usuNome = perfil['displayName'];
-    this.usuario.usuImagem = perfil['imageUrl'];
-    //this.usuario.serverAuthCode = perfil['serverAuthCode'];
-    // this.usuario.familyName = perfil['familyName'];
-    // this.usuario.givemName = perfil['givemName'];
-    this.usuario.usuIdGoogle = perfil['userId'];
+    usuarioController.idToken = perfil['idToken'];
+    usuarioController.usuario.usuEmail = perfil['email'];
+    usuarioController.usuario.usuNome = perfil['displayName'];
+    usuarioController.usuario.usuImagem = perfil['imageUrl'];
+    //usuarioController.usuario.serverAuthCode = perfil['serverAuthCode'];
+    // usuarioController.usuario.familyName = perfil['familyName'];
+    // usuarioController.usuario.givemName = perfil['givemName'];
+    usuarioController.usuario.usuIdGoogle = perfil['userId'];
     try {
       $.ajax({
         url: config.getApi() + '/usuario/login',
@@ -133,13 +118,13 @@ var usuarioController = {
 
     //deleta as propriedades nulas
     for (var k in usuario) {
-      if (usuario[k] === null) {
+      if (usuario[k] == null) {
         delete usuario[k];
       }
     }
 
     for (var k in endereco) {
-      if (endereco[k] === null) {
+      if (endereco[k] == null) {
         delete endereco[k];
       }
     }
