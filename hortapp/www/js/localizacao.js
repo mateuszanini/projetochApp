@@ -73,11 +73,15 @@ var localizacao = {
   },
 
   initMap: function(mapCanvas) {
+    var chamarLocAtual = false;
     // myApp.showIndicator();
     //verifica se a latitude ou longitude é nula
     if (localizacao.latitude === null || localizacao.longitude === null) {
       //toma alguma ação
-      localizacao.latitude = localizacao.longitude = 0.0;
+      //localização de Videira;
+      localizacao.latitude = -27.007458;
+      localizacao.longitude = -51.151072;
+      chamarLocAtual = true;
     }
     try {
       //cria mapa
@@ -117,6 +121,8 @@ var localizacao = {
           alert(" new google.maps.Marker: " + err.message);
         }
       });
+
+      if (chamarLocAtual) localizacao.localizacaoAtual();
     } catch (err) {
       alert("new google.maps.Map: " + err.message);
     }

@@ -154,11 +154,8 @@ var usuario = {
     $('.usuEndereco').toggleClass('hide');
 
     if ($("#usuLocalizacaoAtual").is(":checked")) {
-      mainView.hideToolbar();
+      // mainView.hideToolbar();
       localizacao.initMap(document.getElementById("mapCanvas"));
-    } else {
-      localizacao.mapa = null;
-      mainView.showToolbar();
     }
   },
 

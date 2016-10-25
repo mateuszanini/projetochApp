@@ -3,8 +3,8 @@ LER OFERTAS:
 	GET:/ofertas
 
 	var preferencias =
-	{
-		"distancia": "XX",
+	{	
+		//"distancia": "XX",
 		"dataVencimento": "data",
 		"itens":{3,6,2},
 		"offset":{"inicio":XX, "qtd":XX}
