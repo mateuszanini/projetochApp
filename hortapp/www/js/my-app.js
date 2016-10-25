@@ -23,7 +23,3 @@ var mainView = myApp.addView('.view-main', {
 myApp.onPageInit('meuPerfil', function(page) {
   usuario.initialize();
 });
-
-myApp.pageAfterBack('meuPerfil', function(page) {
-  // mainView.showToolbar();
-})
