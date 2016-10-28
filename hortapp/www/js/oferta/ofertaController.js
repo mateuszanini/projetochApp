@@ -1,17 +1,18 @@
 var ofertaController = {
   initialize: function() {
-    ofertaController.ofertas = [];
+    ofertaController.todasOfertas = [];
+    ofertaController.minhasOfertas = [];
     //adiciona métodos ao modelo de oferta
-    OfertaModel.prototype.create = function(){
+    OfertaModel.prototype.create = function() {
       ofertaController.create(this);
     };
-    OfertaModel.prototype.update = function(){
+    OfertaModel.prototype.update = function() {
       ofertaController.update(this);
     };
   },
 
   create: function(oferta) {
-  alert(JSON.stringify(oferta));
+    alert(JSON.stringify(oferta));
     try {
       $.ajax({
         url: config.getApi() + '/oferta/nova',
@@ -56,8 +57,10 @@ var ofertaController = {
           myApp.showIndicator();
         },
         success: function(data, status, xhr) {
-          alert('iterar sobre os dados recebidos e inserir nas ofertas');
-//          ofertaController.ofertas.push(data)
+          alert(
+            'iterar sobre os dados recebidos e inserir nas ofertas'
+          );
+          //          ofertaController.ofertas.push(data)
           callback();
           //alert('success: \nstatus:' + JSON.stringify(status)+'\ndata:' + JSON.stringify(data));
         },
