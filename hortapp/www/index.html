@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <meta http-equiv="Content-Security-Policy" content="connect-src *;"/>
+    <meta http-equiv="Content-Security-Policy" content="connect-src *;" />
     <!-- Your app title -->
     <title>HortApp</title>
     <!-- Path to Framework7 iOS CSS theme styles-->
@@ -41,15 +41,15 @@
         </div>
         <div class="list-block">
             <ul>
-              <li>
-                  <a href="index.html" class="item-link item-content">
-                      <div class="item-media"><i class="fa fa-home" aria-hidden="true"></i></div>
-                      <div class="item-inner">
-                          <div class="item-title">Início</div>
-                          <div class="item-after"></div>
-                      </div>
-                  </a>
-              </li>
+                <li>
+                    <a href="index.html" class="item-link item-content">
+                        <div class="item-media"><i class="fa fa-home" aria-hidden="true"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title">Início</div>
+                            <div class="item-after"></div>
+                        </div>
+                    </a>
+                </li>
                 <li>
                     <a href="#" class="item-link item-content">
                         <div class="item-media"><i class="fa fa-tags" aria-hidden="true"></i></div>
@@ -78,7 +78,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="item-link item-content">
+                    <a href="#" class="item-link item-content open-popup">
                         <div class="item-media"><i class="fa fa-cog" aria-hidden="true"></i></div>
                         <div class="item-inner">
                             <div class="item-title">Preferências</div>
@@ -131,7 +131,6 @@
                             <p id="conteudo"></p>
                             <p><a href="views/about/about.html">About app</a></p>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -170,6 +169,64 @@
                 /End of Bottom tabbar-->
         </div>
     </div>
+
+    <!-- Tela de Preferências -->
+    <div class="popup popup-about">
+        <div class="toolbar">
+            <div class="toolbar-inner">
+                <div class="left">
+                    <a href="#" class="link close-popup">
+                        <i class="icon icon-back"></i>
+                        <span>Voltar</span>
+                    </a>
+                </div>
+                <div class="center">Preferências</div>
+                <div class="right">
+                    <a href="#" class="link" id="usuSalvarPreferencias">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                        <span>Salvar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="content-block">
+
+        </div>
+
+        <div class="list-block">
+            <ul>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon icon-form-settings"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title label">Distância</div>
+                            <div class="item-input">
+                                <div class="range-slider">
+                                    <input type="range" min="0" max="100" value="50" step="0.1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="content-block-title">Custom date format</div>
+        <div class="list-block">
+            <ul>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="text" placeholder="Selecionar Data" readonly id="usuPreferenciasData">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
 
     <!-- Tela de Login add modal-in-->
     <div class="login-screen" id="loginScreen">
@@ -220,6 +277,7 @@
     <!-- JSON Estados e Cidades-->
     <script type="text/javascript" src="js/usuario/uf.js"></script>
     <script type="text/javascript" src="js/usuario/usuario.js"></script>
+    <script type="text/javascript" src="js/usuario/preferencias.js"></script>
 
     <script type="text/javascript" src="js/cordovaInit.js"></script>
 </body>
