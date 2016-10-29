@@ -65,7 +65,6 @@ var usuario = {
   },
 
   salvar: function() {
-
     try {
       var formData = myApp.formToJSON('#usuFormulario');
       // alert(JSON.stringify(formData));
@@ -103,6 +102,8 @@ var usuario = {
       usuarioController.endereco.endCep = "";
       usuarioController.endereco.cidCodigo = "";
       usuarioController.endereco.ufCodigo = "";
+      usuarioController.endereco.endLatitude = localizacao.latitude;
+      usuarioController.endereco.endLongitude = localizacao.longitude;
       // myScript.notificacao("Dados do formulário", "Latitude: " +
       //   usuarioController.endereco.endLatitude + " / Longitude: " +
       //   usuarioController.endereco.endLongitude, true);

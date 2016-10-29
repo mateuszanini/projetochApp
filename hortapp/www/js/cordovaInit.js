@@ -69,7 +69,7 @@ var app = {
       }
       //caso nao estiver, carrega o script do google
       $.getScript(
-        'https://maps.googleapis.com/maps/api/js?key=AIzaSyA0P239oFuH1QHiBM91-nmQo435XFcDKfs&callback=localizacao.initGeocoder'
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyA0P239oFuH1QHiBM91-nmQo435XFcDKfs'
       );
     } catch (err) {
       alert('loadMapsApi:' + err.message);
