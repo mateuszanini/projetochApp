@@ -24,7 +24,6 @@ myApp.onPageInit('meuPerfil', function(page) {
   usuario.initialize();
 });
 
-
 myApp.onPageInit('novaOferta', function(page) {
-  ofertaController.initialize();
+  novaOferta.initialize();
 });

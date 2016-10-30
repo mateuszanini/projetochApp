@@ -253,11 +253,19 @@
     </div>
 
 
+
     <script type="text/javascript" src="cordova.js"></script>
     <!-- Path to Framework7 Library JS-->
     <script type="text/javascript" src="bower_components/Framework7/dist/js/framework7.min.js"></script>
     <!-- JQuery-->
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+
+    <script>
+    console.log('retirar depois');
+        $.getScript(
+          'https://maps.googleapis.com/maps/api/js?key=AIzaSyA0P239oFuH1QHiBM91-nmQo435XFcDKfs'
+        );
+        </script>
 
     <script type="text/javascript" src="js/Modelos.js"></script>
     <!-- JSON Estados e Cidades-->
@@ -272,8 +280,8 @@
     <script type="text/javascript" src="js/usuario/autenticacao.js"></script>
     <script type="text/javascript" src="js/Localizacao.js"></script>
 
-
     <script type="text/javascript" src="js/oferta/ofertaController.js"></script>
+    <script type="text/javascript" src="js/oferta/novaOferta.js"></script>
 
     <script type="text/javascript" src="js/notificacoes.js"></script>
     <script type="text/javascript" src="js/my-script.js"></script>

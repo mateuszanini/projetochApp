@@ -4,6 +4,9 @@ var usuarioController = {
     usuarioController.endereco = new EnderecoModel();
     usuarioController.usuario = new UsuarioModel();
 
+    //novo objeto da classe Localizacao,
+    usuarioController.localizacao = new Localizacao();
+
     //inicializa os objetos com os dados vindos da Google
     usuarioController.idToken = perfil['idToken'];
     usuarioController.usuario.usuEmail = perfil['email'];
@@ -60,11 +63,13 @@ var usuarioController = {
 
               usuarioController.endereco.endLatitude =
                 data.data.endereco['endLatitude'];
-              localizacao.latitude = usuarioController.endereco.endLatitude;
+              usuarioController.localizacao.latitude =
+                usuarioController.endereco.endLatitude;
 
               usuarioController.endereco.endLongitude =
                 data.data.endereco['endLongitude'];
-              localizacao.longitude = usuarioController.endereco.endLongitude;
+              usuarioController.localizacao.longitude =
+                usuarioController.endereco.endLongitude;
             }
             if (data.data.completarCadastro) {
               myScript.notificacao("Dados incompletos",

@@ -1,5 +1,12 @@
 var usuario = {
   initialize: function() {
+
+    usuarioController.localizacao.mapCanvas =
+      document.getElementById("mapCanvas");
+
+    usuarioController.localizacao.divEnderecoAtual =
+      document.getElementById("usuLocalizacao");
+
     $("#usuLocalizacaoAtual").change(function() {
       usuario.mostraMapa();
     });
@@ -13,20 +20,34 @@ var usuario = {
       if (cep.length == 8) {
         var validacep = /^[0-9]{8}$/;
         if (validacep.test(cep)) {
-          usuario.pesquisaCep(cep, "manual");
+          ofertaController.localizacao.pesquisaCep(cep, function(data) {
+            $("#endBairro").val(data.bairro);
+            $("#endLogradouro").val(data.logradouro);
+            usuario.listaEstados(data.uf);
+            usuario.listaCidades(data.ibge);
+          });
         }
       }
     });
+    // $("#endCep").keyup(function() {
+    //   var cep = $(this).val().replace(/\D/g, '');
+    //   if (cep.length == 8) {
+    //     var validacep = /^[0-9]{8}$/;
+    //     if (validacep.test(cep)) {
+    //       usuario.pesquisaCep(cep, "manual");
+    //     }
+    //   }
+    // });
 
     $("#btnPesquisarLocalizacao").click(function() {
       myApp.prompt('Digite uma localização para pesquisar', function(
         value) {
-        localizacao.geocodeAddress(value);
+        usuarioController.localizacao.geocodeAddress(value);
       });
     });
 
     $("#btnLocalizacaoAtual").click(function() {
-      localizacao.localizacaoAtual();
+      usuarioController.localizacao.localizacaoAtual();
     });
     $("#usuSalvar").click(function() {
       usuario.salvar();
@@ -102,8 +123,10 @@ var usuario = {
       usuarioController.endereco.endCep = "";
       usuarioController.endereco.cidCodigo = "";
       usuarioController.endereco.ufCodigo = "";
-      usuarioController.endereco.endLatitude = localizacao.latitude;
-      usuarioController.endereco.endLongitude = localizacao.longitude;
+      usuarioController.endereco.endLatitude = usuarioController.localizacao
+        .latitude;
+      usuarioController.endereco.endLongitude = usuarioController.localizacao
+        .longitude;
       // myScript.notificacao("Dados do formulário", "Latitude: " +
       //   usuarioController.endereco.endLatitude + " / Longitude: " +
       //   usuarioController.endereco.endLongitude, true);
@@ -115,37 +138,37 @@ var usuario = {
     usuarioController.salvar();
   },
 
-  pesquisaCep: function(cep, tipo) {
-    $.ajax({
-      url: "https://viacep.com.br/ws/" + cep + "/json",
-      method: "GET",
-      beforeSend: function(xhr) {
-        myApp.showIndicator();
-      },
-      success: function(data) {
-        if (!("erro" in data)) {
-          if (tipo == "manual") {
-            myScript.notificacao("Cidade encontrada", "Você está em " +
-              data.localidade + " - " + data.uf, true);
-            $("#endBairro").val(data.bairro);
-            $("#endLogradouro").val(data.logradouro);
-          }
-          usuario.listaEstados(data.uf);
-          usuario.listaCidades(data.ibge);
-        } else {
-          myScript.notificacao("CEP não encontrado",
-            "Por favor, digite um CEP existente.", false);
-        }
-      },
-      error: function(data, status, xhr) {
-        myScript.notificacao("Erro desconhecido",
-          "Tente novamente mais tarde", false);
-      },
-      complete: function(xhr, status) {
-        myApp.hideIndicator();
-      }
-    });
-  },
+  // pesquisaCep: function(cep, tipo) {
+  //   $.ajax({
+  //     url: "https://viacep.com.br/ws/" + cep + "/json",
+  //     method: "GET",
+  //     beforeSend: function(xhr) {
+  //       myApp.showIndicator();
+  //     },
+  //     success: function(data) {
+  //       if (!("erro" in data)) {
+  //         if (tipo == "manual") {
+  //           myScript.notificacao("Cidade encontrada", "Você está em " +
+  //             data.localidade + " - " + data.uf, true);
+  //           $("#endBairro").val(data.bairro);
+  //           $("#endLogradouro").val(data.logradouro);
+  //         }
+  //         usuario.listaEstados(data.uf);
+  //         usuario.listaCidades(data.ibge);
+  //       } else {
+  //         myScript.notificacao("CEP não encontrado",
+  //           "Por favor, digite um CEP existente.", false);
+  //       }
+  //     },
+  //     error: function(data, status, xhr) {
+  //       myScript.notificacao("Erro desconhecido",
+  //         "Tente novamente mais tarde", false);
+  //     },
+  //     complete: function(xhr, status) {
+  //       myApp.hideIndicator();
+  //     }
+  //   });
+  // },
 
   mostraMapa: function() {
     $('.divisor').toggleClass('animated zoomOut');
@@ -156,7 +179,8 @@ var usuario = {
 
     if ($("#usuLocalizacaoAtual").is(":checked")) {
       // mainView.hideToolbar();
-      localizacao.initMap(document.getElementById("mapCanvas"));
+      usuarioController.localizacao.initMap(document.getElementById(
+        "mapCanvas"));
     }
   },
 

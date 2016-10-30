@@ -29,11 +29,11 @@ var app = {
     }
     config.initialize();
     autenticacao.initialize();
+    ofertaController.initialize();
   },
   autenticado: function() {
     try {
       notificacoes.initialize();
-      localizacao.initialize();
     } catch (err) {
       alert("autenticado:" + err.message);
     }
@@ -62,7 +62,7 @@ var app = {
       if (window.google !== undefined) {
         //caso estiver
         //verifica se a variavel maps esta definida
-        if (window.google.maps !== undefined) {
+        if (window.google.maps == undefined) {
           //caso estiver retorna
           return;
         }
