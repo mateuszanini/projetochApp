@@ -41,7 +41,7 @@ var novaOferta = {
     });
 
     $("#ufCodigoOferta").change(function() {
-      ofertaController.listaCidades(0);
+      novaOferta.listaCidades(0);
     });
 
     $("#endCepOferta").keyup(function() {
@@ -52,8 +52,8 @@ var novaOferta = {
           ofertaController.localizacao.pesquisaCep(cep, function(data) {
             $("#endBairroOferta").val(data.bairro);
             $("#endLogradouroOferta").val(data.logradouro);
-            ofertaController.listaEstados(data.uf);
-            ofertaController.listaCidades(data.ibge);
+            novaOferta.listaEstados(data.uf);
+            novaOferta.listaCidades(data.ibge);
           });
         }
       }
