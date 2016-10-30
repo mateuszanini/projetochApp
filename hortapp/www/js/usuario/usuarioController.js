@@ -1,5 +1,3 @@
-
-
 var usuarioController = {
   initialize: function(perfil) {
     //define os objetos

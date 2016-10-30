@@ -26,8 +26,5 @@ myApp.onPageInit('meuPerfil', function(page) {
 
 
 myApp.onPageInit('novaOferta', function(page) {
-  ofertaController.listaItens();
-  ofertaController.listaEstados('SC');
-  ofertaController.listaCidades(4219309);
-  ofertaController.atribuiAcoes();
+  ofertaController.initialize();
 });

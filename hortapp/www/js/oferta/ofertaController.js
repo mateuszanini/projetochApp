@@ -1,6 +1,9 @@
 var ofertaController = {
   initialize: function() {
-    ofertaController.localizacao = new Localizacao();
+    ofertaController.localizacao = new Localizacao(
+      document.getElementById("mapCanvasOferta"),
+      document.getElementById("oftLocalizacao")
+    );
     ofertaController.ofertas = [];
     //adiciona métodos ao modelo de oferta
     OfertaModel.prototype.create = function() {
@@ -9,6 +12,11 @@ var ofertaController = {
     OfertaModel.prototype.update = function() {
       ofertaController.update(this);
     };
+
+    ofertaController.listaItens();
+    ofertaController.listaEstados('SC');
+    ofertaController.listaCidades(4219309);
+    ofertaController.atribuiAcoes();
   },
 
   create: function(oferta) {
@@ -170,8 +178,7 @@ var ofertaController = {
       $('.enderecoOferta').toggleClass('hide');
       if ($("#oftLocalizacaoAtual").is(":checked")) {
         // mostrar o mapa aqui
-        ofertaController.localizacao.initMap(document.getElementById(
-          "mapCanvasOferta"));
+        ofertaController.localizacao.initMap();
       }
     });
 
@@ -191,5 +198,3 @@ var ofertaController = {
     });
   }
 };
-
-ofertaController.initialize();

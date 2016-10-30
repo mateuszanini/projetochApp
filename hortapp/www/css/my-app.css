@@ -7,7 +7,8 @@ img {
     height: 0 !important;
 }
 
-#mapCanvas{
+/*ALTERADO PARA CLASSE PARA UTILIZAR EM MAIS DE UM LUGAR NA APLICAÇÃO*/
+.canvasMapa{
   width: 100%;
   height: 350px;
 }
