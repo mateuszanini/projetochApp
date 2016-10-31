@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <meta http-equiv="Content-Security-Policy" content="connect-src *;"/>
+    <meta http-equiv="Content-Security-Policy" content="connect-src *;" />
     <!-- Your app title -->
     <title>HortApp</title>
     <!-- Path to Framework7 iOS CSS theme styles-->
@@ -42,10 +42,19 @@
         <div class="list-block">
             <ul>
                 <li>
-                    <a href="views/usuario/meuPerfil.html" class="item-link item-content close-panel">
-                        <div class="item-media"><i class="fa fa-user" aria-hidden="true"></i></div>
+                    <a href="index.html" class="item-link item-content">
+                        <div class="item-media"><i class="fa fa-home" aria-hidden="true"></i></div>
                         <div class="item-inner">
-                            <div class="item-title">Meu perfil</div>
+                            <div class="item-title">Início</div>
+                            <div class="item-after"></div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="views/oferta/novaOferta.html" class="item-link item-content close-panel">
+                        <div class="item-media"><i class="fa fa-tags" aria-hidden="true"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title">Ofertas</div>
                             <div class="item-after"></div>
                         </div>
                     </a>
@@ -55,21 +64,30 @@
                         <div class="item-media"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
                         <div class="item-inner">
                             <div class="item-title">Reservas</div>
-                            <div class="item-after"><span class="badge color-green">5</span></div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="item-link item-content open-login-screen">
-                        <div class="item-media"><i class="fa fa-cog" aria-hidden="true"></i></div>
-                        <div class="item-inner">
-                            <div class="item-title">Configurações</div>
                             <div class="item-after"></div>
                         </div>
                     </a>
                 </li>
                 <li>
-                    <a href="#" id="btnSair" class="item-link item-content">
+                    <a href="views/usuario/meuPerfil.html" class="item-link item-content close-panel">
+                        <div class="item-media"><i class="fa fa-user" aria-hidden="true"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title">Meu perfil</div>
+                            <div class="item-after"></div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item-link item-content open-popup">
+                        <div class="item-media"><i class="fa fa-cog" aria-hidden="true"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title">Preferências</div>
+                            <div class="item-after"></div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="btnSair" class="item-link item-content open-login-screen">
                         <div class="item-media"><i class="fa fa-power-off" aria-hidden="true"></i></div>
                         <div class="item-inner">
                             <div class="item-title">Sair</div>
@@ -108,18 +126,16 @@
             <div class="pages navbar-through toolbar-through">
                 <div data-page="index" class="page">
                     <div class="page-content">
-                        <p>Page content goes here</p>
                         <!-- Link to another page -->
                         <div class="content-block">
-                            <p>Page content goes here</p>
+                            <p id="conteudo"></p>
                             <p><a href="views/about/about.html">About app</a></p>
                         </div>
-
                     </div>
                 </div>
             </div>
 
-            <div class="toolbar">
+            <!-- <div class="toolbar">
                 <div class="toolbar-inner">
                     <a href="views/chat/chat.html">
                         <i class="fa fa-comments" aria-hidden="true"></i>
@@ -134,7 +150,7 @@
                         <span>Lembrete</span>
                     </a>
                 </div>
-            </div>
+            </div> -->
 
             <!--Bottom tabbar
             <div class="toolbar tabbar">
@@ -153,6 +169,60 @@
                 /End of Bottom tabbar-->
         </div>
     </div>
+
+    <!-- Tela de Preferências -->
+    <div class="popup popup-about">
+        <div class="toolbar">
+            <div class="toolbar-inner">
+                <div class="left">
+                    <a href="#" class="link close-popup">
+                        <i class="icon icon-back"></i>
+                        <span>Voltar</span>
+                    </a>
+                </div>
+                <div class="center">Preferências</div>
+                <div class="right">
+                    <a href="#" class="link" id="usuSalvarPreferencias">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                        <span>Salvar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="content-block">
+
+        </div>
+
+        <div class="list-block">
+            <ul>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">Distância</div>
+                            <div class="item-input">
+                                <div class="range-slider">
+                                    <input type="range" min="0" max="100" value="50" step="0.5">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">Data Final</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="Selecionar Data" readonly id="usuPreferenciasData">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
 
     <!-- Tela de Login add modal-in-->
     <div class="login-screen" id="loginScreen">
@@ -183,23 +253,41 @@
     </div>
 
 
+
     <script type="text/javascript" src="cordova.js"></script>
     <!-- Path to Framework7 Library JS-->
     <script type="text/javascript" src="bower_components/Framework7/dist/js/framework7.min.js"></script>
     <!-- JQuery-->
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+
+    <script>
+    console.log('retirar depois');
+        $.getScript(
+          'https://maps.googleapis.com/maps/api/js?key=AIzaSyA0P239oFuH1QHiBM91-nmQo435XFcDKfs'
+        );
+        </script>
+
+    <script type="text/javascript" src="js/Modelos.js"></script>
+    <!-- JSON Estados e Cidades-->
+    <script type="text/javascript" src="js/usuario/uf.js"></script>
+    <script type="text/javascript" src="js/oferta/itens.js"></script>
+
     <!-- Configurações do F7 -->
     <script type="text/javascript" src="js/my-app.js"></script>
     <!-- JS personalizado-->
     <script type="text/javascript" src="js/configuracoes.js"></script>
     <script type="text/javascript" src="js/usuario/usuarioController.js"></script>
     <script type="text/javascript" src="js/usuario/autenticacao.js"></script>
-    <script type="text/javascript" src="js/localizacao.js"></script>
+    <script type="text/javascript" src="js/Localizacao.js"></script>
+
+    <script type="text/javascript" src="js/oferta/ofertaController.js"></script>
+    <script type="text/javascript" src="js/oferta/novaOferta.js"></script>
+
     <script type="text/javascript" src="js/notificacoes.js"></script>
     <script type="text/javascript" src="js/my-script.js"></script>
-    <!-- JSON Estados e Cidades-->
-    <script type="text/javascript" src="js/usuario/uf.js"></script>
+
     <script type="text/javascript" src="js/usuario/usuario.js"></script>
+    <script type="text/javascript" src="js/usuario/preferencias.js"></script>
 
     <script type="text/javascript" src="js/cordovaInit.js"></script>
 </body>

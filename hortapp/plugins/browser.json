@@ -9,7 +9,78 @@
     "installed_plugins": {
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "cordova-plugin-battery-status": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "cordova-plugin-device-motion": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "cordova-plugin-device-orientation": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "cordova-plugin-globalization": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "cordova-plugin-media": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "cordova-plugin-vibration": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "cordova-plugin-googleplus": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "phonegap-plugin-push": {
+            "SENDER_ID": "514553019114",
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "plugin.google.maps": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "br.com.projetoch.hortapp"
+        }
+    }
 }

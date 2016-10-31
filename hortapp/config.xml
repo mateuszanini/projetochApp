@@ -31,7 +31,7 @@
     <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0" />
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
     <plugin name="cordova-plugin-googleplus" spec="~5.1.0">
-        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.514553019114-3e27ruv2oe2f37he5urf8v05h8rai7du" />
+        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.514553019114-72jc7mk2ai4s61q5kr1roiqu5mbsf34k" />
     </plugin>
     <plugin name="phonegap-plugin-push" source="npm" spec="~1.8.0">
         <variable name="SENDER_ID" value="514553019114" />

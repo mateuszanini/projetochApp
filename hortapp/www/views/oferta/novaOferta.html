@@ -1,0 +1,231 @@
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left sliding">
+            <a href="#" class="back link">
+                <i class="icon icon-back"></i>
+                <span>Voltar</span>
+            </a>
+        </div>
+        <div class="center sliding">Nova Oferta</div>
+        <div class="right sliding">
+            <a href="#" data-panel="left" class="link" id="oftSalvar">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                <span>Salvar</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="page" data-page="novaOferta">
+    <div class="page-content">
+        <form id="oftFormulario" class="list-block">
+            <ul>
+                <li>
+                    <a href="#" class="item-link smart-select" data-open-in="popup" data-popup-close-text="Voltar" data-back-on-select="true" data-searchbar="true" data-searchbar-placeholder="Pesquisar Item" data-searchbar-cancel="Cancelar">
+                        <select name="itmCodigo" id="itmCodigo"></select>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">Item</div>
+                                <div class="item-after" id="itemSelecionado"></div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <!-- <div class="item-media"><i class="icon icon-form-email"></i></div> -->
+                        <div class="item-inner">
+                            <div class="item-title label">Quantidade</div>
+                            <div class="item-input">
+                                <input type="number" min="1" name="oftQuantidade" id="oftQuantidade" pattern="^\d*[0-9](\.\d*[0-9])?$" placeholder="Quantidade">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <!-- <div class="item-media"><i class="icon icon-form-email"></i></div> -->
+                        <div class="item-inner">
+                            <div class="item-title label">Valor</div>
+                            <div class="item-input">
+                                <input type="number" min="0" name="oftValor" id="oftValor" pattern="^\d*[0-9](\.\d*[0-9])?$" placeholder="Valor">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <!-- <div class="item-media"><i class="icon icon-form-email"></i></div> -->
+                        <div class="item-inner">
+                            <!-- <div class="item-title label">Foto</div> -->
+                            <div class="item-input">
+                                <a href="#" class="button" id="btnTirarFoto"><i class="fa fa-camera-retro" aria-hidden="true"></i>&nbspTirar Foto</a>
+                                <img id="fotoOferta" />
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <!-- SELEÇÃO DE ENDEREÇO -->
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner semBorda">
+                            <div class="item-title label">Usar meu endereço</div>
+                            <div class="item-input">
+                                <label class="label-switch">
+                  <input type="checkbox" nome="oftEnderecoCadastro" id="oftEnderecoCadastro" checked="">
+                  <div class="checkbox"></div>
+                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DIV COM CONTEUDO DO ENDEREÇO PROPRIO -->
+                    <div class="content-block hide enderecoProprio">
+
+                        <div class="item-content">
+                            <div class="item-inner semBorda">
+                                <div class="item-title label">Usar GPS</div>
+                                <div class="item-input">
+                                    <label class="label-switch">
+                                <input type="checkbox" nome="oftLocalizacaoAtual" id="oftLocalizacaoAtual">
+                                <div class="checkbox"></div>
+                              </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+
+                            <div class="row hide mapaOferta">
+                                <div class="row col-100 pesquisarLocalizacaoOferta">
+                                    <a href="#" class="button col-100" id="btnPesquisarLocalizacaoOferta"><i class="fa fa-search" aria-hidden="true"></i>&nbspPesquisar localização</a>
+                                    <a href="#" class="button col-100" id="btnLocalizacaoAtualOferta"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbspLocalização Atual</a>
+                                </div>
+
+                                <div class="canvasMapa" id="mapCanvasOferta"></div>
+                                <div class="color-blue" id="oftLocalizacao"></div>
+
+                            </div>
+
+                            <div class="row content-block divisorOferta animated zoomIn">
+                                <div class="col-45">
+                                    <hr>
+                                </div>
+                                <div class="col-10 text-center divisor">OU</div>
+                                <div class="col-45">
+                                    <hr>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="enderecoOferta animated fadeInRight">
+                            <ul>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title label">CEP</div>
+                                            <div class="item-input">
+                                                <input type="number" name="endCepOferta" id="endCepOferta" placeholder="00000-000">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="#" class="item-link smart-select" data-open-in="popup" data-popup-close-text="Voltar" data-back-on-select="true" data-searchbar="true" data-searchbar-placeholder="Pesquisar Estados" data-searchbar-cancel="Cancelar">
+                                        <select name="ufCodigoOferta" id="ufCodigoOferta">
+
+                                </select>
+                                        <div class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title">Estado</div>
+                                                <div class="item-after" id="estadoSelecionadoOferta"></div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="item-link smart-select" data-open-in="popup" data-popup-close-text="Voltar" data-back-on-select="true" data-searchbar="true" data-searchbar-placeholder="Pesquisar Cidades" data-searchbar-cancel="Cancelar">
+                                        <select name="cidCodigoOferta" id="cidCodigoOferta" class="text-capitalize">
+
+                                </select>
+                                        <div class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title">Cidade</div>
+                                                <div class="item-after" id="cidadeSelecionadaOferta"></div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title label">Bairro</div>
+                                            <div class="item-input">
+                                                <input type="text" name="endBairroOferta" id="endBairroOferta" placeholder="Bairro">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title label">Logradouro</div>
+                                            <div class="item-input">
+                                                <input type="text" name="endLogradouroOferta" id="endLogradouroOferta" placeholder="Logradouro">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title label">Número</div>
+                                            <div class="item-input">
+                                                <input type="text" name="endNumeroOferta" id="endNumeroOferta" placeholder="Numero">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <!--FIM DO ENDEREÇO  -->
+                <li>
+
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">Data Inicial</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="Selecionar Data" name="oftDataInicial" id="oftDataInicial" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">Data de vencimento</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="Selecionar Data" name="oftDataFinal" id="oftDataFinal"readonly>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">Observações</div>
+                            <div class="item-input">
+                                <textarea name="oftObs" id="oftObs"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>

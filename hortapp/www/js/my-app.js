@@ -23,3 +23,7 @@ var mainView = myApp.addView('.view-main', {
 myApp.onPageInit('meuPerfil', function(page) {
   usuario.initialize();
 });
+
+myApp.onPageInit('novaOferta', function(page) {
+  novaOferta.initialize();
+});

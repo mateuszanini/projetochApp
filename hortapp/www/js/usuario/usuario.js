@@ -1,5 +1,12 @@
 var usuario = {
   initialize: function() {
+
+    usuarioController.localizacao.mapCanvas =
+      document.getElementById("mapCanvas");
+
+    usuarioController.localizacao.divEnderecoAtual =
+      document.getElementById("usuLocalizacao");
+
     $("#usuLocalizacaoAtual").change(function() {
       usuario.mostraMapa();
     });
@@ -13,20 +20,34 @@ var usuario = {
       if (cep.length == 8) {
         var validacep = /^[0-9]{8}$/;
         if (validacep.test(cep)) {
-          usuario.pesquisaCep(cep, "manual");
+          ofertaController.localizacao.pesquisaCep(cep, function(data) {
+            $("#endBairro").val(data.bairro);
+            $("#endLogradouro").val(data.logradouro);
+            usuario.listaEstados(data.uf);
+            usuario.listaCidades(data.ibge);
+          });
         }
       }
     });
+    // $("#endCep").keyup(function() {
+    //   var cep = $(this).val().replace(/\D/g, '');
+    //   if (cep.length == 8) {
+    //     var validacep = /^[0-9]{8}$/;
+    //     if (validacep.test(cep)) {
+    //       usuario.pesquisaCep(cep, "manual");
+    //     }
+    //   }
+    // });
 
     $("#btnPesquisarLocalizacao").click(function() {
       myApp.prompt('Digite uma localização para pesquisar', function(
         value) {
-        localizacao.geocodeAddress(value);
+        usuarioController.localizacao.geocodeAddress(value);
       });
     });
 
     $("#btnLocalizacaoAtual").click(function() {
-      localizacao.localizacaoAtual();
+      usuarioController.localizacao.localizacaoAtual();
     });
     $("#usuSalvar").click(function() {
       usuario.salvar();
@@ -37,13 +58,13 @@ var usuario = {
     $("#usuEmail").val(usuarioController.usuario.usuEmail);
     $("#usuTelefone").val(usuarioController.usuario.usuTelefone);
 
-    if (usuarioController.usuario.usuTelefoneVisivel === 1) {
+    if (usuarioController.usuario.usuTelefoneVisivel == 1) {
       $('#usuTelefoneVisivel').prop('checked', true);
     } else {
       $('#usuTelefoneVisivel').prop('checked', false);
     }
 
-    if (usuarioController.usuario.usuEndVisivel === 1) {
+    if (usuarioController.usuario.usuEndVisivel == 1) {
       $('#usuEndVisivel').prop('checked', true);
     } else {
       $('#usuEndVisivel').prop('checked', false);
@@ -65,7 +86,6 @@ var usuario = {
   },
 
   salvar: function() {
-
     try {
       var formData = myApp.formToJSON('#usuFormulario');
       // alert(JSON.stringify(formData));
@@ -103,6 +123,10 @@ var usuario = {
       usuarioController.endereco.endCep = "";
       usuarioController.endereco.cidCodigo = "";
       usuarioController.endereco.ufCodigo = "";
+      usuarioController.endereco.endLatitude = usuarioController.localizacao
+        .latitude;
+      usuarioController.endereco.endLongitude = usuarioController.localizacao
+        .longitude;
       // myScript.notificacao("Dados do formulário", "Latitude: " +
       //   usuarioController.endereco.endLatitude + " / Longitude: " +
       //   usuarioController.endereco.endLongitude, true);
@@ -114,37 +138,37 @@ var usuario = {
     usuarioController.salvar();
   },
 
-  pesquisaCep: function(cep, tipo) {
-    $.ajax({
-      url: "https://viacep.com.br/ws/" + cep + "/json",
-      method: "GET",
-      beforeSend: function(xhr) {
-        myApp.showIndicator();
-      },
-      success: function(data) {
-        if (!("erro" in data)) {
-          if (tipo == "manual") {
-            myScript.notificacao("Cidade encontrada", "Você está em " +
-              data.localidade + " - " + data.uf, true);
-            $("#endBairro").val(data.bairro);
-            $("#endLogradouro").val(data.logradouro);
-          }
-          usuario.listaEstados(data.uf);
-          usuario.listaCidades(data.ibge);
-        } else {
-          myScript.notificacao("CEP não encontrado",
-            "Por favor, digite um CEP existente.", false);
-        }
-      },
-      error: function(data, status, xhr) {
-        myScript.notificacao("Erro desconhecido",
-          "Tente novamente mais tarde", false);
-      },
-      complete: function(xhr, status) {
-        myApp.hideIndicator();
-      }
-    });
-  },
+  // pesquisaCep: function(cep, tipo) {
+  //   $.ajax({
+  //     url: "https://viacep.com.br/ws/" + cep + "/json",
+  //     method: "GET",
+  //     beforeSend: function(xhr) {
+  //       myApp.showIndicator();
+  //     },
+  //     success: function(data) {
+  //       if (!("erro" in data)) {
+  //         if (tipo == "manual") {
+  //           myScript.notificacao("Cidade encontrada", "Você está em " +
+  //             data.localidade + " - " + data.uf, true);
+  //           $("#endBairro").val(data.bairro);
+  //           $("#endLogradouro").val(data.logradouro);
+  //         }
+  //         usuario.listaEstados(data.uf);
+  //         usuario.listaCidades(data.ibge);
+  //       } else {
+  //         myScript.notificacao("CEP não encontrado",
+  //           "Por favor, digite um CEP existente.", false);
+  //       }
+  //     },
+  //     error: function(data, status, xhr) {
+  //       myScript.notificacao("Erro desconhecido",
+  //         "Tente novamente mais tarde", false);
+  //     },
+  //     complete: function(xhr, status) {
+  //       myApp.hideIndicator();
+  //     }
+  //   });
+  // },
 
   mostraMapa: function() {
     $('.divisor').toggleClass('animated zoomOut');
@@ -154,18 +178,16 @@ var usuario = {
     $('.usuEndereco').toggleClass('hide');
 
     if ($("#usuLocalizacaoAtual").is(":checked")) {
-      mainView.hideToolbar();
-      localizacao.initMap(document.getElementById("mapCanvas"));
-    } else {
-      localizacao.mapa = null;
-      mainView.showToolbar();
+      // mainView.hideToolbar();
+      usuarioController.localizacao.initMap(document.getElementById(
+        "mapCanvas"));
     }
   },
 
   listaEstados: function(ufSigla) {
     var strUf = '';
     for (var i = 0; i < uf.length; i++) {
-      if (uf[i].ufSigla === ufSigla || uf[i].ufCodigo === ufSigla) {
+      if (uf[i].ufSigla == ufSigla || uf[i].ufCodigo == ufSigla) {
         strUf += '<option value="' + uf[i].ufCodigo + '" selected>' + uf[i]
           .ufNome +
           '</option>';
@@ -184,7 +206,7 @@ var usuario = {
     for (var i = 0; i < uf.length; i++) {
       if (uf[i].ufCodigo == ufSelecionado) {
         for (var j = 0; j < uf[i].cidades.length; j++) {
-          if (cidCodigo === 0 && j === 0) {
+          if (cidCodigo == 0 && j == 0) {
             strCidade += '<option value="' + uf[i].cidades[j].cidCodigo +
               '" selected>' + uf[i].cidades[j].cidNome + '</option>';
             $("#cidadeSelecionada").html(uf[i].cidades[j].cidNome);
