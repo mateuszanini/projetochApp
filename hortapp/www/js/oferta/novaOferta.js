@@ -105,18 +105,6 @@ var novaOferta = {
       novaOferta.listaCidades(0);
     });
 
-    // novaOferta.calendarioInicioOferta.onClose(function(p) {
-    //   console.log(p);
-    // });
-    //
-    // $("#oftDataInicial").change(function() {
-    //   console.log(novaOferta.calendarioInicioOferta.value());
-    //   // console.log(this);
-    //   // console.log(new Date().setDate($(this).val()));
-    //   // console.log($(this).val());
-    //   // novaOferta.calendarioFinalOferta.minDate =
-    // })
-
     $("#endCepOferta").keyup(function() {
       var cep = $(this).val().replace(/\D/g, '');
       if (cep.length == 8) {
@@ -210,9 +198,53 @@ var novaOferta = {
   salvar: function() {
     try {
       var formData = myApp.formToJSON('#oftFormulario');
-      alert(JSON.stringify(formData));
+      //alert(JSON.stringify(formData));
+      var oferta = new OfertaModel();
+      // oferta.oftCodigo = null;
+      //oferta.usuCodigo = null;
+      oferta.itmCodigo = formData['itmCodigo'];
+      oferta.oftImagem = novaOferta.fileURI;
+      oferta.oftQuantidade = formData['oftQuantidade'];
+      oferta.oftValor = formData['oftValor'];
+      oferta.oftDataInicial = novaOferta.oftDataInicial;
+      oferta.oftDataFinal = novaOferta.oftDataFinal;
+      // oferta.stsCodigo = null;
+      oferta.oftObs = formData['oftObs'];
+
+      //verifica se é para usar o endereco do usuario
+      if ($("#oftEnderecoCadastro").is(":checked")) {
+        oferta.endCodigo = usuarioController.usuario.endCodigo;
+      } else {
+        //verifica se está usando o mapa
+        if ($("#oftLocalizacaoAtual").is(":checked")) {
+          oferta.endereco.endLatitude = ofertaController.localizacao.latitude;
+          oferta.endereco.endLongitude = ofertaController.localizacao.longitude;
+        } else {
+          // caso contrario, pega os dados do formulario de endereço
+          // oferta.endCodigo = null;
+          oferta.endereco.endLogradouro = formData['endLogradouroOferta'];
+          oferta.endereco.endBairro = formData['endBairroOferta'];
+          oferta.endereco.endNumero = formData['endNumeroOferta'];
+          oferta.endereco.endCep = formData['endCepOferta'];
+          oferta.endereco.cidCodigo = formData['cidCodigoOferta'];
+          oferta.endereco.ufCodigo = formData['ufCodigoOferta'];
+        }
+      }
+      //deleta as propriedades nulas
+      for (var k in oferta) {
+        if (oferta[k] == null) {
+          delete oferta[k];
+        }
+      }
+      for (var k in oferta.endereco) {
+        if (oferta.endereco[k] == null) {
+          delete oferta.endereco[k];
+        }
+      }
+
+      alert(JSON.stringify(oferta));
     } catch (e) {
-      alert("Erro ao salvar o formulario da oferta");
+      alert("Erro ao salvar o formulario da oferta: " + e);
     }
   }
 
