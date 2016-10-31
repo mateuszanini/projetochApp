@@ -1,10 +1,63 @@
 var novaOferta = {
   initialize: function() {
+    novaOferta.fileURI;
+    novaOferta.retries = 0;
     ofertaController.localizacao.mapCanvas =
       document.getElementById("mapCanvasOferta");
 
     ofertaController.localizacao.divEnderecoAtual =
       document.getElementById("oftLocalizacao");
+
+    novaOferta.calendarioInicioOferta = myApp.calendar({
+      input: '#oftDataInicial',
+      dateFormat: 'DD, dd de MM de yyyy',
+      toolbarCloseText: 'Concluído',
+      minDate: new Date().setDate(today.getDate() - 1),
+      monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio',
+        'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro',
+        'Dezembro'
+      ],
+      monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul',
+        'Ago', 'Set', 'Out', 'Nov', 'Dez'
+      ],
+      dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
+        'Sexta', 'Sábado'
+      ],
+      dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+      closeOnSelect: true,
+      onClose: function(p) {
+        console.log(p.value[0]);
+        novaOferta.calendarioFinalOferta = myApp.calendar({
+          input: '#oftDataFinal',
+          dateFormat: 'DD, dd de MM de yyyy',
+          toolbarCloseText: 'Concluído',
+          minDate: p.value[0],
+          monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril',
+            'Maio',
+            'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro',
+            'Novembro',
+            'Dezembro'
+          ],
+          monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai',
+            'Jun',
+            'Jul',
+            'Ago', 'Set', 'Out', 'Nov', 'Dez'
+          ],
+          dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta',
+            'Quinta',
+            'Sexta', 'Sábado'
+          ],
+          dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui',
+            'Sex', 'Sab'
+          ],
+          closeOnSelect: true
+        });
+        $('#oftDataFinal').show();
+      },
+      onOpen: function(p) {
+        $('#oftDataFinal').hide();
+      }
+    });
 
     novaOferta.listaItens();
     novaOferta.listaEstados('SC');
@@ -13,6 +66,13 @@ var novaOferta = {
   },
 
   atribuiAcoes: function() {
+    $('#oftSalvar').click(function() {
+      novaOferta.salvar();
+    });
+    $('#btnTirarFoto').click(function() {
+      novaOferta.capturePhoto();
+    });
+
     $("#oftEnderecoCadastro").change(function() {
       $('.enderecoProprio').toggleClass('hide');
     });
@@ -30,10 +90,11 @@ var novaOferta = {
     });
 
     $("#btnPesquisarLocalizacaoOferta").click(function() {
-      myApp.prompt('Digite uma localização para pesquisar', function(
-        value) {
-        ofertaController.localizacao.geocodeAddress(value);
-      });
+      myApp.prompt('Digite uma localização para pesquisar',
+        function(
+          value) {
+          ofertaController.localizacao.geocodeAddress(value);
+        });
     });
 
     $("#btnLocalizacaoAtualOferta").click(function() {
@@ -44,12 +105,25 @@ var novaOferta = {
       novaOferta.listaCidades(0);
     });
 
+    // novaOferta.calendarioInicioOferta.onClose(function(p) {
+    //   console.log(p);
+    // });
+    //
+    // $("#oftDataInicial").change(function() {
+    //   console.log(novaOferta.calendarioInicioOferta.value());
+    //   // console.log(this);
+    //   // console.log(new Date().setDate($(this).val()));
+    //   // console.log($(this).val());
+    //   // novaOferta.calendarioFinalOferta.minDate =
+    // })
+
     $("#endCepOferta").keyup(function() {
       var cep = $(this).val().replace(/\D/g, '');
       if (cep.length == 8) {
         var validacep = /^[0-9]{8}$/;
         if (validacep.test(cep)) {
-          ofertaController.localizacao.pesquisaCep(cep, function(data) {
+          ofertaController.localizacao.pesquisaCep(cep, function(
+            data) {
             $("#endBairroOferta").val(data.bairro);
             $("#endLogradouroOferta").val(data.logradouro);
             novaOferta.listaEstados(data.uf);
@@ -63,7 +137,8 @@ var novaOferta = {
   listaItens: function() {
     var strItem = '';
     for (var i = 0; i < itens.length; i++) {
-      strItem += '<option value="' + itens[i].itmCodigo + '">' + itens[i].itmNome +
+      strItem += '<option value="' + itens[i].itmCodigo + '">' + itens[
+          i].itmNome +
         '</option>';
     }
     $("#itmCodigo").html(strItem);
@@ -73,7 +148,8 @@ var novaOferta = {
     var strUf = '';
     for (var i = 0; i < uf.length; i++) {
       if (uf[i].ufSigla == ufSigla || uf[i].ufCodigo == ufSigla) {
-        strUf += '<option value="' + uf[i].ufCodigo + '" selected>' + uf[i]
+        strUf += '<option value="' + uf[i].ufCodigo + '" selected>' +
+          uf[i]
           .ufNome +
           '</option>';
         $("#estadoSelecionadoOferta").html(uf[i].ufNome);
@@ -108,6 +184,36 @@ var novaOferta = {
       }
     }
     $("#cidCodigoOferta").html(strCidade);
+  },
+
+  capturePhoto: function() {
+    navigator.camera.getPicture(novaOferta.onCapturePhoto, novaOferta.onFail, {
+      quality: 100,
+      // targetHeight: 250,
+      targetWidth: 250,
+      encodingType: navigator.camera.EncodingType.JPEG,
+      destinationType: navigator.camera.DestinationType.FILE_URI,
+      allowEdit: true,
+      correctOrientation: true //Corrects Android orientation quirks
+    });
+  },
+
+  onCapturePhoto: function(fileURI) {
+    novaOferta.fileURI = fileURI;
+    $("#fotoOferta").addClass("fotoOferta");
+    $("#fotoOferta").attr("src", fileURI);
+  },
+  onFail: function(message) {
+    alert('Failed because: ' + message);
+  },
+
+  salvar: function() {
+    try {
+      var formData = myApp.formToJSON('#oftFormulario');
+      alert(JSON.stringify(formData));
+    } catch (e) {
+      alert("Erro ao salvar o formulario da oferta");
+    }
   }
 
 };

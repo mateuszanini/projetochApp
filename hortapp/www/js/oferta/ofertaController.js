@@ -7,6 +7,10 @@ var ofertaController = {
     OfertaModel.prototype.create = function() {
       ofertaController.create(this);
     };
+    OfertaModel.prototype.enviaFoto = function() {
+      ofertaController.enviaFoto(this);
+    };
+
     OfertaModel.prototype.update = function() {
       ofertaController.update(this);
     };
@@ -106,7 +110,62 @@ var ofertaController = {
     } catch (err) {
       alert('Erro usuarioController.salvar: ' + err.message);
     }
+  },
+
+  enviaFoto: function(oferta) {
+    if (oferta.oftCodigo == null) {
+      alert("Deve ser uma oferta válida");
+      return false;
+    }
+    //verifica se o arquivo existe
+    var reader = new FileReader();
+    reader.onloadend = function(evt) {
+      if (evt.target.result == null) {
+        alert("Deve ser uma imagem válida");
+        return false;
+      } else {
+        //envia a foto
+        var win = function(r) {
+          navigator.camera.cleanup();
+          ofertaController.retries = 0;
+          alert('Feito!');
+        }
+
+        var fail = function(error) {
+          if (retries == 0) {
+            ofertaController.retries++
+              setTimeout(function() {
+                ofertaController.enviaFoto(oferta)
+              }, 1000)
+          } else {
+            ofertaController.retries = 0;
+            navigator.camera.cleanup();
+            alert('Ups. Algo errado aconteceu!');
+          }
+        }
+
+        var options = new FileUploadOptions();
+        options.fileKey = "file";
+        options.fileName = fileURI.substr(oferta.oftImagem.lastIndexOf(
+            '/') +
+          1);
+        options.trustAllHosts = true;
+        options.headers = {
+          "idtoken": usuarioController.idToken
+        };
+        options.mimeType = "image/jpeg";
+        options.params = {
+          "oftCodigo": oferta.oftCodigo
+        };
+        var ft = new FileTransfer();
+        //envia arquivo para o servidor
+        ft.upload(fileURI, encodeURI("http://192.168.5.104:8888/upload"),
+          win,
+          fail,
+          options);
+      }
+    };
+    // We are going to check if the file exists
+    reader.readAsDataURL(oferta.oftImagem);
   }
-
-
 };
