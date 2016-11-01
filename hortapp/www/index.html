@@ -190,106 +190,108 @@
             </div>
         </div>
         <div class="content-block">
-
         </div>
 
-        <div class="list-block">
-            <ul>
-                <li>
-                    <div class="item-content">
-                        <div class="item-inner">
-                            <div class="item-title label">Distância</div>
-                            <div class="item-input">
-                                <div class="range-slider">
-                                    <input type="range" min="0" max="100" value="50" step="0.5">
+        <form id="usuPreferenciasForm" class="list-block">
+            <div class="content-block-title color-blue"><i class="fa fa-map-marker" aria-hidden="true"></i> Distância de busca</div>
+            <div class="list-block">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner text-center">
+                                <div class="item-title label color-gray" id="distancia"></div>
+                                <div class="item-input">
+                                    <div class="range-slider">
+                                        <input type="range" min="0.5" max="100" value="15" step="0.5" name="usuPreferenciasDistancia" id="usuPreferenciasDistancia">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="item-content">
-                        <div class="item-inner">
-                            <div class="item-title label">Data Final</div>
-                            <div class="item-input">
-                                <input type="text" placeholder="Selecionar Data" readonly id="usuPreferenciasData">
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-block-title color-blue"><i class="fa fa-calendar" aria-hidden="true"></i> Data Final</div>
+            <div class="list-block">
+                <ul>
+                    <li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-input">
+                                        <input type="text" placeholder="Selecionar Data" name="usuPreferenciasData" readonly id="usuPreferenciasData">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-block-title color-blue"><i class="fa fa-list" aria-hidden="true"></i> Itens</div>
+
+        </form>
+
+
+        <!-- Tela de Login add modal-in-->
+        <div class="login-screen" id="loginScreen">
+            <!-- Default view-page layout -->
+            <div class="view">
+                <div class="page">
+                    <!-- page-content has additional login-screen content -->
+                    <div class="page-content login-screen-content bg-lightblue">
+                        <div class="row">
+                            <div class="col-auto">
+                                <div class="login-screen-title color-white animated fadeInDownBig">HortApp</div>
                             </div>
                         </div>
-                    </div>
-                </li>
-            </ul>
-
-        </div>
-
-    </div>
-
-
-    <!-- Tela de Login add modal-in-->
-    <div class="login-screen" id="loginScreen">
-        <!-- Default view-page layout -->
-        <div class="view">
-            <div class="page">
-                <!-- page-content has additional login-screen content -->
-                <div class="page-content login-screen-content bg-lightblue">
-                    <div class="row">
-                        <div class="col-auto">
-                            <div class="login-screen-title color-white animated fadeInDownBig">HortApp</div>
+                        <div class="row">
+                            <div class="col-5"></div>
+                            <div class="col-90 animated zoomIn" id="logoLogin">
+                                <img src="img/logo/LogoBranco-F7.png" alt="Logo HortApp" id="imagem" />
+                            </div>
+                            <div class="col-5"></div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-5"></div>
-                        <div class="col-90 animated zoomIn" id="logoLogin">
-                            <img src="img/logo/LogoBranco-F7.png" alt="Logo HortApp" id="imagem" />
+                        <div class="row content-block">
+                            <div class="col-100">
+                                <a href="#" id="btnLogin" class="button button-big button-fill color-red animated fadeInUpBig"><i class="fa fa-google" aria-hidden="true"></i>&nbspLogin com Google</a> </div>
                         </div>
-                        <div class="col-5"></div>
-                    </div>
-                    <div class="row content-block">
-                        <div class="col-100">
-                            <a href="#" id="btnLogin" class="button button-big button-fill color-red animated fadeInUpBig"><i class="fa fa-google" aria-hidden="true"></i>&nbspLogin com Google</a> </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
 
-    <script type="text/javascript" src="cordova.js"></script>
-    <!-- Path to Framework7 Library JS-->
-    <script type="text/javascript" src="bower_components/Framework7/dist/js/framework7.min.js"></script>
-    <!-- JQuery-->
-    <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <!-- Path to Framework7 Library JS-->
+        <script type="text/javascript" src="bower_components/Framework7/dist/js/framework7.min.js"></script>
+        <!-- JQuery-->
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
 
-    <script>
-    console.log('retirar depois');
-        $.getScript(
-          'https://maps.googleapis.com/maps/api/js?key=AIzaSyA0P239oFuH1QHiBM91-nmQo435XFcDKfs'
-        );
-        </script>
+        <script type="text/javascript" src="js/Modelos.js"></script>
+        <!-- JSON Estados e Cidades-->
+        <script type="text/javascript" src="js/usuario/uf.js"></script>
+        <script type="text/javascript" src="js/oferta/itens.js"></script>
 
-    <script type="text/javascript" src="js/Modelos.js"></script>
-    <!-- JSON Estados e Cidades-->
-    <script type="text/javascript" src="js/usuario/uf.js"></script>
-    <script type="text/javascript" src="js/oferta/itens.js"></script>
+        <!-- Configurações do F7 -->
+        <script type="text/javascript" src="js/my-app.js"></script>
+        <!-- JS personalizado-->
+        <script type="text/javascript" src="js/configuracoes.js"></script>
+        <script type="text/javascript" src="js/usuario/usuarioController.js"></script>
+        <script type="text/javascript" src="js/usuario/autenticacao.js"></script>
+        <script type="text/javascript" src="js/Localizacao.js"></script>
 
-    <!-- Configurações do F7 -->
-    <script type="text/javascript" src="js/my-app.js"></script>
-    <!-- JS personalizado-->
-    <script type="text/javascript" src="js/configuracoes.js"></script>
-    <script type="text/javascript" src="js/usuario/usuarioController.js"></script>
-    <script type="text/javascript" src="js/usuario/autenticacao.js"></script>
-    <script type="text/javascript" src="js/Localizacao.js"></script>
+        <script type="text/javascript" src="js/oferta/ofertaController.js"></script>
+        <script type="text/javascript" src="js/oferta/novaOferta.js"></script>
 
-    <script type="text/javascript" src="js/oferta/ofertaController.js"></script>
-    <script type="text/javascript" src="js/oferta/novaOferta.js"></script>
+        <script type="text/javascript" src="js/notificacoes.js"></script>
+        <script type="text/javascript" src="js/my-script.js"></script>
 
-    <script type="text/javascript" src="js/notificacoes.js"></script>
-    <script type="text/javascript" src="js/my-script.js"></script>
+        <script type="text/javascript" src="js/usuario/usuario.js"></script>
+        <script type="text/javascript" src="js/usuario/preferencias.js"></script>
 
-    <script type="text/javascript" src="js/usuario/usuario.js"></script>
-    <script type="text/javascript" src="js/usuario/preferencias.js"></script>
-
-    <script type="text/javascript" src="js/cordovaInit.js"></script>
+        <script type="text/javascript" src="js/cordovaInit.js"></script>
 </body>
 
 </html>
