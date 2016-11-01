@@ -39,6 +39,9 @@ var usuarioController = {
               usuarioController.usuario.usuTelefoneVisivel =
                 data.data.usuario['usuTelefoneVisivel'];
 
+              usuarioController.usuario.endCodigo =
+                data.data.usuario['endCodigo'];
+
               usuarioController.usuario.usuEndVisivel =
                 data.data.usuario['usuEndVisivel'];
             }
@@ -154,7 +157,10 @@ var usuarioController = {
           myApp.showIndicator();
         },
         success: function(data, status, xhr) {
-          //alert('success: \nstatus:' + JSON.stringify(status)+'\ndata:' + JSON.stringify(data));
+          if (data.data.usuario) {
+            usuarioController.usuario.endCodigo =
+              data.data.usuario['endCodigo'];
+          }
         },
         error: function(data, status, xhr) {
           alert('error: \nstatus:' + JSON.stringify(status) +

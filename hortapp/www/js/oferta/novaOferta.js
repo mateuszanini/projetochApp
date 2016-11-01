@@ -241,8 +241,7 @@ var novaOferta = {
           delete oferta.endereco[k];
         }
       }
-
-      alert(JSON.stringify(oferta));
+      ofertaController.create(oferta);
     } catch (e) {
       alert("Erro ao salvar o formulario da oferta: " + e);
     }

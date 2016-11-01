@@ -4,23 +4,24 @@ var ofertaController = {
 
     ofertaController.ofertas = [];
     //adiciona métodos ao modelo de oferta
-    OfertaModel.prototype.create = function() {
-      ofertaController.create(this);
-    };
-    OfertaModel.prototype.enviaFoto = function() {
-      ofertaController.enviaFoto(this);
-    };
-
-    OfertaModel.prototype.update = function() {
-      ofertaController.update(this);
-    };
+    // OfertaModel.prototype.create = function() {
+    //   ofertaController.create(this);
+    // };
+    //
+    // OfertaModel.prototype.enviaFoto = function() {
+    //   ofertaController.enviaFoto(this);
+    // };
+    //
+    // OfertaModel.prototype.update = function() {
+    //   ofertaController.update(this);
+    // };
   },
 
   create: function(oferta) {
-    alert(JSON.stringify(oferta));
+    alert('oferta:' + JSON.stringify(oferta));
     try {
       $.ajax({
-        url: config.getApi() + '/oferta/nova',
+        url: config.getApi() + '/novaoferta',
         headers: {
           "idtoken": usuarioController.idToken
         },
@@ -32,7 +33,8 @@ var ofertaController = {
           myApp.showIndicator();
         },
         success: function(data, status, xhr) {
-          //alert('success: \nstatus:' + JSON.stringify(status)+'\ndata:' + JSON.stringify(data));
+          alert('success: \nstatus:' + JSON.stringify(status) +
+            '\ndata:' + JSON.stringify(data));
         },
         error: function(data, status, xhr) {
           alert('error: \nstatus:' + JSON.stringify(status) +
@@ -43,7 +45,7 @@ var ofertaController = {
         }
       });
     } catch (err) {
-      alert('Erro usuarioController.salvar: ' + err.message);
+      alert('Erro Oferta.create: ' + err.message);
     }
   },
 
