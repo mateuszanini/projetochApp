@@ -1,7 +1,7 @@
 var ofertaController = {
   initialize: function() {
     ofertaController.localizacao = new Localizacao();
-
+    ofertaController.retries = 0;
     ofertaController.ofertas = [];
     //adiciona métodos ao modelo de oferta
     // OfertaModel.prototype.create = function() {
@@ -33,16 +33,16 @@ var ofertaController = {
           myApp.showIndicator();
         },
         success: function(data, status, xhr) {
-			alert('entrou do succes: '+data.data.oferta.oftCodigo);
-			alert('oferta:' + JSON.stringify(oferta));
-			try{
-				ofertaController.enviaFoto({
-					oftCodigo: data.data.oferta['oftCodigo'],
-					oftImagem: oferta.oftImagem
-				});
-			}catch(e){
-				alert("Erro no success: "+ e);
-			}
+          //alert('entrou do succes: '+JSON.stringify(data));
+          //alert('oferta:' + JSON.stringify(oferta));
+          try {
+            ofertaController.enviaFoto({
+              oftCodigo: data.data['oftCodigo'],
+              oftImagem: oferta.oftImagem
+            });
+          } catch (e) {
+            alert("Erro no success: " + e);
+          }
         },
         error: function(data, status, xhr) {
           alert('error: \nstatus:' + JSON.stringify(status) +
@@ -123,59 +123,57 @@ var ofertaController = {
   },
 
   enviaFoto: function(oferta) {
-	alert("enviaFoto: "+ JSON.stringify(oferta));
+    //alert("enviaFoto: " + JSON.stringify(oferta));
     if (oferta.oftCodigo == null) {
       alert("Deve ser uma oferta válida");
       return false;
     }
-    //verifica se o arquivo existe
-    var reader = new FileReader();
-    reader.onloadend = function(evt) {
-      if (evt.target.result == null) {
-        alert("Deve ser uma imagem válida");
-        return false;
+    //envia a foto
+    var win = function(r) {
+      navigator.camera.cleanup();
+      ofertaController.retries = 0;
+      alert('Feito!');
+    }
+
+    var fail = function(error) {
+      alert('Ups. Algo errado aconteceu: ' + JSON.stringify(error));
+      if (ofertaController.retries == 0) {
+        ofertaController.retries++;
+        setTimeout(function() {
+          ofertaController.enviaFoto(oferta)
+        }, 1000)
       } else {
-        //envia a foto
-        var win = function(r) {
-          navigator.camera.cleanup();
-          ofertaController.retries = 0;
-          alert('Feito!');
-        }
-
-        var fail = function(error) {
-          if (retries == 0) {
-            ofertaController.retries++
-              setTimeout(function() {
-                ofertaController.enviaFoto(oferta)
-              }, 1000)
-          } else {
-            ofertaController.retries = 0;
-            navigator.camera.cleanup();
-            alert('Ups. Algo errado aconteceu!');
-          }
-        }
-
-        var options = new FileUploadOptions();
-        options.fileKey = "file";
-        //options.fileName = fileURI.substr(oferta.oftImagem.lastIndexOf('/') +1);
-		options.fileName = oferta.oftCodigo + '.jpeg';
-        options.trustAllHosts = true;
-        options.headers = {
-          "idtoken": usuarioController.idToken
-        };
-        options.mimeType = "image/jpeg";
-        options.params = {
-          "oftCodigo": oferta.oftCodigo
-        };
-        var ft = new FileTransfer();
-        //envia arquivo para o servidor
-        ft.upload(oferta.oftImagem, encodeURI(config.getApi() + '/recebefoto'),
-          win,
-          fail,
-          options);
+        ofertaController.retries = 0;
+        navigator.camera.cleanup();
       }
+    }
+
+    var options = new FileUploadOptions();
+    options.fileKey = "file";
+    options.fileName = oferta.oftImagem.substr(oferta.oftImagem.lastIndexOf(
+      '/') + 1);
+    //options.fileName = oferta.oftCodigo + '.jpeg';
+    //options.trustAllHosts = true;
+    options.httpMethod = 'POST';
+    options.headers = {
+      "idtoken": usuarioController.idToken
     };
-    // We are going to check if the file exists
-    reader.readAsDataURL(oferta.oftImagem);
+    options.mimeType = "image/jpeg";
+    options.params = {
+      "oftCodigo": oferta.oftCodigo
+    };
+    //alert(JSON.stringify(options));
+
+    try {
+      var ft = new FileTransfer();
+      //envia arquivo para o servidor
+
+      ft.upload(oferta.oftImagem, encodeURI(config.getApi() + '/recebefoto'),
+        win,
+        fail,
+        options);
+    } catch (e) {
+      alert('ft.upload: ' + e);
+    }
   }
 };
