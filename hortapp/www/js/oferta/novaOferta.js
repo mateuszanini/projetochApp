@@ -2,6 +2,8 @@ var novaOferta = {
   initialize: function() {
     novaOferta.fileURI;
     novaOferta.retries = 0;
+    novaOferta.oftDataInicial = null;
+    novaOferta.oftDataFinal = null;
     ofertaController.localizacao.mapCanvas =
       document.getElementById("mapCanvasOferta");
 
@@ -25,6 +27,11 @@ var novaOferta = {
       ],
       dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
       closeOnSelect: true,
+      onDayClick: function(p, dayContainer, year, month, day) {
+        novaOferta.oftDataInicial = year + '-' + (parseInt(month) + 1) +
+          '-' +
+          day;
+      },
       onClose: function(p) {
         console.log(p.value[0]);
         novaOferta.calendarioFinalOferta = myApp.calendar({
@@ -50,8 +57,14 @@ var novaOferta = {
           dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui',
             'Sex', 'Sab'
           ],
-          closeOnSelect: true
+          closeOnSelect: true,
+          onDayClick: function(p, dayContainer, year, month, day) {
+            novaOferta.oftDataFinal =
+              year + '-' + (parseInt(month) + 1) + '-' + day;
+          },
         });
+        novaOferta.calendarioFinalOferta.setValue(
+          novaOferta.calendarioInicioOferta.value);
         $('#oftDataFinal').show();
       },
       onOpen: function(p) {
@@ -232,12 +245,12 @@ var novaOferta = {
       }
       //deleta as propriedades nulas
       for (var k in oferta) {
-        if (oferta[k] == null) {
+        if (oferta[k] == null || oferta[k] == "") {
           delete oferta[k];
         }
       }
       for (var k in oferta.endereco) {
-        if (oferta.endereco[k] == null) {
+        if (oferta.endereco[k] == null || oferta.endereco[k] == "") {
           delete oferta.endereco[k];
         }
       }

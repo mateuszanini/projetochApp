@@ -18,7 +18,7 @@ var ofertaController = {
   },
 
   create: function(oferta) {
-    alert('oferta:' + JSON.stringify(oferta));
+    //alert('oferta:' + JSON.stringify(oferta));
     try {
       $.ajax({
         url: config.getApi() + '/novaoferta',
@@ -33,8 +33,16 @@ var ofertaController = {
           myApp.showIndicator();
         },
         success: function(data, status, xhr) {
-          alert('success: \nstatus:' + JSON.stringify(status) +
-            '\ndata:' + JSON.stringify(data));
+			alert('entrou do succes: '+data.data.oferta.oftCodigo);
+			alert('oferta:' + JSON.stringify(oferta));
+			try{
+				ofertaController.enviaFoto({
+					oftCodigo: data.data.oferta['oftCodigo'],
+					oftImagem: oferta.oftImagem
+				});
+			}catch(e){
+				alert("Erro no success: "+ e);
+			}
         },
         error: function(data, status, xhr) {
           alert('error: \nstatus:' + JSON.stringify(status) +
@@ -115,6 +123,7 @@ var ofertaController = {
   },
 
   enviaFoto: function(oferta) {
+	alert("enviaFoto: "+ JSON.stringify(oferta));
     if (oferta.oftCodigo == null) {
       alert("Deve ser uma oferta válida");
       return false;
@@ -148,9 +157,8 @@ var ofertaController = {
 
         var options = new FileUploadOptions();
         options.fileKey = "file";
-        options.fileName = fileURI.substr(oferta.oftImagem.lastIndexOf(
-            '/') +
-          1);
+        //options.fileName = fileURI.substr(oferta.oftImagem.lastIndexOf('/') +1);
+		options.fileName = oferta.oftCodigo + '.jpeg';
         options.trustAllHosts = true;
         options.headers = {
           "idtoken": usuarioController.idToken
@@ -161,7 +169,7 @@ var ofertaController = {
         };
         var ft = new FileTransfer();
         //envia arquivo para o servidor
-        ft.upload(fileURI, encodeURI("http://192.168.5.104:8888/upload"),
+        ft.upload(oferta.oftImagem, encodeURI(config.getApi() + '/recebefoto'),
           win,
           fail,
           options);
