@@ -24,6 +24,7 @@ var app = {
         myApp.alert("Você está Offline");
       }, false);
       app.loadMapsApi();
+      app.loadGoogleApi();
     } catch (err) {
       alert('onDeviceReady: ' + err.message);
     }
@@ -41,10 +42,12 @@ var app = {
 
   onOnline: function() {
     app.loadMapsApi();
+    app.loadGoogleApi();
   },
 
   onResume: function() {
     app.loadMapsApi();
+    app.loadGoogleApi();
   },
 
   // https://codingwithspike.wordpress.com/2014/08/13/loading-google-maps-in-cordova-the-right-way/
@@ -73,6 +76,30 @@ var app = {
       );
     } catch (err) {
       alert('loadMapsApi:' + err.message);
+    }
+  },
+
+  loadGoogleApi: function() {
+    try {
+      //verifica se tem conexao
+      if (navigator.connection.type === Connection.NONE) {
+        //se nao tiver retorna
+        console.log('Sem conexão!');
+        return;
+      }
+      //caso tenha conexão
+
+      //verifica se a variavel google está definida
+      if (window.gapi !== undefined) {
+        //caso estiver retorna
+        return;
+      }
+      //caso nao estiver, carrega o script do google
+      $.getScript(
+        'https://plus.google.com/js/client:platform.js'
+      );
+    } catch (err) {
+      alert('loadGoogleApi:' + err.message);
     }
   }
 };

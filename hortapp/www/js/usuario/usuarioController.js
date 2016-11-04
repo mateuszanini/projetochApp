@@ -4,6 +4,18 @@ var usuarioController = {
     usuarioController.endereco = new EnderecoModel();
     usuarioController.usuario = new UsuarioModel();
 
+    usuarioController.preferencias = {
+      "distancia": "15",
+      "dataVencimento": "2016-12-31",
+      "itens": [
+        '3', '6', '2'
+      ],
+      "offset": {
+        "inicio": 0,
+        "qtd": 10
+      }
+    };
+
     //novo objeto da classe Localizacao,
     usuarioController.localizacao = new Localizacao();
 
