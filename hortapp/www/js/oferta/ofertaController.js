@@ -3,22 +3,9 @@ var ofertaController = {
     ofertaController.localizacao = new Localizacao();
     ofertaController.retries = 0;
     ofertaController.ofertas = [];
-    //adiciona métodos ao modelo de oferta
-    // OfertaModel.prototype.create = function() {
-    //   ofertaController.create(this);
-    // };
-    //
-    // OfertaModel.prototype.enviaFoto = function() {
-    //   ofertaController.enviaFoto(this);
-    // };
-    //
-    // OfertaModel.prototype.update = function() {
-    //   ofertaController.update(this);
-    // };
   },
 
   create: function(oferta) {
-    //alert('oferta:' + JSON.stringify(oferta));
     try {
       $.ajax({
         url: config.getApi() + '/novaoferta',
@@ -60,11 +47,11 @@ var ofertaController = {
   read: function(preferencias, callback) {
     try {
       $.ajax({
-        url: config.getApi() + '/oferta',
+        url: config.getApi() + '/ofertas',
         headers: {
           "idtoken": usuarioController.idToken
         },
-        data: oferta,
+        data: preferencias,
         type: "GET",
         dataType: undefined,
         // contentType: "application/json",
@@ -72,10 +59,9 @@ var ofertaController = {
           myApp.showIndicator();
         },
         success: function(data, status, xhr) {
-          alert(
-            'iterar sobre os dados recebidos e inserir nas ofertas'
-          );
-          //          ofertaController.ofertas.push(data)
+          for (var i = 0; i < data.data.length; i++) {
+            ofertaController.ofertas.push(data.data[i]);
+          }
           callback();
           //alert('success: \nstatus:' + JSON.stringify(status)+'\ndata:' + JSON.stringify(data));
         },
