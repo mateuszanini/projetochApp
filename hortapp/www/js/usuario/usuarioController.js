@@ -6,13 +6,11 @@ var usuarioController = {
 
     usuarioController.preferencias = {
       "distancia": "15",
-      "dataVencimento": "2016-12-31",
-      "itens": [
-        '3', '6', '2'
-      ],
+      "dataVencimento": "31/12/2099",
+      "itens": [],
       "offset": {
         "inicio": 0,
-        "qtd": 10
+        "qtd": 100
       }
     };
 

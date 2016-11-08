@@ -3,7 +3,7 @@ var myApp = new Framework7({
   sortable: false,
   scrollTopOnNavbarClick: true,
   animateNavBackIcon: true,
-  swipePanel: 'left',
+  //swipePanel: 'left',
   /*MODAL*/
   modalTitle: "HortApp",
   modalButtonCancel: "Cancelar",
@@ -14,7 +14,6 @@ var myApp = new Framework7({
 });
 
 var $$ = Dom7;
-/*var $ = Framework7.$;*/
 
 var mainView = myApp.addView('.view-main', {
   dynamicNavbar: true
@@ -26,4 +25,8 @@ myApp.onPageInit('meuPerfil', function(page) {
 
 myApp.onPageInit('novaOferta', function(page) {
   novaOferta.initialize();
+});
+
+myApp.onPageInit('ofertas', function(page) {
+  ofertas.initialize();
 });

@@ -19,10 +19,14 @@ var ofertaController = {
           myApp.showIndicator();
         },
         success: function(data, status, xhr) {
-          ofertaController.enviaFoto({
-            oftCodigo: data.data['oftCodigo'],
-            oftImagem: oferta.oftImagem
-          });
+          try {
+            ofertaController.enviaFoto({
+              oftCodigo: data.data['oftCodigo'],
+              oftImagem: oferta.oftImagem
+            });
+          } catch (e) {
+            alert(JSON.stringify(e));
+          }
         },
         error: function(data, status, xhr) {
           myScript.notificacao("Erro", data, false);
@@ -102,7 +106,7 @@ var ofertaController = {
   },
 
   enviaFoto: function(oferta) {
-    //alert("enviaFoto: " + JSON.stringify(oferta));
+    alert("enviaFoto: " + JSON.stringify(oferta));
     if (oferta.oftCodigo == null) {
       alert("Deve ser uma oferta válida");
       return false;
@@ -133,26 +137,29 @@ var ofertaController = {
         myScript.notificacao("Erro", error, false);
       }
     }
+    try {
+      var options = new FileUploadOptions();
+      options.fileKey = "file";
+      //options.fileName = oferta.oftImagem.substr(oferta.oftImagem.lastIndexOf( '/') + 1);
+      options.fileName = oferta.oftCodigo + '.jpg';
+      options.trustAllHosts = true;
+      options.httpMethod = 'POST';
+      options.headers = {
+        "idtoken": usuarioController.idToken,
+        "oftCodigo": oferta.oftCodigo
+      };
+      options.mimeType = "image/jpeg";
+      var ft = new FileTransfer();
+      //envia arquivo para o servidor
+      myApp.showIndicator();
 
-    var options = new FileUploadOptions();
-    options.fileKey = "file";
-    //options.fileName = oferta.oftImagem.substr(oferta.oftImagem.lastIndexOf( '/') + 1);
-    options.fileName = oferta.oftCodigo + '.jpg';
-    options.trustAllHosts = true;
-    options.httpMethod = 'POST';
-    options.headers = {
-      "idtoken": usuarioController.idToken,
-      "oftCodigo": oferta.oftCodigo
-    };
-    options.mimeType = "image/jpeg";
-    var ft = new FileTransfer();
-    //envia arquivo para o servidor
-    myApp.showIndicator();
-    ft.upload(oferta.oftImagem, encodeURI(config.getEnderecoImagem() +
-        '/recebefoto'),
-      win,
-      fail,
-      options);
-
+      ft.upload(oferta.oftImagem, encodeURI(config.getEnderecoImagem() +
+          '/recebefoto'),
+        win,
+        fail,
+        options);
+    } catch (e) {
+      fail(e);
+    }
   }
 };
