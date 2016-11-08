@@ -106,38 +106,41 @@ var ofertaController = {
   },
 
   enviaFoto: function(oferta) {
-    alert("enviaFoto: " + JSON.stringify(oferta));
-    if (oferta.oftCodigo == null) {
-      alert("Deve ser uma oferta válida");
-      return false;
-    }
-    //envia a foto
-    var win = function(r) {
-      navigator.camera.cleanup();
-      ofertaController.retries = 0;
-      myApp.hideIndicator();
-      myScript.notificacao("Finalizado", "Oferta salva!", true);
-      mainView.router.load({
-        url: 'index.html'
-      });
-      //mainView.router.refreshPage();
-      //alert('Feito!');
-    }
-
-    var fail = function(error) {
-      if (ofertaController.retries == 0) {
-        ofertaController.retries++;
-        setTimeout(function() {
-          ofertaController.enviaFoto(oferta)
-        }, 1000)
-      } else {
-        ofertaController.retries = 0;
-        navigator.camera.cleanup();
-        myApp.hideIndicator();
-        myScript.notificacao("Erro", error, false);
-      }
-    }
     try {
+      if (oferta.oftCodigo == null) {
+        // alert("Deve ser uma oferta válida");
+        return false;
+      }
+      if (oferta.oftImagem == null || oferta.oftImagem == "") {
+        return false;
+      }
+      //envia a foto
+      var win = function(r) {
+        navigator.camera.cleanup();
+        ofertaController.retries = 0;
+        myApp.hideIndicator();
+        myScript.notificacao("Finalizado", "Oferta salva!", true);
+        mainView.router.load({
+          url: 'index.html'
+        });
+        //mainView.router.refreshPage();
+        //alert('Feito!');
+      }
+
+      var fail = function(error) {
+        if (ofertaController.retries == 0) {
+          ofertaController.retries++;
+          setTimeout(function() {
+            ofertaController.enviaFoto(oferta)
+          }, 1000)
+        } else {
+          ofertaController.retries = 0;
+          navigator.camera.cleanup();
+          myApp.hideIndicator();
+          myScript.notificacao("Erro", JSON.stringify(error), false);
+        }
+      }
+
       var options = new FileUploadOptions();
       options.fileKey = "file";
       //options.fileName = oferta.oftImagem.substr(oferta.oftImagem.lastIndexOf( '/') + 1);
@@ -153,13 +156,13 @@ var ofertaController = {
       //envia arquivo para o servidor
       myApp.showIndicator();
 
-      ft.upload(oferta.oftImagem, encodeURI(config.getEnderecoImagem() +
+      ft.upload(oferta.oftImagem, encodeURI(config.getApiImagens() +
           '/recebefoto'),
         win,
         fail,
         options);
     } catch (e) {
-      fail(e);
+      JSON.stringify(e)
     }
   }
 };

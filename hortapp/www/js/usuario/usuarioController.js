@@ -10,7 +10,7 @@ var usuarioController = {
       "itens": [],
       "offset": {
         "inicio": 0,
-        "qtd": 100
+        "qtd": 10
       }
     };
 
