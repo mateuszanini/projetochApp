@@ -19,7 +19,7 @@ var minhasOfertas = {
                         '</div>' +
                         '<div class="item-subtitle">Vence em: <br/>' +
                         ofertas[i]['oftDataFinal'] +
-                        ' </div><br/>' +
+                        ' </div>' +
                         '<div class="item-text">Quantidade disponível:<br/>' +
                         ofertas[i]['oftQuantidade'] + '</div>' +
                         '</div>' +

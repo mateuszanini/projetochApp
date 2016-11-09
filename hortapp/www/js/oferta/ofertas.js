@@ -6,7 +6,7 @@ var ofertas = {
 
           console.log(typeof ofertas[i]['oftDataFinal']);
           console.log(ofertas[i]['oftDataFinal'].split('-'));
-          
+
           var img = ofertas[i]['oftImagem'] != null ?
             ofertas[i]['oftImagem'] : 'null.jpg';
 
@@ -23,7 +23,7 @@ var ofertas = {
             '</div>' +
             '<div class="item-subtitle">Vence em: <br/>' +
             ofertas[i]['oftDataFinal'] +
-            ' </div><br/>' +
+            ' </div>' +
             '<div class="item-text">Quantidade disponível:<br/>' +
             ofertas[i]['oftQuantidade'] + '</div>' +
             '</div>' +
