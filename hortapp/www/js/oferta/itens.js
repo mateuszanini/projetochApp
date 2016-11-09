@@ -1001,3 +1001,11 @@ var itens = [{
 	"itmCodigo": 334,
 	"itmNome": "Xixa"
 }];
+
+var getItemByCodigo = function(codigo) {
+	for (var i = 0; i < itens.length; i++) {
+		if (codigo == itens[i]['itmCodigo']) {
+			return itens[i]['itmNome'];
+		}
+	}
+}

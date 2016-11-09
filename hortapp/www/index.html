@@ -50,11 +50,20 @@
                         </div>
                     </a>
                 </li>
-                <li>
-                    <a href="views/oferta/novaOferta.html" class="item-link item-content close-panel">
+                <!-- <li>
+                    <a href="views/oferta/ofertas.html" class="item-link item-content close-panel">
                         <div class="item-media"><i class="fa fa-tags" aria-hidden="true"></i></div>
                         <div class="item-inner">
                             <div class="item-title">Ofertas</div>
+                            <div class="item-after"></div>
+                        </div>
+                    </a>
+                </li> -->
+                <li>
+                    <a href="views/oferta/minhasOfertas.html" class="item-link item-content close-panel">
+                        <div class="item-media"><i class="fa fa-tags" aria-hidden="true"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title">Minhas ofertas</div>
                             <div class="item-after"></div>
                         </div>
                     </a>
@@ -105,12 +114,12 @@
             <!-- Top Navbar-->
             <div class="navbar">
                 <div class="navbar-inner">
-                    <div class="left sliding">
+                    <!-- <div class="left sliding">
                         <a href="#" class="link">
                             <i class="icon icon-back"></i>
                             <span>Voltar</span>
                         </a>
-                    </div>
+                    </div> -->
                     <div class="center sliding">HortApp</div>
                     <div class="right sliding">
                         <a href="#" data-panel="left" class="link open-panel">
@@ -127,10 +136,16 @@
                 <div data-page="index" class="page">
                     <div class="page-content">
                         <!-- Link to another page -->
-                        <div class="content-block">
+                        <!-- <div class="content-block">
                             <p id="conteudo"></p>
                             <p><a href="views/about/about.html">About app</a></p>
+                        </div> -->
+
+                        <div class="list-block media-list">
+                            <ul id="listaOfertas">
+                            </ul>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -221,6 +236,8 @@
 
     <script type="text/javascript" src="js/oferta/ofertaController.js"></script>
     <script type="text/javascript" src="js/oferta/novaOferta.js"></script>
+    <script type="text/javascript" src="js/oferta/ofertas.js"></script>
+    <script type="text/javascript" src="js/oferta/minhasOfertas.js"></script>
 
     <script type="text/javascript" src="js/notificacoes.js"></script>
     <script type="text/javascript" src="js/my-script.js"></script>
