@@ -40,7 +40,37 @@ var ofertaController = {
     }
   },
 
-  read: function(preferencias, callback) {
+  readMy: function(callback) {
+    try {
+      $.ajax({
+        url: config.getApi() + '/minhasofertas',
+        headers: {
+          "idtoken": usuarioController.idToken
+        },
+        type: "GET",
+        dataType: undefined,
+        // contentType: "application/json",
+        beforeSend: function() {
+          myApp.showIndicator();
+        },
+        success: function(data, status, xhr) {
+          callback(data.data);
+        },
+        error: function(data, status, xhr) {
+          alert('error readMy: \nstatus:' + JSON.stringify(status) +
+            '\ndata:' + JSON.stringify(data));
+        },
+        complete: function(xhr, status) {
+          myApp.hideIndicator();
+        }
+      });
+    } catch (err) {
+      alert('Erro usuarioController.salvar: ' + err.message);
+    }
+  },
+
+
+  readAll: function(preferencias, callback) {
     try {
       console.log(config.getApi());
       $.ajax({
@@ -56,9 +86,9 @@ var ofertaController = {
           myApp.showIndicator();
         },
         success: function(data, status, xhr) {
-          for (var i = 0; i < data.data.length; i++) {
-            ofertaController.ofertas.push(data.data[i]);
-          }
+          // for (var i = 0; i < data.data.length; i++) {
+          //   ofertaController.ofertas.push(data.data[i]);
+          // }
           callback(data.data);
           //alert('success: \nstatus:' + JSON.stringify(status)+'\ndata:' + JSON.stringify(data));
         },
@@ -121,7 +151,7 @@ var ofertaController = {
         myApp.hideIndicator();
         myScript.notificacao("Finalizado", "Oferta salva!", true);
         mainView.router.load({
-          url: 'index.html'
+          url: 'minhasOfertas.html'
         });
         //mainView.router.refreshPage();
         //alert('Feito!');

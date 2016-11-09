@@ -30,3 +30,7 @@ myApp.onPageInit('novaOferta', function(page) {
 myApp.onPageInit('ofertas', function(page) {
   ofertas.initialize();
 });
+
+myApp.onPageInit('minhasOfertas', function(page) {
+  minhasOfertas.initialize();
+});

@@ -1,11 +1,12 @@
 var ofertas = {
   initialize: function() {
-    ofertaController.read(usuarioController.preferencias, function(ofertas) {
+    ofertaController.readAll(usuarioController.preferencias, function(ofertas) {
       try {
         for (var i = 0; i < ofertas.length; i++) {
 
           console.log(typeof ofertas[i]['oftDataFinal']);
           console.log(ofertas[i]['oftDataFinal'].split('-'));
+          
           var img = ofertas[i]['oftImagem'] != null ?
             ofertas[i]['oftImagem'] : 'null.jpg';
 
