@@ -2,6 +2,8 @@ var novaOferta = {
   initialize: function() {
     novaOferta.fileURI;
     novaOferta.retries = 0;
+    novaOferta.oftDataInicial = null;
+    novaOferta.oftDataFinal = null;
     ofertaController.localizacao.mapCanvas =
       document.getElementById("mapCanvasOferta");
 
@@ -25,6 +27,11 @@ var novaOferta = {
       ],
       dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
       closeOnSelect: true,
+      onDayClick: function(p, dayContainer, year, month, day) {
+        novaOferta.oftDataInicial = year + '-' + (parseInt(month) + 1) +
+          '-' +
+          day;
+      },
       onClose: function(p) {
         console.log(p.value[0]);
         novaOferta.calendarioFinalOferta = myApp.calendar({
@@ -50,8 +57,14 @@ var novaOferta = {
           dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui',
             'Sex', 'Sab'
           ],
-          closeOnSelect: true
+          closeOnSelect: true,
+          onDayClick: function(p, dayContainer, year, month, day) {
+            novaOferta.oftDataFinal =
+              year + '-' + (parseInt(month) + 1) + '-' + day;
+          },
         });
+        novaOferta.calendarioFinalOferta.setValue(
+          novaOferta.calendarioInicioOferta.value);
         $('#oftDataFinal').show();
       },
       onOpen: function(p) {
@@ -104,18 +117,6 @@ var novaOferta = {
     $("#ufCodigoOferta").change(function() {
       novaOferta.listaCidades(0);
     });
-
-    // novaOferta.calendarioInicioOferta.onClose(function(p) {
-    //   console.log(p);
-    // });
-    //
-    // $("#oftDataInicial").change(function() {
-    //   console.log(novaOferta.calendarioInicioOferta.value());
-    //   // console.log(this);
-    //   // console.log(new Date().setDate($(this).val()));
-    //   // console.log($(this).val());
-    //   // novaOferta.calendarioFinalOferta.minDate =
-    // })
 
     $("#endCepOferta").keyup(function() {
       var cep = $(this).val().replace(/\D/g, '');
@@ -193,7 +194,7 @@ var novaOferta = {
       targetWidth: 250,
       encodingType: navigator.camera.EncodingType.JPEG,
       destinationType: navigator.camera.DestinationType.FILE_URI,
-      allowEdit: true,
+      //allowEdit: true,
       correctOrientation: true //Corrects Android orientation quirks
     });
   },
@@ -210,9 +211,52 @@ var novaOferta = {
   salvar: function() {
     try {
       var formData = myApp.formToJSON('#oftFormulario');
-      alert(JSON.stringify(formData));
+      //alert(JSON.stringify(formData));
+      var oferta = new OfertaModel();
+      // oferta.oftCodigo = null;
+      //oferta.usuCodigo = null;
+      oferta.itmCodigo = formData['itmCodigo'];
+      oferta.oftImagem = novaOferta.fileURI;
+      oferta.oftQuantidade = formData['oftQuantidade'];
+      oferta.oftValor = formData['oftValor'];
+      oferta.oftDataInicial = novaOferta.oftDataInicial;
+      oferta.oftDataFinal = novaOferta.oftDataFinal;
+      // oferta.stsCodigo = null;
+      oferta.oftObs = formData['oftObs'];
+
+      //verifica se é para usar o endereco do usuario
+      if ($("#oftEnderecoCadastro").is(":checked")) {
+        oferta.endCodigo = usuarioController.usuario.endCodigo;
+      } else {
+        //verifica se está usando o mapa
+        if ($("#oftLocalizacaoAtual").is(":checked")) {
+          oferta.endereco.endLatitude = ofertaController.localizacao.latitude;
+          oferta.endereco.endLongitude = ofertaController.localizacao.longitude;
+        } else {
+          // caso contrario, pega os dados do formulario de endereço
+          // oferta.endCodigo = null;
+          oferta.endereco.endLogradouro = formData['endLogradouroOferta'];
+          oferta.endereco.endBairro = formData['endBairroOferta'];
+          oferta.endereco.endNumero = formData['endNumeroOferta'];
+          oferta.endereco.endCep = formData['endCepOferta'];
+          oferta.endereco.cidCodigo = formData['cidCodigoOferta'];
+          oferta.endereco.ufCodigo = formData['ufCodigoOferta'];
+        }
+      }
+      //deleta as propriedades nulas
+      for (var k in oferta) {
+        if (oferta[k] == null || oferta[k] == "") {
+          delete oferta[k];
+        }
+      }
+      for (var k in oferta.endereco) {
+        if (oferta.endereco[k] == null || oferta.endereco[k] == "") {
+          delete oferta.endereco[k];
+        }
+      }
+      ofertaController.create(oferta);
     } catch (e) {
-      alert("Erro ao salvar o formulario da oferta");
+      alert("Erro ao salvar o formulario da oferta: " + e);
     }
   }
 

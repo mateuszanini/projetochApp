@@ -4,6 +4,7 @@ var UsuarioModel = function() {
   this.usuImagem = null;
   this.usuIdGoogle = null;
   this.usuTokenFcm = null;
+  this.endCodigo = null;
   this.usuEndVisivel = null;
   this.usuTelefone = null;
   this.usuTelefoneVisivel = null;
