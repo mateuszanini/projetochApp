@@ -39,8 +39,9 @@ var autenticacao = {
       window.plugins.googleplus.logout(
         function(msg) {
           //notificacoes.unregister();
-          myApp.closePanel();
+          //myApp.closePanel();
           myApp.loginScreen();
+          myApp.closePanel();
         });
     });
   }

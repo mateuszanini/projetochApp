@@ -52,6 +52,15 @@ myApp.onPageInit('minhasOfertas', function(page) {
   minhasOfertas.initialize();
 });
 
+myApp.onPageAfterAnimation('minhasOfertas', function(page) {
+  minhasOfertas.initialize();
+});
+
+myApp.onPageAfterAnimation('ofertas', function(page) {
+  myApp.attachInfiniteScroll($('.infinite-scroll'));
+  ofertas.initialize();
+});
+
 myApp.onPageInit('ofertas', function(page) {
   myApp.attachInfiniteScroll($('.infinite-scroll'));
   ofertas.initialize();

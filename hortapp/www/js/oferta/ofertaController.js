@@ -149,11 +149,12 @@ var ofertaController = {
         navigator.camera.cleanup();
         ofertaController.retries = 0;
         myApp.hideIndicator();
-        myScript.notificacao("Finalizado", "Oferta salva!", true);
-        mainView.router.load({
-          url: 'minhasOfertas.html'
-        });
-        //mainView.router.refreshPage();
+        myScript.notificacao("Concluído", "Oferta salva!", true);
+        // mainView.router.load({
+        //   url: 'ofertas.html'
+        // });
+        mainView.router.back();
+        mainView.router.refreshPage();
         //alert('Feito!');
       }
 

@@ -179,6 +179,8 @@ var usuarioController = {
         },
         complete: function(xhr, status) {
           myApp.hideIndicator();
+          mainView.router.back();
+          mainView.router.refreshPage();
         }
       });
     } catch (err) {
