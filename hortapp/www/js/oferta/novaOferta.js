@@ -205,13 +205,12 @@ var novaOferta = {
     $("#fotoOferta").attr("src", fileURI);
   },
   onFail: function(message) {
-    alert('Failed because: ' + message);
+    console.log('Failed because: ' + message);
   },
 
   salvar: function() {
     try {
       var formData = myApp.formToJSON('#oftFormulario');
-      //alert(JSON.stringify(formData));
       var oferta = new OfertaModel();
       // oferta.oftCodigo = null;
       //oferta.usuCodigo = null;
@@ -223,6 +222,8 @@ var novaOferta = {
       oferta.oftDataFinal = novaOferta.oftDataFinal;
       // oferta.stsCodigo = null;
       oferta.oftObs = formData['oftObs'];
+
+      var valido = true;
 
       //verifica se é para usar o endereco do usuario
       if ($("#oftEnderecoCadastro").is(":checked")) {
@@ -241,8 +242,33 @@ var novaOferta = {
           oferta.endereco.endCep = formData['endCepOferta'];
           oferta.endereco.cidCodigo = formData['cidCodigoOferta'];
           oferta.endereco.ufCodigo = formData['ufCodigoOferta'];
+
+          if (oferta.endereco.cidCodigo == "" &&
+            oferta.endereco.ufCodigo == "") {
+            myScript.notificacao("Erro", "Revise o endereço",
+              true);
+            valido = false;
+          }
         }
       }
+      //VALIDA OS CAMPOS
+
+      if (oferta.itmCodigo == "") {
+        myScript.notificacao("Erro", "Selecione um item.", true);
+        valido = false;
+      }
+      if (oferta.oftQuantidade == "") {
+        myScript.notificacao("Erro", "Insira a quantidade", true);
+        valido = false;
+      }
+      if (oferta.oftDataInicial == null) {
+        myScript.notificacao("Erro", "Seleciona a data inicial da oferta",
+          true);
+        valido = false;
+      }
+
+      if (!valido) return;
+      //FIM DA VALIDAÇÃO
       //deleta as propriedades nulas
       for (var k in oferta) {
         if (oferta[k] == null || oferta[k] == "") {

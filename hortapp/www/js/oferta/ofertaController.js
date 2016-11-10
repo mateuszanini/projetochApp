@@ -136,64 +136,62 @@ var ofertaController = {
   },
 
   enviaFoto: function(oferta) {
-    try {
-      if (oferta.oftCodigo == null) {
-        // alert("Deve ser uma oferta válida");
-        return false;
-      }
-      if (oferta.oftImagem == null || oferta.oftImagem == "") {
-        return false;
-      }
-      //envia a foto
-      var win = function(r) {
-        navigator.camera.cleanup();
-        ofertaController.retries = 0;
-        myApp.hideIndicator();
-        myScript.notificacao("Concluído", "Oferta salva!", true);
-        // mainView.router.load({
-        //   url: 'ofertas.html'
-        // });
-        mainView.router.back();
-        mainView.router.refreshPage();
-        //alert('Feito!');
-      }
-
-      var fail = function(error) {
-        if (ofertaController.retries == 0) {
-          ofertaController.retries++;
-          setTimeout(function() {
-            ofertaController.enviaFoto(oferta)
-          }, 1000)
-        } else {
-          ofertaController.retries = 0;
-          navigator.camera.cleanup();
-          myApp.hideIndicator();
-          myScript.notificacao("Erro", JSON.stringify(error), false);
-        }
-      }
-
-      var options = new FileUploadOptions();
-      options.fileKey = "file";
-      //options.fileName = oferta.oftImagem.substr(oferta.oftImagem.lastIndexOf( '/') + 1);
-      options.fileName = oferta.oftCodigo + '.jpg';
-      options.trustAllHosts = true;
-      options.httpMethod = 'POST';
-      options.headers = {
-        "idtoken": usuarioController.idToken,
-        "oftCodigo": oferta.oftCodigo
-      };
-      options.mimeType = "image/jpeg";
-      var ft = new FileTransfer();
-      //envia arquivo para o servidor
-      myApp.showIndicator();
-
-      ft.upload(oferta.oftImagem, encodeURI(config.getApiImagens() +
-          '/recebefoto'),
-        win,
-        fail,
-        options);
-    } catch (e) {
-      JSON.stringify(e)
+    if (oferta.oftCodigo == null) {
+      // alert("Deve ser uma oferta válida");
+      return false;
     }
+    if (oferta.oftImagem == null || oferta.oftImagem == "") {
+      return false;
+    }
+    //envia a foto
+    var win = function(r) {
+      navigator.camera.cleanup();
+      ofertaController.retries = 0;
+      myApp.hideIndicator();
+      myScript.notificacao("Concluído", "Oferta salva!", true);
+      // mainView.router.load({
+      //   url: 'ofertas.html'
+      // });
+      // mainView.router.back();
+      // mainView.router.refreshPage();
+      //alert('Feito!');
+    }
+
+    var fail = function(error) {
+      if (ofertaController.retries == 0) {
+        ofertaController.retries++;
+        setTimeout(function() {
+          ofertaController.enviaFoto(oferta)
+        }, 1000)
+      } else {
+        ofertaController.retries = 0;
+        navigator.camera.cleanup();
+        myApp.hideIndicator();
+        myScript.notificacao("Erro", JSON.stringify(error), false);
+      }
+    }
+
+    var options = new FileUploadOptions();
+    options.fileKey = "file";
+    //options.fileName = oferta.oftImagem.substr(oferta.oftImagem.lastIndexOf( '/') + 1);
+    options.fileName = oferta.oftCodigo + '.jpg';
+    options.trustAllHosts = true;
+    options.httpMethod = 'POST';
+    options.headers = {
+      "idtoken": usuarioController.idToken,
+      "oftCodigo": oferta.oftCodigo
+    };
+    options.mimeType = "image/jpeg";
+    var ft = new FileTransfer();
+    //envia arquivo para o servidor
+    myApp.showIndicator();
+
+    ft.upload(oferta.oftImagem, encodeURI(config.getApiImagens() +
+        '/recebefoto'),
+      win,
+      fail,
+      options);
+    mainView.router.back();
+    mainView.router.refreshPage();
   }
 };
