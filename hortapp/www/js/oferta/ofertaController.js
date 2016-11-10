@@ -86,9 +86,9 @@ var ofertaController = {
           myApp.showIndicator();
         },
         success: function(data, status, xhr) {
-          // for (var i = 0; i < data.data.length; i++) {
-          //   ofertaController.ofertas.push(data.data[i]);
-          // }
+          for (var i = 0; i < data.data.length; i++) {
+            ofertaController.ofertas.push(data.data[i]);
+          }
           callback(data.data);
           //alert('success: \nstatus:' + JSON.stringify(status)+'\ndata:' + JSON.stringify(data));
         },

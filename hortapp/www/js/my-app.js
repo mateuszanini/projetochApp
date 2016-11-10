@@ -20,20 +20,20 @@ var mainView = myApp.addView('.view-main', {
 });
 
 
-myApp.onPageInit('index', function(page) {
-  //alert('onPageInit(index)');
-  ofertas.initialize();
-});
+// myApp.onPageInit('index', function(page) {
+//     //alert('onPageInit(index)');
+//     ofertas.initialize();
+// });
 
-myApp.onPageBack('index', function(page) {
-  //alert('onPageBack(index)');
-  ofertas.initialize();
-});
-
-myApp.onPageReinit('index', function(page) {
-  //alert('onPageReinit(index)');
-  ofertas.initialize();
-});
+// myApp.onPageBack('index', function(page) {
+//     //alert('onPageBack(index)');
+//     ofertas.initialize();
+// });
+//
+// myApp.onPageReinit('index', function(page) {
+//     //alert('onPageReinit(index)');
+//     ofertas.initialize();
+// });
 
 
 myApp.onPageInit('meuPerfil', function(page) {
@@ -48,10 +48,10 @@ myApp.onPageInit('preferencias', function(page) {
     preferencias.initialize();
 });
 
-// myApp.onPageInit('ofertas', function(page) {
-//   ofertas.initialize();
-// });
-
 myApp.onPageInit('minhasOfertas', function(page) {
-  minhasOfertas.initialize();
+    minhasOfertas.initialize();
+});
+
+myApp.onPageInit('ofertas', function(page) {
+  ofertas.initialize();
 });

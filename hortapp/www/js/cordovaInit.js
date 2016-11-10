@@ -36,7 +36,7 @@ var app = {
     autenticado: function() {
         try {
             notificacoes.initialize();
-            ofertas.initialize();
+            // ofertas.initialize();
         } catch (err) {
             alert("autenticado:" + err.message);
         }
