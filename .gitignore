@@ -6,9 +6,8 @@ hortapp/plugins/*
 hortapp/www/bower_components/*
 
 !hortapp/platforms/platforms.json
+!hortapp/platforms/android/build/outputs/apk/android-debug-unaligned.apk
 !hortapp/plugins/android.json
 !hortapp/plugins/browser.json
 !hortapp/plugins/fetch.json
 !hortapp/hooks/README.md
-
-!hortapp/platforms/android/build/outputs/apk/android-debug-unaligned.apk
