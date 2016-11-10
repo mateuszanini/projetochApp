@@ -9,12 +9,11 @@ var novaOferta = {
 
     ofertaController.localizacao.divEnderecoAtual =
       document.getElementById("oftLocalizacao");
-
     novaOferta.calendarioInicioOferta = myApp.calendar({
       input: '#oftDataInicial',
       dateFormat: 'DD, dd de MM de yyyy',
       toolbarCloseText: 'Concluído',
-      minDate: new Date().setDate(today.getDate() - 1),
+      minDate: new Date().setDate(new Date().getDate() - 1),
       monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio',
         'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro',
         'Dezembro'
@@ -28,7 +27,8 @@ var novaOferta = {
       dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
       closeOnSelect: true,
       onDayClick: function(p, dayContainer, year, month, day) {
-        novaOferta.oftDataInicial = year + '-' + (parseInt(month) + 1) +
+        novaOferta.oftDataFinal = novaOferta.oftDataInicial = year +
+          '-' + (parseInt(month) + 1) +
           '-' +
           day;
       },

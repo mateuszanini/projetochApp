@@ -1,22 +1,22 @@
 var myApp = new Framework7({
-    pushState: true,
-    sortable: false,
-    scrollTopOnNavbarClick: true,
-    animateNavBackIcon: true,
-    //swipePanel: 'left',
-    /*MODAL*/
-    modalTitle: "HortApp",
-    modalButtonCancel: "Cancelar",
-    /*NOTIFICATION*/
-    notificationTitle: "HortApp",
-    notificationHold: 5000,
-    notificationCloseOnClick: false
+  pushState: true,
+  sortable: false,
+  scrollTopOnNavbarClick: true,
+  animateNavBackIcon: true,
+  //swipePanel: 'left',
+  /*MODAL*/
+  modalTitle: "HortApp",
+  modalButtonCancel: "Cancelar",
+  /*NOTIFICATION*/
+  notificationTitle: "HortApp",
+  notificationHold: 5000,
+  notificationCloseOnClick: false
 });
 
 var $$ = Dom7;
 
 var mainView = myApp.addView('.view-main', {
-    dynamicNavbar: true
+  dynamicNavbar: true
 });
 
 
@@ -37,21 +37,22 @@ var mainView = myApp.addView('.view-main', {
 
 
 myApp.onPageInit('meuPerfil', function(page) {
-    usuario.initialize();
+  usuario.initialize();
 });
 
 myApp.onPageInit('novaOferta', function(page) {
-    novaOferta.initialize();
+  novaOferta.initialize();
 });
 
 myApp.onPageInit('preferencias', function(page) {
-    preferencias.initialize();
+  preferencias.initialize();
 });
 
 myApp.onPageInit('minhasOfertas', function(page) {
-    minhasOfertas.initialize();
+  minhasOfertas.initialize();
 });
 
 myApp.onPageInit('ofertas', function(page) {
+  myApp.attachInfiniteScroll($('.infinite-scroll'));
   ofertas.initialize();
 });

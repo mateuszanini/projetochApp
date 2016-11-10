@@ -8,7 +8,7 @@
         </div>
         <div class="center sliding">Todas as Ofertas</div>
         <div class="right sliding">
-            <a href="#" data-panel="left" class="link">
+            <a href="views/usuario/preferencias.html" data-panel="left" class="link">
                 <i class="fa fa-check" aria-hidden="true"></i>
                 <span>Preferências</span>
             </a>
@@ -17,14 +17,18 @@
 </div>
 
 <div class="page" data-page="ofertas">
-    <div class="page-content infinite-scroll">
+    <div class="page-content infinite-scroll pull-to-refresh-content">
+        <div class="pull-to-refresh-layer">
+            <div class="preloader"></div>
+            <div class="pull-to-refresh-arrow"></div>
+        </div>
         <div class="list-block media-list">
             <ul id="listaOfertas">
             </ul>
         </div>
         <!-- Preloader -->
-        <div class="infinite-scroll-preloader">
+        <!-- <div class="infinite-scroll-preloader">
             <div class="preloader"></div>
-        </div>
+        </div> -->
     </div>
 </div>
