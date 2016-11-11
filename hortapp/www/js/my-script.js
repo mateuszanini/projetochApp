@@ -15,5 +15,3 @@ var myScript = {
 };
 
 var storage = window.localStorage;
-storage.conteudo = "window.localStorage Funcionou";
-$('#conteudo').html(storage.conteudo);

@@ -2,7 +2,7 @@ var usuarioController = {
     usuPreferencias: function() {
         usuarioController.preferencias = {
             "distancia": storage.preferenciasDistancia,
-            "dataVencimento": storage.preferenciasData,
+            "dataVencimento": storage.preferenciasDataFormatada,
             "itens": storage.preferenciasItens
         };
     },
@@ -11,7 +11,7 @@ var usuarioController = {
         //define os objetos
         usuarioController.endereco = new EnderecoModel();
         usuarioController.usuario = new UsuarioModel();
-
+        preferencias.initialize();
         /*usuarioController.preferencias = {
           "distancia": "15",
           "dataVencimento": "31/12/2099",
