@@ -48,7 +48,8 @@ var ofertas = {
           dados[i]['oftImagem'] : 'null.jpg';
 
         var html = '<li>';
-        html += '<a href="#" class="item-link item-content">' +
+        html += '<a href="views/oferta/ofertaDetalhes.html?oftCodigo=' +
+          dados[i]['oftCodigo'] + '" class="item-link item-content">' +
           '<div class="item-media"><img src="' + config.getEnderecoImagem() +
           img +
           '" width="80"></div>' +

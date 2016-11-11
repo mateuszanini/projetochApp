@@ -39,6 +39,34 @@ var ofertaController = {
       alert('Erro Oferta.create: ' + err.message);
     }
   },
+  getById: function(oftCodigo, callback) {
+    try {
+      $.ajax({
+        url: config.getApi() + '/ofertas?id=' + oftCodigo,
+        headers: {
+          "idtoken": usuarioController.idToken
+        },
+        type: "GET",
+        dataType: undefined,
+        // contentType: "application/json",
+        beforeSend: function() {
+          myApp.showIndicator();
+        },
+        success: function(data, status, xhr) {
+          callback(data.data);
+        },
+        error: function(data, status, xhr) {
+          alert('error getById: \nstatus:' + JSON.stringify(status) +
+            '\ndata:' + JSON.stringify(data));
+        },
+        complete: function(xhr, status) {
+          myApp.hideIndicator();
+        }
+      });
+    } catch (err) {
+      alert('Erro usuarioController.salvar: ' + err.message);
+    }
+  },
 
   readMy: function(callback) {
     try {

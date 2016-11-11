@@ -113,7 +113,7 @@ var usuarioController = {
   },
 
   //envia alterações para salvar no banco de dados
-  salvar: function() {
+  salvar: function(backPage) {
     //cria variaveis para montar o json que sera enviado ao banco.
     //desta forma somente os campos interessados sao enviados
     var usuario = {
@@ -151,10 +151,6 @@ var usuarioController = {
     };
     // alert("Dados a serem enviados:\n" + JSON.stringify(dados));
     try {
-      // $$.post(config.getApi() + '/usuario/update/me', dados, function(data) {
-      //   alert('FOI!');
-      // });
-
       $.ajax({
         url: config.getApi() + '/usuario/update/me',
         headers: {
@@ -179,8 +175,10 @@ var usuarioController = {
         },
         complete: function(xhr, status) {
           myApp.hideIndicator();
-          mainView.router.back();
-          mainView.router.refreshPage();
+          if (backPage) {
+            mainView.router.back();
+            mainView.router.refreshPage();
+          }
         }
       });
     } catch (err) {

@@ -13,7 +13,7 @@ var myApp = new Framework7({
   notificationCloseOnClick: false
 });
 
-var $$ = Dom7;
+//var $$ = Dom7;
 
 var mainView = myApp.addView('.view-main', {
   dynamicNavbar: true
@@ -56,12 +56,16 @@ myApp.onPageAfterAnimation('minhasOfertas', function(page) {
   minhasOfertas.initialize();
 });
 
-myApp.onPageAfterAnimation('ofertas', function(page) {
-  myApp.attachInfiniteScroll($('.infinite-scroll'));
-  ofertas.initialize();
-});
+// myApp.onPageAfterAnimation('ofertas', function(page) {
+//   myApp.attachInfiniteScroll($('.infinite-scroll'));
+//   ofertas.initialize();
+// });
 
 myApp.onPageInit('ofertas', function(page) {
   myApp.attachInfiniteScroll($('.infinite-scroll'));
   ofertas.initialize();
+});
+
+myApp.onPageInit('ofertaDetalhes', function(page) {
+  ofertaDetalhes(page.query.oftCodigo);
 });

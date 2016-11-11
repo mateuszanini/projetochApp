@@ -12,7 +12,7 @@ var notificacoes = {
           //alert('Registrado: '+data.registrationId);
           try {
             usuarioController.usuario.usuTokenFcm = data.registrationId;
-            usuarioController.salvar();
+            usuarioController.salvar(false);
             //notificacoes.enviaTokenFcm();
           } catch (err) {
             alert('Erro: try registration push: \n' + err);
@@ -49,17 +49,17 @@ var notificacoes = {
   },
 
   unregister: function() {
-      try {
-        var push = window.plugins.pushNotification;
-        push.unregister(
-          function(e) {
-            console.log('success');
-          },
-          function(e) {
-            console.log('error');
-          });
-      } catch (err) {
-        alert(err);
-      }
+    try {
+      var push = window.plugins.pushNotification;
+      push.unregister(
+        function(e) {
+          console.log('success');
+        },
+        function(e) {
+          console.log('error');
+        });
+    } catch (err) {
+      alert(err);
     }
+  }
 };

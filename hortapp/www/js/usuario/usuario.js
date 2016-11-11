@@ -135,7 +135,7 @@ var usuario = {
       usuarioController.endereco.endLongitude = null;
     }
 
-    usuarioController.salvar();
+    usuarioController.salvar(true);
   },
 
   // pesquisaCep: function(cep, tipo) {
