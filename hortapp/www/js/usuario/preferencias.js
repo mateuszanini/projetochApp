@@ -2,9 +2,19 @@ var preferencias = {
     initialize: function() {
         var storage = window.localStorage;
         $('#usuSalvarPreferencias').click(function() {
-            var formData = myApp.formToJSON('#usuPreferenciasForm');
+            /*var formData = myApp.formToJSON('#usuPreferenciasForm');
             storage.preferencias = JSON.stringify(formData);
-            console.log(JSON.stringify(formData));
+            console.log(JSON.stringify(formData));*/
+            storage.preferenciasDistancia = $('#usuPreferenciasDistancia').val();
+            storage.preferenciasData = $('#usuPreferenciasData').val();
+            storage.preferenciasItens = $('#itmCodigoPreferencias').val();
+
+            usuarioController.usuPreferencias();
+            /*usuarioController.preferencias["distancia"] = storage.preferenciasDistancia;
+            usuarioController.preferencias["dataVencimento"] = storage.preferenciasData;
+            usuarioController.preferencias["itens"] = storage.preferenciasItens;*/
+
+            myScript.notificacao("Sucesso", "As preferencias foram salvas.", true);
         });
         //seleciona todos os itens
         $('#btnPreferenciasSelecionar').click(function() {
@@ -39,25 +49,56 @@ var preferencias = {
         preferencias.listaItens(false);
 
         /*LOCAL STORAGE*/
-        if (storage.preferencias) {
-            myApp.alert("Tem");
-            myApp.formFromJSON('#usuPreferenciasForm', storage.preferencias);
-        } else {
-            var stringItens = '[';
+        if (storage.preferenciasDistancia) {
+            //myApp.alert("Tem");
+
+            $('#usuPreferenciasDistancia').val(storage.preferenciasDistancia);
+            preferencias.valorDistancia();
+
+            $('#usuPreferenciasData').val(storage.preferenciasData);
+
+            var itensStorage = storage.preferenciasItens.split(",");
+            var strItem = '';
+            var selecionou = false;
             for (var i = 0; i < itens.length; i++) {
-                if (i == itens.length - 1) {
-                    stringItens += '"' + (i + 1) + '"';
-                } else {
-                    stringItens += '"' + (i + 1) + '", ';
+                for (var j = 0; j < itensStorage.length; j++) {
+                    if (itens[i].itmCodigo == itensStorage[j]) {
+                        strItem += '<option value="' + itens[i].itmCodigo + '" selected>' + itens[
+                                i].itmNome +
+                            '</option>';
+                        selecionou = true;
+                    }
                 }
+                if (selecionou == false) {
+                    strItem += '<option value="' + itens[i].itmCodigo + '">' + itens[
+                            i].itmNome +
+                        '</option>';
+                }
+                selecionou = false;
             }
-            stringItens += ']';
-            var formData = {
+            $("#itmCodigoPreferencias").html(strItem);
+
+            /*myApp.formFromJSON('#usuPreferenciasForm', storage.preferencias);*/
+        } else {
+            storage.preferenciasDistancia = 15;
+            storage.preferenciasData = "Sexta, 11 de novembro de 2016";
+
+            $('#usuPreferenciasDistancia').val(storage.preferenciasDistancia);
+            preferencias.valorDistancia();
+
+            $('#usuPreferenciasData').val(storage.preferenciasData);
+
+            preferencias.listaItens(true);
+            storage.preferenciasItens = $('#itmCodigoPreferencias').val();
+
+            usuarioController.usuPreferencias();
+
+            /*var formData = {
                 'usuPreferenciasDistancia': 15,
                 'usuPreferenciasData': "",
                 'itmCodigoPreferencias': stringItens
             }
-            myApp.formFromJSON('#usuPreferenciasForm', formData);
+            myApp.formFromJSON('#usuPreferenciasForm', formData);*/
         }
     },
     valorDistancia: function() {
