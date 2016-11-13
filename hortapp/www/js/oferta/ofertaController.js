@@ -42,7 +42,7 @@ var ofertaController = {
   getById: function(oftCodigo, callback) {
     try {
       $.ajax({
-        url: config.getApi() + '/ofertas?id=' + oftCodigo,
+        url: config.getApi() + '/oferta/' + oftCodigo,
         headers: {
           "idtoken": usuarioController.idToken
         },
