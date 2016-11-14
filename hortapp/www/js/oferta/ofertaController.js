@@ -99,6 +99,7 @@ var ofertaController = {
 
 
   readAll: function(preferencias, callback) {
+    if (preferencias.itens == 'undefined') preferencias.itens = [];
     try {
       console.log(config.getApi());
       $.ajax({

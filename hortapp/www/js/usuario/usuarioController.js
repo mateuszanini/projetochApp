@@ -1,11 +1,26 @@
 var usuarioController = {
+  usuPreferencias: function() {
+    usuarioController.preferencias = {
+      "offset": {
+        "inicio": 0,
+        "qtd": usuarioController.itensPorScroll
+      },
+      "distancia": storage.preferenciasDistancia ? storage.preferenciasDistancia : "15",
+      "dataVencimento": storage.preferenciasDataFormatada ? storage.preferenciasDataFormatada : "31/12/2099",
+      "itens": storage.preferenciasItens ? JSON.parse(
+        storage.preferenciasItens) : []
+    };
+  },
+
   initialize: function(perfil) {
     //define os objetos
     usuarioController.endereco = new EnderecoModel();
     usuarioController.usuario = new UsuarioModel();
 
     usuarioController.itensPorScroll = 4;
-    usuarioController.preferencias = {
+    preferencias.initialize();
+
+    /*usuarioController.preferencias = {
       "distancia": "15",
       "dataVencimento": "31/12/2099",
       "itens": [],
@@ -13,7 +28,7 @@ var usuarioController = {
         "inicio": 0,
         "qtd": usuarioController.itensPorScroll
       }
-    };
+    };*/
 
     //novo objeto da classe Localizacao,
     usuarioController.localizacao = new Localizacao();
@@ -147,7 +162,8 @@ var usuarioController = {
     }
 
     var dados = {
-      usuario, endereco
+      usuario,
+      endereco
     };
     // alert("Dados a serem enviados:\n" + JSON.stringify(dados));
     try {
