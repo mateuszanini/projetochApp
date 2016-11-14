@@ -10,6 +10,8 @@ var preferencias = {
       myScript.notificacao("Sucesso",
         "As preferências foram salvas.",
         true);
+      mainView.router.back();
+      mainView.router.refreshPage();
     });
     //seleciona todos os itens
     $('#btnPreferenciasSelecionar').click(function() {

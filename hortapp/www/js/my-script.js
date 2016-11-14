@@ -16,4 +16,4 @@ var myScript = {
 };
 
 var storage = window.localStorage;
-storage.clear();
+//storage.clear();

@@ -1,15 +1,21 @@
 var usuarioController = {
   usuPreferencias: function() {
-    usuarioController.preferencias = {
-      "offset": {
-        "inicio": 0,
-        "qtd": usuarioController.itensPorScroll
-      },
-      "distancia": storage.preferenciasDistancia ? storage.preferenciasDistancia : "15",
-      "dataVencimento": storage.preferenciasDataFormatada ? storage.preferenciasDataFormatada : "31/12/2099",
-      "itens": storage.preferenciasItens ? JSON.parse(
-        storage.preferenciasItens) : []
-    };
+    try {
+      usuarioController.preferencias['distancia'] = storage.preferenciasDistancia;
+    } catch (e) {
+      alert("usuarioController.preferencias['distancia']: " + e);
+    }
+    try {
+      usuarioController.preferencias['dataVencimento'] = storage.preferenciasDataFormatada;
+    } catch (e) {
+      alert("usuarioController.preferencias['dataVencimento']: " + e);
+    }
+    try {
+      usuarioController.preferencias['itens'] = storage.preferenciasItens.split(
+        ',');
+    } catch (e) {
+      alert("usuarioController.preferencias['itens']:" + e);
+    }
   },
 
   initialize: function(perfil) {
@@ -18,9 +24,8 @@ var usuarioController = {
     usuarioController.usuario = new UsuarioModel();
 
     usuarioController.itensPorScroll = 4;
-    preferencias.initialize();
 
-    /*usuarioController.preferencias = {
+    usuarioController.preferencias = {
       "distancia": "15",
       "dataVencimento": "31/12/2099",
       "itens": [],
@@ -28,8 +33,8 @@ var usuarioController = {
         "inicio": 0,
         "qtd": usuarioController.itensPorScroll
       }
-    };*/
-
+    };
+    preferencias.initialize();
     //novo objeto da classe Localizacao,
     usuarioController.localizacao = new Localizacao();
 
