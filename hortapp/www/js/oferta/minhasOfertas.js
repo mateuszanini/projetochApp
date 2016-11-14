@@ -13,6 +13,7 @@ var minhasOfertas = {
   lerOfertas: function() {
     ofertaController.readMy(function(ofertas) {
       try {
+        $('#listaMinhasOfertas').empty();
         for (var i = 0; i < ofertas.length; i++) {
           var img = ofertas[i]['oftImagem'] != null ?
             ofertas[i]['oftImagem'] : 'null.jpg';

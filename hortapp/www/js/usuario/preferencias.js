@@ -49,8 +49,8 @@ var preferencias = {
         'Sab'
       ],
       onDayClick: function(p, dayContainer, year, month, day) {
-        storage.preferenciasDataFormatada = day + '/' + (parseInt(
-          month) + 1) + '/' + year;
+        storage.preferenciasDataFormatada = year + '-' + (parseInt(
+          month) + 1) + '-' + day;
       }
     });
 
