@@ -41,6 +41,13 @@ img {
     margin: 0 auto;
 }
 
+.fotoEditarOferta {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
 .pesquisarLocalizacao {
     padding-bottom: 10px !important;
 }

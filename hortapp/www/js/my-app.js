@@ -73,3 +73,9 @@ myApp.onPageInit('ofertas', function(page) {
 myApp.onPageInit('ofertaDetalhes', function(page) {
   ofertaDetalhes(page.query.oftCodigo);
 });
+
+myApp.onPageInit('editarOferta', function(page) {
+  //config.initialize();
+
+  editarOferta.listarOferta(page.query.oftCodigo);
+});
