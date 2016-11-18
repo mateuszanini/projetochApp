@@ -6,7 +6,7 @@
                 <span>Voltar</span>
             </a>
         </div>
-        <div class="left sliding">Detalhes</div>
+        <div class="left sliding">Detalhes da Oferta</div>
         <div class="right sliding">
             <a href="#" data-panel="left" class="link open-panel">
                 <i class="icon icon-bars"></i>
@@ -17,17 +17,7 @@
 </div>
 
 <div class="page" data-page="ofertaDetalhes">
-    <div class="page-content" id="">
-        <div class="content-block">
-            <div class="row">
-                <div class="col-70">
-                    Teste
-                </div>
-                <div class="col-30">
-                    <img src="" alt="" id="imgMiniatura" />
-                </div>
-            </div>
-        </div>
+    <div class="page-content">
 
         <div class="card facebook-card">
             <div class="card-header no-border">
@@ -35,11 +25,69 @@
                 <div class="facebook-name"></div>
                 <div class="facebook-date"><a href="mailto:mateus.zanini.gl@gmail.com">mateus.zanini.gl@gmail.com</a></div>
             </div>
-            <div class="card-content"><img src="..." width="100%"></div>
+            <div class="card-content">
+                <div class="list-block">
+                    <ul>
+                        <li class="item-content">
+                            <div class="item-media"><i class="fa fa-apple" aria-hidden="true"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">Item</div>
+                                <div class="item-after" id="itmNome"></div>
+                            </div>
+                        </li>
+                        <li class="item-content" id="visualizarImagem">
+                            <div class="item-media"><i class="fa fa-camera" aria-hidden="true"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">Imagem</div>
+                                <div class="item-after">Visualizar</div>
+                            </div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-media"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">Data inicial</div>
+                                <div class="item-after" id="oftDataInicial"></div>
+                            </div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-media"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">Data final</div>
+                                <div class="item-after" id="oftDataFinal"></div>
+                            </div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-media"><i class="fa fa-balance-scale" aria-hidden="true"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">Quantidade disponível</div>
+                                <div class="item-after" id="oftQuantidade"></div>
+                            </div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-media"><i class="fa fa-money" aria-hidden="true"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">Valor</div>
+                                <div class="item-after" id="oftValor"></div>
+                            </div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-media"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">Endereço</div>
+                                <div class="item-after" id=""></div>
+                            </div>
+                        </li>
+                        <div class="content-block">
+                            <img src="https://social.msdn.microsoft.com/Forums/getfile/166999" alt="" />
+                        </div>
+
+                    </ul>
+                </div>
+            </div>
             <div class="card-footer no-border">
-                <a href="#" class="link">Like</a>
-                <a href="#" class="link">Comment</a>
-                <a href="#" class="link">Share</a>
+                <a href="#" class="link"></a>
+                <a href="#" class="link" id="btnReservar"><i class="fa fa-cart-plus" aria-hidden="true"></i>&nbspReservar</a>
+                <a href="#" class="link"></a>
             </div>
         </div>
 
