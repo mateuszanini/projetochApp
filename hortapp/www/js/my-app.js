@@ -71,5 +71,6 @@ myApp.onPageInit('ofertas', function(page) {
 });
 
 myApp.onPageInit('ofertaDetalhes', function(page) {
+  config.initialize();
   ofertaDetalhes(page.query.oftCodigo);
 });
