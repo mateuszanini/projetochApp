@@ -1,11 +1,12 @@
 .infinite-scroll-preloader {
-  margin-top:-20px;
-  margin-bottom: 10px;
-  text-align: center;
+    margin-top: -20px;
+    margin-bottom: 10px;
+    text-align: center;
 }
+
 .infinite-scroll-preloader .preloader {
-  width:34px;
-  height:34px;
+    width: 34px;
+    height: 34px;
 }
 
 img {
@@ -16,6 +17,16 @@ img {
 .semBorda:after {
     height: 0 !important;
 }
+
+
+#imgMiniatura {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+}
+
 
 /* F7 ALTERADO*/
 
@@ -115,6 +126,11 @@ img {
 
 .facebook-card .facebook-avatar {
     float: left;
+}
+
+.facebook-card .facebook-avatar img{
+    width: 36px !important;
+    height: 36px !important;
 }
 
 .facebook-card .facebook-name {
