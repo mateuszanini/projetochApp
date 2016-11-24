@@ -17,11 +17,15 @@ var ofertaDetalhes = function(oftCodigo) {
     }
 
     $("#itmNome").html(itmNome);
-    var caminhoImg = config.enderecoImagem + dados.oferta['oftImagem'];
+    var caminhoImg = config.enderecoImagem;
+    caminhoImg += dados.oferta['oftImagem'] != null ?
+      dados.oferta['oftImagem'] : 'null.jpg';
+
     $("#imgMiniatura").attr("src", caminhoImg);
     $("#oftDataInicial").html(dados.oferta['oftDataInicial']);
     $("#oftDataFinal").html(dados.oferta['oftDataFinal']);
     $("#oftQuantidade").html(dados.oferta['oftQuantidade']);
+
     if (dados.oferta['oftValor'] == undefined || dados.oferta['oftValor'] ==
       0) {
       $("#oftValor").html("Grátis");
@@ -47,6 +51,7 @@ var ofertaDetalhes = function(oftCodigo) {
       document.getElementById("mapCanvasOferta");
 
     if (dados.endereco['endLatitude'] && dados.endereco['endLongitude']) {
+
       ofertaDetalhes.localizacao.divEnderecoAtual =
         document.getElementById("usuLocalizacaoOferta");
 
@@ -58,12 +63,12 @@ var ofertaDetalhes = function(oftCodigo) {
     } else {
       var endereco = "";
 
-      endereco += dados.endereco['endLogradouro'] != undefined ? dados.endereco[
-        'endLogradouro'] + ", " : "";
-      endereco += dados.endereco['endNumero'] != undefined ? dados.endereco[
-        'endNumero'] + " - " : "";
-      endereco += dados.endereco['endBairro'] != undefined ? dados.endereco[
-        'endBairro'] + ", " : "";
+      endereco += dados.endereco['endLogradouro'] != undefined ?
+        dados.endereco['endLogradouro'] + ", " : "";
+      endereco += dados.endereco['endNumero'] != undefined ?
+        dados.endereco['endNumero'] + " - " : "";
+      endereco += dados.endereco['endBairro'] != undefined ?
+        dados.endereco['endBairro'] + ", " : "";
 
       for (var i = 0; i < uf.length; i++) {
         if (uf[i].ufCodigo == dados.endereco['ufCodigo']) {
@@ -77,8 +82,8 @@ var ofertaDetalhes = function(oftCodigo) {
           break;
         }
       }
-      endereco += dados.endereco['endCep'] != undefined ? dados.endereco[
-        'endCep'] + ", Brasil" : "";
+      endereco += dados.endereco['endCep'] != undefined ?
+        dados.endereco['endCep'] + ", Brasil" : "";
 
       $('#usuLocalizacaoOferta').html(
         '<p class="text-center"><i class="fa fa-map-signs" aria-hidden="true"></i>&nbsp ' +
@@ -87,14 +92,14 @@ var ofertaDetalhes = function(oftCodigo) {
       ofertaDetalhes.localizacao.geocodeAddress(endereco);
     }
 
-    ofertaDetalhes.localizacao.initMap();
+    //ofertaDetalhes.localizacao.initMap();
     // $("#mapCanvasOferta").css("pointer-events", "none");
-    google.maps.event.clearListeners(ofertaDetalhes.localizacao.mapa,
-      'click');
-
-    //ofertaDetalhes.localizacao.mapa.removeListener('click');
-
-
+    try {
+      google.maps.event.clearListeners(ofertaDetalhes.localizacao.mapa,
+        'click');
+    } catch (e) {
+      console.log(e);
+    }
     $('#btnReservar').on('click', function() {
       myApp.prompt('Qual quantidade você deseja reservar?', function(
         value) {

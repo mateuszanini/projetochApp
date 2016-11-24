@@ -15,6 +15,12 @@ var editarOferta = {
       try {
         editarOferta.calendarios(dados.oferta['oftDataInicialCru'],
           dados.oferta['oftDataFinalCru']);
+
+        $("#oftEditarDataInicial").attr("placeholder",
+          dados.oferta['oftDataInicial']);
+        $("#oftEditarDataFinal").attr("placeholder",
+          dados.oferta['oftDataFinal']);
+
       } catch (e) {
         alert(e);
       }
@@ -43,13 +49,13 @@ var editarOferta = {
   calendarios: function(dataInicial, dataFinal) {
     dataFinal = new Date(Date.parse(dataFinal)).getTime();
     dataInicial = new Date(Date.parse(dataInicial)).getTime();
-    alert(dataInicial);
-    alert(dataFinal);
+    // alert(dataInicial);
+    // alert(dataFinal);
     editarOferta.calendarioInicioOferta = myApp.calendar({
       input: '#oftEditarDataInicial',
-      dateFormat: 'DD, dd de MM de yyyy',
+      dateFormat: 'dd de MM de yyyy',
       toolbarCloseText: 'Concluído',
-      minDate: new Date().setDate(new Date().getDate() - 1),
+      //minDate: new Date().setDate(new Date().getDate() - 1),
       monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio',
         'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro',
         'Dezembro'
@@ -70,7 +76,6 @@ var editarOferta = {
           day;
       },
       onClose: function(p) {
-        alert(editarOferta.calendarioInicioOferta.value);
         editarOferta.calendarioFinalOferta.setValue(
           editarOferta.calendarioInicioOferta.value);
       }
@@ -78,7 +83,7 @@ var editarOferta = {
 
     editarOferta.calendarioFinalOferta = myApp.calendar({
       input: '#oftEditarDataFinal',
-      dateFormat: 'DD, dd de MM de yyyy',
+      dateFormat: 'dd de MM de yyyy',
       toolbarCloseText: 'Concluído',
       monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril',
         'Maio',
@@ -104,7 +109,6 @@ var editarOferta = {
           year + '-' + (parseInt(month) + 1) + '-' + day;
       },
     });
-
     editarOferta.calendarioInicioOferta.setValue(dataInicial);
     editarOferta.calendarioFinalOferta.setValue(dataFinal);
 
