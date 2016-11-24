@@ -179,8 +179,7 @@ var usuario = {
 
     if ($("#usuLocalizacaoAtual").is(":checked")) {
       // mainView.hideToolbar();
-      usuarioController.localizacao.initMap(document.getElementById(
-        "mapCanvas"));
+      usuarioController.localizacao.initMap();
     }
   },
 

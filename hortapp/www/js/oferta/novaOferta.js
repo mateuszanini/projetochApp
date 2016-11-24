@@ -33,7 +33,7 @@ var novaOferta = {
           day;
       },
       onClose: function(p) {
-        console.log(p.value[0]);
+        //        alert(p.value[0]);
         novaOferta.calendarioFinalOferta = myApp.calendar({
           input: '#oftDataFinal',
           dateFormat: 'DD, dd de MM de yyyy',

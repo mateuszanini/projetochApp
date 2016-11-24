@@ -16,7 +16,7 @@ var editarOferta = {
         editarOferta.calendarios(dados.oferta['oftDataInicialCru'],
           dados.oferta['oftDataFinalCru']);
       } catch (e) {
-        alert(JSON.stringify(e));
+        alert(e);
       }
     });
   },
@@ -41,7 +41,10 @@ var editarOferta = {
   },
 
   calendarios: function(dataInicial, dataFinal) {
-    //alert(dataInicial);
+    dataFinal = new Date(Date.parse(dataFinal)).getTime();
+    dataInicial = new Date(Date.parse(dataInicial)).getTime();
+    alert(dataInicial);
+    alert(dataFinal);
     editarOferta.calendarioInicioOferta = myApp.calendar({
       input: '#oftEditarDataInicial',
       dateFormat: 'DD, dd de MM de yyyy',
@@ -67,42 +70,39 @@ var editarOferta = {
           day;
       },
       onClose: function(p) {
-        editarOferta.calendarioFinalOferta = myApp.calendar({
-          input: '#oftEditarDataFinal',
-          dateFormat: 'DD, dd de MM de yyyy',
-          toolbarCloseText: 'Concluído',
-          minDate: p.value[0],
-          monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril',
-            'Maio',
-            'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro',
-            'Novembro',
-            'Dezembro'
-          ],
-          monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai',
-            'Jun',
-            'Jul',
-            'Ago', 'Set', 'Out', 'Nov', 'Dez'
-          ],
-          dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta',
-            'Quinta',
-            'Sexta', 'Sábado'
-          ],
-          dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui',
-            'Sex', 'Sab'
-          ],
-          closeOnSelect: true,
-          onDayClick: function(p, dayContainer, year, month, day) {
-            editarOferta.oftDataFinal =
-              year + '-' + (parseInt(month) + 1) + '-' + day;
-          },
-        });
+        alert(editarOferta.calendarioInicioOferta.value);
         editarOferta.calendarioFinalOferta.setValue(
           editarOferta.calendarioInicioOferta.value);
-        $('#oftEditarDataFinal').show();
-      },
-      onOpen: function(p) {
-        $('#oftEditarDataFinal').hide();
       }
+    });
+
+    editarOferta.calendarioFinalOferta = myApp.calendar({
+      input: '#oftEditarDataFinal',
+      dateFormat: 'DD, dd de MM de yyyy',
+      toolbarCloseText: 'Concluído',
+      monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril',
+        'Maio',
+        'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro',
+        'Novembro',
+        'Dezembro'
+      ],
+      monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai',
+        'Jun',
+        'Jul',
+        'Ago', 'Set', 'Out', 'Nov', 'Dez'
+      ],
+      dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta',
+        'Quinta',
+        'Sexta', 'Sábado'
+      ],
+      dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui',
+        'Sex', 'Sab'
+      ],
+      closeOnSelect: true,
+      onDayClick: function(p, dayContainer, year, month, day) {
+        editarOferta.oftDataFinal =
+          year + '-' + (parseInt(month) + 1) + '-' + day;
+      },
     });
 
     editarOferta.calendarioInicioOferta.setValue(dataInicial);
