@@ -72,22 +72,22 @@
                           <div class="item-title label">Usar meu endereço</div>
                           <div class="item-input">
                               <label class="label-switch">
-                <input type="checkbox" nome="oftEnderecoCadastro" id="oftEnderecoCadastro" checked="">
+                <input type="checkbox" nome="oftEditarEnderecoCadastro" id="oftEditarEnderecoCadastro">
                 <div class="checkbox"></div>
               </label>
                           </div>
                       </div>
-                  </div> -->
+                  </div>
 
                   <!-- DIV COM CONTEUDO DO ENDEREÇO PROPRIO -->
-                  <div class="content-block hide enderecoProprio">
+                  <div class="content-block enderecoEditarProprio">
 
                       <div class="item-content">
                           <div class="item-inner semBorda">
                               <div class="item-title label">Usar GPS</div>
                               <div class="item-input">
                                   <label class="label-switch">
-                              <input type="checkbox" nome="oftLocalizacaoAtual" id="oftLocalizacaoAtual">
+                              <input type="checkbox" nome="oftEditarLocalizacaoAtual" id="oftEditarLocalizacaoAtual">
                               <div class="checkbox"></div>
                             </label>
                               </div>
@@ -96,14 +96,14 @@
 
                       <div class="content-block">
 
-                          <div class="row hide mapaOferta">
-                              <div class="row col-100 pesquisarLocalizacaoOferta">
-                                  <a href="#" class="button col-100" id="btnPesquisarLocalizacaoOferta"><i class="fa fa-search" aria-hidden="true"></i>&nbspPesquisar localização</a>
-                                  <a href="#" class="button col-100" id="btnLocalizacaoAtualOferta"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbspLocalização Atual</a>
+                          <div class="row hide mapaEditarOferta">
+                              <div class="row col-100 pesquisarEditarLocalizacaoOferta">
+                                  <a href="#" class="button col-100" id="btnEditarPesquisarLocalizacaoOferta"><i class="fa fa-search" aria-hidden="true"></i>&nbspPesquisar localização</a>
+                                  <a href="#" class="button col-100" id="btnEditarLocalizacaoAtualOferta"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbspLocalização Atual</a>
                               </div>
 
-                              <div class="canvasMapa" id="mapCanvasOferta"></div>
-                              <div class="color-blue" id="oftLocalizacao"></div>
+                              <div class="canvasMapa" id="mapEditarCanvasOferta"></div>
+                              <div class="color-blue" id="oftEditarLocalizacao"></div>
 
                           </div>
 
@@ -119,40 +119,40 @@
 
                       </div>
 
-                      <div class="enderecoOferta animated fadeInRight">
+                      <div class="enderecoEditarOferta hide animated fadeInRight">
                           <ul>
                               <li>
                                   <div class="item-content">
                                       <div class="item-inner">
                                           <div class="item-title label">CEP</div>
                                           <div class="item-input">
-                                              <input type="number" name="endCepOferta" id="endCepOferta" placeholder="00000-000">
+                                              <input type="number" name="endEditarCepOferta" id="endEditarCepOferta" placeholder="00000-000">
                                           </div>
                                       </div>
                                   </div>
                               </li>
                               <li>
                                   <a href="#" class="item-link smart-select" data-open-in="popup" data-popup-close-text="Voltar" data-back-on-select="true" data-searchbar="true" data-searchbar-placeholder="Pesquisar Estados" data-searchbar-cancel="Cancelar">
-                                      <select name="ufCodigoOferta" id="ufCodigoOferta">
+                                      <select name="ufEditarCodigoOferta" id="ufEditarCodigoOferta">
 
                               </select>
                                       <div class="item-content">
                                           <div class="item-inner">
                                               <div class="item-title">Estado</div>
-                                              <div class="item-after" id="estadoSelecionadoOferta"></div>
+                                              <div class="item-after" id="estadoEditarSelecionadoOferta"></div>
                                           </div>
                                       </div>
                                   </a>
                               </li>
                               <li>
                                   <a href="#" class="item-link smart-select" data-open-in="popup" data-popup-close-text="Voltar" data-back-on-select="true" data-searchbar="true" data-searchbar-placeholder="Pesquisar Cidades" data-searchbar-cancel="Cancelar">
-                                      <select name="cidCodigoOferta" id="cidCodigoOferta" class="text-capitalize">
+                                      <select name="cidEditarCodigoOferta" id="cidEditarCodigoOferta" class="text-capitalize">
 
                               </select>
                                       <div class="item-content">
                                           <div class="item-inner">
                                               <div class="item-title">Cidade</div>
-                                              <div class="item-after" id="cidadeSelecionadaOferta"></div>
+                                              <div class="item-after" id="cidadeEditarSelecionadaOferta"></div>
                                           </div>
                                       </div>
                                   </a>
@@ -162,7 +162,7 @@
                                       <div class="item-inner">
                                           <div class="item-title label">Bairro</div>
                                           <div class="item-input">
-                                              <input type="text" name="endBairroOferta" id="endBairroOferta" placeholder="Bairro">
+                                              <input type="text" name="endEditarBairroOferta" id="endEditarBairroOferta" placeholder="Bairro">
                                           </div>
                                       </div>
                                   </div>
@@ -172,7 +172,7 @@
                                       <div class="item-inner">
                                           <div class="item-title label">Logradouro</div>
                                           <div class="item-input">
-                                              <input type="text" name="endLogradouroOferta" id="endLogradouroOferta" placeholder="Logradouro">
+                                              <input type="text" name="endEditarLogradouroOferta" id="endEditarLogradouroOferta" placeholder="Logradouro">
                                           </div>
                                       </div>
                                   </div>
@@ -182,7 +182,7 @@
                                       <div class="item-inner">
                                           <div class="item-title label">Número</div>
                                           <div class="item-input">
-                                              <input type="text" name="endNumeroOferta" id="endNumeroOferta" placeholder="Numero">
+                                              <input type="text" name="endEditarNumeroOferta" id="endEditarNumeroOferta" placeholder="Numero">
                                           </div>
                                       </div>
                                   </div>
