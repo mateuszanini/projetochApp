@@ -12,14 +12,19 @@ var editarOferta = {
       $("#fotoEditarOferta").addClass("fotoEditarOferta");
       $('#fotoEditarOferta').attr('src', config.enderecoImagem + dados.oferta[
         'oftImagem']);
-      try {
-        editarOferta.calendarios(dados.oferta['oftDataInicialCru'],
-          dados.oferta['oftDataFinalCru']);
+      editarOferta.calendarios(dados.oferta['oftDataInicialCru'],
+        dados.oferta['oftDataFinalCru']);
 
-        $("#oftEditarDataInicial").attr("placeholder",
-          dados.oferta['oftDataInicial']);
-        $("#oftEditarDataFinal").attr("placeholder",
-          dados.oferta['oftDataFinal']);
+      $("#oftEditarDataInicial").attr("placeholder",
+        dados.oferta['oftDataInicial']);
+      $("#oftEditarDataFinal").attr("placeholder",
+        dados.oferta['oftDataFinal']);
+
+      $('#oftEditarObs').val(dados.oferta['oftObs']);
+
+      dados.endereco
+
+      try {
 
       } catch (e) {
         alert(e);
