@@ -194,7 +194,7 @@ var novaOferta = {
       targetWidth: 250,
       encodingType: navigator.camera.EncodingType.JPEG,
       destinationType: navigator.camera.DestinationType.FILE_URI,
-      allowEdit: true,
+      //allowEdit: true,
       correctOrientation: true //Corrects Android orientation quirks
     });
   },
