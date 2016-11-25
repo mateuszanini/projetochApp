@@ -246,7 +246,7 @@ var novaOferta = {
           if (oferta.endereco.cidCodigo == "" &&
             oferta.endereco.ufCodigo == "") {
             myScript.notificacao("Erro", "Revise o endereço",
-              true);
+              false);
             valido = false;
           }
         }
@@ -254,16 +254,16 @@ var novaOferta = {
       //VALIDA OS CAMPOS
 
       if (oferta.itmCodigo == "") {
-        myScript.notificacao("Erro", "Selecione um item.", true);
+        myScript.notificacao("Erro", "Selecione um item.", false);
         valido = false;
       }
       if (oferta.oftQuantidade == "") {
-        myScript.notificacao("Erro", "Insira a quantidade", true);
+        myScript.notificacao("Erro", "Insira a quantidade", false);
         valido = false;
       }
       if (oferta.oftDataInicial == null) {
-        myScript.notificacao("Erro", "Seleciona a data inicial da oferta",
-          true);
+        myScript.notificacao("Erro", "Selecione a data inicial da oferta",
+          false);
         valido = false;
       }
 
