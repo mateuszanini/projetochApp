@@ -103,8 +103,15 @@ var ofertaDetalhes = function(oftCodigo) {
     $('#btnReservar').on('click', function() {
       myApp.prompt('Qual quantidade você deseja reservar?', function(
         value) {
-        myScript.notificacao("Sucesso", "Você reservou " + value +
-          " itens!", true);
+        reservar({
+          'remetente': usuarioController.usuario.usuNome,
+          'destinatario': dados.usuario['usuIdGoogle'],
+          'msg': value
+        }, function() {
+          myScript.notificacao("Sucesso", "Você reservou " +
+            value +
+            " itens!", true);
+        })
       });
     });
   });
